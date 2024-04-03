@@ -1,5 +1,7 @@
 package Character;
 
-public class CharacterCreator {
+import java.io.Serializable;
+
+public class CharacterCreator implements Serializable{
     
 }
