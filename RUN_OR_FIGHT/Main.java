@@ -1,82 +1,105 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import User.User;
 
 public class Main {
-    User user;
+    private static final String FILENAME = "users.dat";
+    private static ArrayList<User> users = new ArrayList<>();
+    private static boolean isLogged = false;
+
     public static void main(String[] args) {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Run Or Fight");
+        loadUsers();
 
-            while (true) {
-                System.out.println("1. Iniciar Sesion");
-                System.out.println("2. Registrarse");
-                System.out.println("3. RUN");
-                System.out.print("Seleccione una opción: ");
-                String opcion = br.readLine();
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
 
-                switch (opcion) {
-                    case "1":
-                        login();
-                        break;
-                    case "2":
-                        signUp();
-                        break;
-                    case "3":
-                        System.out.println("¡RUN!");
-                        return;
-                    default:
-                        System.out.println("Elige una opcion valida");
-                        break;
-                }
+        while (!exit && !isLogged) {
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (option) {
+                case 1:
+                    login(scanner);
+                    break;
+                case 2:
+                    signUp(scanner);
+                    saveUsers();
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
             }
-        } catch (IOException e) {
+        }
+        scanner.close();
+    }
+
+    private static void login(Scanner scanner) {
+        System.out.print("Enter nick: ");
+        String nick = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        for (User user : users) {
+            if (user.getNick().equals(nick) && user.getPassword().equals(password)) {
+                System.out.println("Login successful. Welcome, " + user.getName() + "!");
+                isLogged = true;
+                return;
+            }
+        }
+        System.out.println("Invalid username or password.");
+    }
+
+    private static void signUp(Scanner scanner) {
+        System.out.print("Enter nick: ");
+        String nick = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        if (nick.isEmpty() || password.isEmpty() || name.isEmpty()) {
+            System.out.println("Please fill in all fields.");
+            return;
+        }
+
+        User newUser = new User(nick, password, name);
+        users.add(newUser);
+        System.out.println("Registration successful. Welcome, " + name + "!");
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void loadUsers() {
+        File file = new File(FILENAME);
+        if (!file.exists()) {
+            System.out.println("User file not found. Creating new user database.");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
+            users = (ArrayList<User>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static void login() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Nombre de usuario:");
-        String username = br.readLine();
-        System.out.println("Password:");
-        String password = br.readLine();
-
-        BufferedReader reader = new BufferedReader(new FileReader("user.txt"));
-        String line;
-        boolean found = false;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
-            if (parts[0].equals(username) && parts[1].equals(password)) {
-                found = true;
-                break;
-            }
+    private static void saveUsers() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
+            oos.writeObject(users);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        reader.close();
-
-        if (found) {
-            System.out.println("¡Iniciando sesion!");
-        } else {
-            System.out.println("Usuario o password incorrectos.");
-        }
-    }
-
-    public static void signUp() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ingrese un nombre de usuario:");
-        String username = br.readLine();
-        System.out.println("Ingrese un password:");
-        String password = br.readLine();
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter("user.txt", true));
-        writer.write(username + "," + password + "\n");
-        writer.close();
-
-        System.out.println("signUp exitoso");
     }
 }

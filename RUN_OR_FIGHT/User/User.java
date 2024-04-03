@@ -2,11 +2,12 @@ package User;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable {
+public class User implements Serializable {
     private String nick;
     private String password;
     private String name;
     private Boolean accountStatus;
+    private Boolean logged;
 
     public User(String nick, String password, String name) {
         this.nick = nick;
@@ -14,8 +15,12 @@ public abstract class User implements Serializable {
         this.name = name;
     }
 
-    public Boolean isLogged(Boolean logged) {
+    public Boolean isLogged() {
         return logged;
+    }
+
+    public void setLogged(Boolean logged) {
+        this.logged = logged;
     }
 
     // getters and setters
