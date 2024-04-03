@@ -3,7 +3,7 @@ package User;
 import java.io.Serializable;
 
 public class Player extends User implements Serializable{
-    private String record; 
+    private String record;
 
     public Player(String nick, String password, String name, String record) {
         super(nick, password, name);
