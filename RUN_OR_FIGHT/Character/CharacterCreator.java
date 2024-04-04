@@ -1,7 +1,5 @@
 package Character;
 
-import java.io.Serializable;
-
-public class CharacterCreator implements Serializable{
-    
+public interface CharacterCreator {
+    void handleCharacter(Character character);
 }

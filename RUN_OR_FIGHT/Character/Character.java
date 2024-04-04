@@ -1,10 +1,17 @@
 package Character;
 
-public class Character {
+import java.io.Serializable;
+
+public class Character implements Serializable{
     private String name;
     private int gold;
     private int health;
     private int attack;
+
+    //Kind of character
+    public enum Kind {
+        VAMPIRE, WEREWOLF, HUNTER
+    }
 
     //Basic Constructors
     private Character(String name, int gold, int health, int attack) {
@@ -13,10 +20,7 @@ public class Character {
         this.attack = attack;
     }
 
-
-
     // Getters and setters
-    
     public String getName() {
         return name;
     }

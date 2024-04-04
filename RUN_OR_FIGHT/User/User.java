@@ -9,12 +9,14 @@ public class User implements Serializable {
     private Boolean accountStatus;
     private Boolean logged;
 
+    //Constructor
     public User(String nick, String password, String name) {
         this.nick = nick;
         this.password = password;
         this.name = name;
     }
 
+    //Getters and Setters
     public Boolean isLogged() {
         return logged;
     }
