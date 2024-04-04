@@ -7,6 +7,8 @@ public class User implements Serializable {
     private String password;
     private String name;
     private Boolean accountStatus;
+    private String role; // al hacer el login hay que hacer un comprobacion de role, para dirigir el
+                         // usuario a diferentes menu
     private Boolean logged;
 
     // Constructor
@@ -16,7 +18,17 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public User() {
+    }
+
     // Getters and Setters
+
+    public User findUser(String nick) {
+        // Para hacer la busqueda de usuario por el nick
+        User detinationUser = new User();
+        return detinationUser;
+    }
+
     public Boolean isLogged() {
         return logged;
     }
@@ -50,6 +62,14 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     // For future admin feature (ban user or unban user)
     public void setAccountStatus(Boolean status) {
         this.accountStatus = status;
@@ -58,5 +78,4 @@ public class User implements Serializable {
     public Boolean getAccountStatus() {
         return accountStatus;
     }
-
 }

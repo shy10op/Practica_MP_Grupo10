@@ -2,18 +2,22 @@ package Character;
 
 import java.io.Serializable;
 
-public class Character implements Serializable{
+public class Character implements Serializable {
     private String name;
     private int gold;
     private int health;
     private int attack;
 
-    //Kind of character
+    // Equipment
+    private Weapon weapon;
+    private Armor armor;
+
+    // Kind of character
     public enum Kind {
         VAMPIRE, WEREWOLF, HUNTER
     }
 
-    //Basic Constructors
+    // Basic Constructors
     private Character(String name, int gold, int health, int attack) {
         this.name = name;
         this.health = health;
