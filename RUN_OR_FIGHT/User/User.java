@@ -9,14 +9,14 @@ public class User implements Serializable {
     private Boolean accountStatus;
     private Boolean logged;
 
-    //Constructor
+    // Constructor
     public User(String nick, String password, String name) {
         this.nick = nick;
         this.password = password;
         this.name = name;
     }
 
-    //Getters and Setters
+    // Getters and Setters
     public Boolean isLogged() {
         return logged;
     }
@@ -50,6 +50,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    // For future admin feature (ban user or unban user)
     public void setAccountStatus(Boolean status) {
         this.accountStatus = status;
     }

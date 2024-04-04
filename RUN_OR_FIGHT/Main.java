@@ -1,20 +1,20 @@
-import java.io.*;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import User.User;
+import Database.Initdata;
 
 public class Main {
-    private static final String FILENAME = "users.dat";
-    private static ArrayList<User> users = new ArrayList<>();
-    private static boolean isLogged = false;
 
-    public static void main(String[] args) {
-        loadUsers();
-
+    public static void main(String[] args) throws IOException {
+        Initdata initData = new Initdata();
+        initData.startInitData();
+        List<User> users = Initdata.getUsers();
+        String FILENAME = Initdata.getFILENAME();
         Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
+        boolean exit = false; // Variable para controlar la salida del bucle
 
-        while (!exit && !isLogged) {
+        while (!exit) {
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Exit");
@@ -24,11 +24,17 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    login(scanner);
+                    User user = Auth.login(scanner, users);
+                    if (user != null) {
+                        System.out.println("Welcome, " + user.getName() + "!");
+                        // user.setLogged(true);
+                        // despues de esto entra al menu principal
+                    } else {
+                        System.out.println("Invalid username or password.");
+                    }
                     break;
                 case 2:
-                    signUp(scanner);
-                    saveUsers();
+                    Auth.signUp(scanner, users, FILENAME);
                     break;
                 case 3:
                     exit = true;
@@ -39,67 +45,5 @@ public class Main {
             }
         }
         scanner.close();
-    }
-
-    private static void login(Scanner scanner) {
-        System.out.print("Enter nick: ");
-        String nick = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-
-        for (User user : users) {
-            if (user.getNick().equals(nick) && user.getPassword().equals(password)) {
-                System.out.println("Login successful. Welcome, " + user.getName() + "!");
-                isLogged = true;
-                return;
-            }
-        }
-        System.out.println("Invalid username or password.");
-    }
-
-    private static void signUp(Scanner scanner) {
-        System.out.print("Enter nick: ");
-        String nick = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-        System.out.print("Enter name: ");
-        String name = scanner.nextLine();
-
-        if (nick.isEmpty() || password.isEmpty() || name.isEmpty()) {
-            System.out.println("Please fill in all fields.");
-            return;
-        }
-
-        User newUser = new User(nick, password, name);
-        users.add(newUser);
-        System.out.println("Registration successful. Welcome, " + name + "!");
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void loadUsers() {
-        File file = new File(FILENAME);
-        if (!file.exists()) {
-            System.out.println("User file not found. Creating new user database.");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return;
-        }
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
-            users = (ArrayList<User>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void saveUsers() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
-            oos.writeObject(users);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
