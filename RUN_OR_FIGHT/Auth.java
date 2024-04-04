@@ -20,8 +20,6 @@ public class Auth {
                 return user;
             }
         }
-
-        System.out.println("Invalid username or password.");
         return null;
     }
 

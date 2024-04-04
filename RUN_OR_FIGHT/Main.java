@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 import User.User;
 import Database.Initdata;
@@ -7,18 +7,17 @@ import Database.Initdata;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-    
+
         Initdata initData = new Initdata();
         String FILENAME = Initdata.getFILENAME();
-        List<User> users = Initdata.getUsers();
+        ArrayList<User> users = Initdata.getUsers();
         initData.startInitData();
 
-        
-        Scanner scanner = new Scanner(System.in); 
-        User user = null;
+        Scanner scanner = new Scanner(System.in);
+        User user = new User();
         boolean exit = false; // Variable para controlar la salida del bucle
 
-        while (!exit && user.isLogged()) {
+        while (!exit) {
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Exit");
@@ -31,6 +30,7 @@ public class Main {
                     user = Auth.login(scanner, users);
                     if (user != null) {
                         System.out.println("Welcome, " + user.getName() + "!");
+                        exit = true;
                         // despues de esto entra al menu principal
                     } else {
                         System.out.println("Invalid username or password.");
@@ -40,7 +40,8 @@ public class Main {
                     Auth.signUp(scanner, users, FILENAME);
                     break;
                 case 3:
-                    exit = true;
+                    System.out.println("Exiting...");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
