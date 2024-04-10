@@ -56,7 +56,7 @@ public class Initdata implements Serializable {
             user.setName("BotName" + i);
             // para otras cosas de usuarios añadirlas aqui
             // character
-
+            user.setRole("player");
             users.add(user);
         }
         saveUsersToFile(); // Guarda los bots en el archivo

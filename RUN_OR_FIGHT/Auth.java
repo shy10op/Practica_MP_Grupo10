@@ -51,10 +51,10 @@ public class Auth {
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println("Selecte a Role (admin/user)");
+            System.out.println("Selecte a Role (admin/player)");
             String input = scanner.nextLine().trim();
 
-            if (input.equalsIgnoreCase("admin") || input.equalsIgnoreCase("user")) {
+            if (input.equalsIgnoreCase("admin") || input.equalsIgnoreCase("player")) {
                 role = input;
                 validInput = true;
             } else {
@@ -71,19 +71,19 @@ public class Auth {
         if ("admin".equalsIgnoreCase(newUser.getRole())) {
             newUser = new Admin(nick, password, name);
             System.out.println("Registration successful. Welcome Admin, " + name + "!");
-        } else if ("user".equalsIgnoreCase(newUser.getRole())) {
+        } else if ("player".equalsIgnoreCase(newUser.getRole())) {
             newUser = new Player(nick, password, name, RecordPlayer.generateRecord());
             System.out.println("Registration successful. Welcome player, " + name + "!");
             System.out.println(RecordPlayer.generateRecord());
         } else {
-            System.out.println(newUser.getRole());
+            System.out.println("Error: "+ newUser.getRole());
         }
         users.add(newUser);
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
             oos.writeObject(users);
         } catch (IOException e) {
-            e.printStackTrace(); // Esto imprimirá la pila de llamadas del error
+            e.printStackTrace();
             System.err.println("Error writing users to file: " + e.getMessage());
         }
 

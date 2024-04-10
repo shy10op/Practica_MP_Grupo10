@@ -28,6 +28,18 @@ public class Main {
                     user = Auth.login(scanner, users);
                     if (user != null) {
                         System.out.println("Welcome, " + user.getName() + "!");
+                        user.setLogged(true);
+
+                        while (user.isLogged()) {
+                            String userRole = user.getRole();
+                            if (userRole.equals("admin")){
+                                Menu.adminMenu();
+                                user.setLogged(false);
+                            }else if (userRole.equals("user")){
+                                Menu.playerMenu(); 
+                                user.setLogged(false);
+                            }
+                        }
                         exit = true;
                         // despues de esto entra al menu principal
                     } else {
@@ -47,13 +59,5 @@ public class Main {
             }
         }
         scanner.close();
-
-        if (user.isLogged()) {
-            /*
-             * Si el usuario es la primera vez tiene que elegir un personaje
-             * Si no es primera vez pues pasa a la menu principal
-             * 
-             */
-        }
     }
 }
