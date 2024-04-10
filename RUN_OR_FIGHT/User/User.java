@@ -41,8 +41,6 @@ public class User implements Serializable {
 
     // Getters and Setters
 
-  
-
     public Boolean isLogged() {
         return logged;
     }
