@@ -7,15 +7,16 @@ public class User implements Serializable {
     private String password;
     private String name;
     private Boolean accountStatus;
-    private String role; // al hacer el login hay que hacer un comprobacion de role, para dirigir el
-                         // usuario a diferentes menu
+    private Boolean role; // al hacer el login hay que hacer un comprobacion de role, para dirigir el
+                          // usuario a diferentes menu
     private Boolean logged;
 
     // Constructor
-    public User(String nick, String password, String name) {
+    public User(String nick, String password, String name, Boolean role) {
         this.nick = nick;
         this.password = password;
         this.name = name;
+        this.role = role;
     }
 
     public User() {
@@ -62,11 +63,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getRole() {
+    public Boolean getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Boolean role) {
         this.role = role;
     }
 

@@ -23,6 +23,11 @@ public class Auth {
         return null;
     }
 
+    /**
+     * @param scanner
+     * @param users
+     * @param FILENAME
+     */
     public static void signUp(Scanner scanner, List<User> users, String FILENAME) {
         System.out.print("Enter nick: ");
         String nick = scanner.nextLine().trim();
@@ -30,13 +35,27 @@ public class Auth {
         String password = scanner.nextLine().trim();
         System.out.print("Enter name: ");
         String name = scanner.nextLine().trim();
+        boolean role = false;
+        boolean validInput = false;
+
+        while (!validInput) {
+            System.out.println("Do you want to be an admin? (true/false)");
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
+                role = Boolean.parseBoolean(input);
+                validInput = true;
+            } else {
+                System.out.println("Invalid input. Please enter true or false.");
+            }
+        }
 
         if (nick.isEmpty() || password.isEmpty() || name.isEmpty()) {
             System.out.println("Please fill in all fields.");
             return;
         }
 
-        User newUser = new User(nick, password, name);
+        User newUser = new User(nick, password, name, role);
         users.add(newUser);
         System.out.println("Registration successful. Welcome, " + name + "!");
 
