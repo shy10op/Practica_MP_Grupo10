@@ -3,7 +3,10 @@ package Character;
 import java.io.Serializable;
 import javax.management.RuntimeErrorException;
 
-public class CharacterFactory implements Serializable{
+import Character.Equipment.Armor;
+import Character.Equipment.Weapon;
+
+public class CharacterFactory{
     protected String name;
     protected Weapon weapon;
     protected Weapon activeWeapon; 
@@ -15,7 +18,7 @@ public class CharacterFactory implements Serializable{
     protected int power;
     protected int strength;
 
-     //Kind of character
+    //Kind of character
     public enum Kind {
         VAMPIRE, WEREWOLF, HUNTER
     }
@@ -34,9 +37,9 @@ public class CharacterFactory implements Serializable{
         this.strength = strength;
     }
 
-    public CharacterCreator createCharacterHandle(Character.Kind kind){
+    public CharacterCreator createCharacterHandle(Kind kind){
         return switch (kind){
-            case VAMPIRE -> new Vampire(vampire);
+            case VAMPIRE -> new Vampire(Character character, int blood, int age, Hability ability);
             case HUNTER -> new Hunter(hunter);
             case WEREWOLF -> new Werewolf(werewolf);
             default -> throw new RuntimeErrorException(null, "ERROR: No se ha podido crear un personaje");

@@ -2,20 +2,33 @@ package Character;
 
 import java.io.Serializable;
 
-public class Vampire extends CharacterFactory implements Serializable, CharacterCreator{
+import Character.Equipment.Armor;
+import Character.Equipment.Weapon;
+
+public class Vampire implements Serializable, CharacterCreator{
     private int blood;
     private int age;
     private Ability discipline;
 
     public Vampire(String name, Weapon weapon, Weapon activeWeapon, Armor armor, Armor armorActive, Minion minion,
-            int gold, int hp, int power, int strength) {
+    int gold, int hp, int power, int strength, int blood, int age, Ability discipline) {
         super(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
-        //TODO Auto-generated constructor stub
+        this.blood = blood;
+        this.age = age; 
+        this.discipline = discipline;
+    }
+
+    public Vampire(Character character, int blood, int age, Ability discipline){
+        this.character = character; 
+        this.blood = blood;
+        this.age = age; 
+        this.discipline = discipline;
+
     }
 
     @Override //rewrite the interface method CharacterCreator
     public void handleCharacter(Character character) {
-        Vampire vampire = new Vampire(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
+        Vampire vampire = new Vampire(minion, gold, hp, power, strength);
     }
 
     //Getters and setters

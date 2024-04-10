@@ -2,6 +2,9 @@ package Character;
 
 import java.io.Serializable;
 
+import Character.Equipment.Armor;
+import Character.Equipment.Weapon;
+
 public class Werewolf extends CharacterFactory implements Serializable, CharacterCreator{
     private int rage;
     private Ability don;

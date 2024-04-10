@@ -2,6 +2,9 @@ package Character;
 
 import java.io.Serializable;
 
+import Character.Equipment.Armor;
+import Character.Equipment.Weapon;
+
 public class Hunter extends CharacterFactory implements Serializable, CharacterCreator{
     private int willpoower;
     private Ability talent;

@@ -3,9 +3,9 @@ package SystemFunction;
 public class Menu {
 
     public static void playerMenu() {
-        System.out.println("   Main menu");
-        System.out.println("1. Register Character");
-        System.out.println("2. Unenroll Character");
+        System.out.println("----Main menu----");
+        System.out.println("1. View Character");
+        System.out.println("2. Delete Character");
         System.out.println("3. Modify Active Items");
         System.out.println("4. Challenge another user");
         System.out.println("5. Message");
@@ -16,7 +16,7 @@ public class Menu {
     }
 
     public static void adminMenu() {
-        System.out.println("   Main Menu");
+        System.out.println("----Main Menu----");
         System.out.println("1. Edit Character");
         System.out.println("2. Add Items To The Character");
         System.out.println("3. Validate Challenges");
