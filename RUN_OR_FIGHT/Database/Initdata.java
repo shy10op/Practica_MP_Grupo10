@@ -51,8 +51,12 @@ public class Initdata {
             User user = new User();
             user.setNick("Bot" + i);
             user.setPassword("12345");
-            user.setRole("user");
+            //user.setRole("user");
             user.setName("BotName" + i);
+            //para otras cosas de usuarios añadirlas aqui
+            //character
+            
+            
             users.add(user);
         }
         saveUsersToFile(); // Guarda los bots en el archivo
