@@ -1,4 +1,4 @@
-package Character;
+package Character.Equipment;
 
 public class Armor {
     private String name;
