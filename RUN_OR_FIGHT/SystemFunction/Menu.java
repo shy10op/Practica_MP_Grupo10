@@ -8,7 +8,7 @@ public class Menu {
         System.out.println("2. Unenroll Character");
         System.out.println("3. Modify Active Items");
         System.out.println("4. Challenge another user");
-        System.out.println("5. Check History");
+        System.out.println("5. Message");
         System.out.println("6. Check World Ranking");
         System.out.println("7. Exit");
         System.out.print("Choose an option: ");

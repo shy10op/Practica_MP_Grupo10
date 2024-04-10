@@ -1,6 +1,7 @@
 package User;
 
 import java.io.Serializable;
+
 import Character.Character;
 
 public class Player extends User implements Serializable {
