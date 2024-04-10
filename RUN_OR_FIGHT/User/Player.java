@@ -8,7 +8,7 @@ public class Player extends User implements Serializable {
     private Character character;
 
     public Player(String nick, String password, String name, String record) {
-        super(nick, password, name, false);
+        super(nick, password, name, "no");
         this.record = record;
     }
 
