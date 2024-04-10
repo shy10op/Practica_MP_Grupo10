@@ -4,6 +4,8 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 import User.User;
+import User.Admin;
+import User.Player;
 
 public class Auth {
 
@@ -56,8 +58,14 @@ public class Auth {
         }
 
         User newUser = new User(nick, password, name, role);
+        if (role) {
+            newUser = new Admin(nick, password, name);
+            System.out.println("Registration successful. Welcome Admin, " + name + "!");
+        } else {
+            newUser = new Player(nick, password, name, "record inicial");
+            System.out.println("Registration successful. Welcome player, " + name + "!");
+        }
         users.add(newUser);
-        System.out.println("Registration successful. Welcome, " + name + "!");
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
             oos.writeObject(users);
