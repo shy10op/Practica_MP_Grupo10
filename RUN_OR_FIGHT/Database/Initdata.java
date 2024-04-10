@@ -23,24 +23,21 @@ public class Initdata implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return;
         }
     }
 
     @SuppressWarnings("unchecked")
     public static void loadUsersFromFile() {
-        File file = new File(FILENAME);
-        if (file.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
-                users = (ArrayList<User>) ois.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        checkUsersFile(); // Asegúrate de que el archivo existe o es creado.
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
+            users = (ArrayList<User>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
     public static void saveUsersToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME, false))) {
             oos.writeObject(users);
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,22 +45,22 @@ public class Initdata implements Serializable {
     }
 
     public static void generateBots() {
+        if (!users.isEmpty()) {
+            return;
+        }
+
         for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setNick("Bot" + i);
             user.setPassword("12345");
-            // user.setRole("user");
             user.setName("BotName" + i);
-            // para otras cosas de usuarios añadirlas aqui
-            // character
             user.setRole("player");
             users.add(user);
         }
-        saveUsersToFile(); // Guarda los bots en el archivo
+        saveUsersToFile();
     }
 
-    public void startInitData() {
-        checkUsersFile();
+    public static void startInitData() {
         loadUsersFromFile();
         generateBots();
     }

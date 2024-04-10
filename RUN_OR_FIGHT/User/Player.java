@@ -3,11 +3,11 @@ package User;
 import java.io.Serializable;
 import Character.Character;
 
-public class Player extends User{
+public class Player extends User implements Serializable {
     private String record;
     private Character character;
 
-    public Player(String nick, String password, String name,String record) {
+    public Player(String nick, String password, String name, String record) {
         super(nick, password, name, "player");
         this.record = RecordPlayer.generateRecord();
     }

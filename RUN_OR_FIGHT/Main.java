@@ -9,10 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Initdata initData = new Initdata();
         String FILENAME = Initdata.getFILENAME();
         ArrayList<User> users = Initdata.getUsers();
-        initData.startInitData();
+        Initdata.startInitData();
 
         Scanner scanner = new Scanner(System.in);
         User user = new User();
@@ -29,17 +28,6 @@ public class Main {
                     if (user != null) {
                         System.out.println("Welcome, " + user.getName() + "!");
                         user.setLogged(true);
-
-                        while (user.isLogged()) {
-                            String userRole = user.getRole();
-                            if (userRole.equals("admin")){
-                                Menu.adminMenu();
-                                user.setLogged(false);
-                            }else if (userRole.equals("user")){
-                                Menu.playerMenu(); 
-                                user.setLogged(false);
-                            }
-                        }
                         exit = true;
                         // despues de esto entra al menu principal
                     } else {
@@ -58,6 +46,18 @@ public class Main {
                     break;
             }
         }
+
+        while (user.isLogged()) {
+            String userRole = user.getRole();
+            if (userRole.equals("admin")) {
+                Menu.adminMenu();
+                user.setLogged(false);
+            } else if (userRole.equals("player")) {
+                Menu.playerMenu();
+                user.setLogged(false);
+            }
+        }
+
         scanner.close();
     }
 }
