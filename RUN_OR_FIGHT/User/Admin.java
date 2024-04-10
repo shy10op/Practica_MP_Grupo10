@@ -1,8 +1,10 @@
 package User;
 
-public class Admin extends User {
+import java.io.Serializable;
+
+public class Admin extends User{
 
     public Admin(String nick, String password, String name) {
-        super(nick, password, name, true);
+        super(nick, password, name, "admin");
     }
 }

@@ -47,15 +47,15 @@ public class Auth {
         }
         System.out.print("Enter name: ");
         String name = scanner.nextLine().trim();
-        boolean role = false;
+        String role = null;
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println("Do you want to be an admin? (yes/no)");
+            System.out.println("Selecte a Role (admin/user)");
             String input = scanner.nextLine().trim();
 
-            if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
-                role = Boolean.parseBoolean(input);
+            if (input.equalsIgnoreCase("admin") || input.equalsIgnoreCase("user")) {
+                role = input;
                 validInput = true;
             } else {
                 System.out.println("Invalid input. Please enter true or false.");
@@ -68,20 +68,24 @@ public class Auth {
         }
 
         User newUser = new User(nick, password, name, role);
-        if (role) {
+        if ("admin".equalsIgnoreCase(newUser.getRole())) {
             newUser = new Admin(nick, password, name);
             System.out.println("Registration successful. Welcome Admin, " + name + "!");
-        } else {
+        } else if ("user".equalsIgnoreCase(newUser.getRole())) {
             newUser = new Player(nick, password, name, RecordPlayer.generateRecord());
             System.out.println("Registration successful. Welcome player, " + name + "!");
             System.out.println(RecordPlayer.generateRecord());
+        } else {
+            System.out.println(newUser.getRole());
         }
         users.add(newUser);
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
             oos.writeObject(users);
         } catch (IOException e) {
+            e.printStackTrace(); // Esto imprimirá la pila de llamadas del error
             System.err.println("Error writing users to file: " + e.getMessage());
         }
+
     }
 }

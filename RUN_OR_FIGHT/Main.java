@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import User.User;
 import Database.Initdata;
+import SystemFunction.Menu;
 
 public class Main {
 
@@ -18,10 +19,7 @@ public class Main {
         boolean exit = false; // Variable para controlar la salida del bucle
 
         while (!exit) {
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
-            System.out.print("Choose an option: ");
+            Menu.authMenu();
             int option = scanner.nextInt();
             scanner.nextLine();
 

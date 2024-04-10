@@ -1,1 +1,0 @@
-# Practica_MP_Grupo10

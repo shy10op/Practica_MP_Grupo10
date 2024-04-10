@@ -6,10 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import User.User;
 
-public class Initdata {
+public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
     private static ArrayList<User> users = new ArrayList<>();
 
@@ -26,7 +27,7 @@ public class Initdata {
         }
     }
 
-    @SuppressWarnings("unchecked") 
+    @SuppressWarnings("unchecked")
     public static void loadUsersFromFile() {
         File file = new File(FILENAME);
         if (file.exists()) {
@@ -51,12 +52,11 @@ public class Initdata {
             User user = new User();
             user.setNick("Bot" + i);
             user.setPassword("12345");
-            //user.setRole("user");
+            // user.setRole("user");
             user.setName("BotName" + i);
-            //para otras cosas de usuarios añadirlas aqui
-            //character
-            
-            
+            // para otras cosas de usuarios añadirlas aqui
+            // character
+
             users.add(user);
         }
         saveUsersToFile(); // Guarda los bots en el archivo
