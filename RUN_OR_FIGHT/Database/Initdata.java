@@ -81,7 +81,7 @@ public class Initdata implements Serializable {
     public static void startInitData() {
         loadUsersFromFile();
         generateBots();
-        //InitSaveInventory();
+        // InitSaveInventory();
     }
 
     public static String getFILENAME() {
