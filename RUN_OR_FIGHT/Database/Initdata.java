@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import User.User;
+import Character.Equipment.*;
 
 public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
@@ -63,6 +64,7 @@ public class Initdata implements Serializable {
     public static void startInitData() {
         loadUsersFromFile();
         generateBots();
+        InitSaveInventory();
     }
 
     public static String getFILENAME() {
@@ -72,4 +74,22 @@ public class Initdata implements Serializable {
     public static ArrayList<User> getUsers() {
         return users;
     }
+
+    private static void InitSaveInventory() {
+        String path = "inventario.dat";
+        File fichero = new File(path);
+        Inventory inventory;
+
+        // Verificar si el fichero existe
+        if (!fichero.exists()) {
+            // Si el fichero no existe, inicializar y guardar un nuevo inventario
+            inventory = new Inventory();
+            InventoryInitializer.initializeGame(inventory);
+            InventoryInitializer.SaveInventory(inventory, path);
+        } else {
+            // Si el fichero ya existe, cargar el inventario existente
+            inventory = InventoryInitializer.LoadInventory(path);
+        }
+    }
+
 }

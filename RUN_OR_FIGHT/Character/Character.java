@@ -2,6 +2,8 @@ package Character;
 
 import java.io.Serializable;
 
+import Character.Equipment.Weapon;
+
 public class Character implements Serializable {
     private String name;
     private int gold;

@@ -1,6 +1,8 @@
 package Character.Equipment;
 
-public class Armor {
+import java.io.Serializable;
+
+public class Armor implements Serializable {
     private String name;
     private int modAttack;
     private int modDefense;
