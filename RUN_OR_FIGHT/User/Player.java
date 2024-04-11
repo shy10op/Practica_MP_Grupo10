@@ -8,9 +8,9 @@ public class Player extends User implements Serializable {
     private String record;
     private Character character;
 
-    public Player(String nick, String password, String name, String record) {
-        super(nick, password, name, "player");
-        this.record = RecordPlayer.generateRecord();
+    public Player(String nick, String name, String record) {
+        super(nick, name, record, "player");
+        this.record = record;
     }
 
     public String getRecord() {

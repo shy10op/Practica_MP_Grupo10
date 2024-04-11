@@ -58,8 +58,9 @@ public class Main {
             String userRole = user.getRole();
 
             if (userRole.equals("player")) {
+                Player player = user.getPlayer();
 
-                if (user.getCharacter() == null) {
+                if (player.getCharacter() == null) {
                     Menu.chooseMenu();
                     System.out.print("Enter your choice: ");
                     int choice = scanner.nextInt();
@@ -69,16 +70,16 @@ public class Main {
                             character = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 20, 0,
                                     0,
                                     0);
-                            user.setCharacter(character);
+                            player.setCharacter(character);
                             break;
                         case 2:
                             character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 30, 5, 400,
                                     0);
-                            user.setCharacter(character);
+                            player.setCharacter(character);
                             break;
                         case 3:
                             character = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 25, 0, 0, 1);
-                            user.setCharacter(character);
+                            player.setCharacter(character);
                             break;
                         case 4:
                             System.out.println("Exiting the program...");
@@ -94,7 +95,7 @@ public class Main {
                 scanner.nextLine();
                 switch (option) {
                     case 1:
-                        System.out.println(user.getCharacter().getName());
+                        System.out.println(player.getCharacter().getName());
                         break;
                     case 2:
                         // UnenrollCharacter();

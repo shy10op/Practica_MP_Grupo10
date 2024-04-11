@@ -2,7 +2,8 @@ package Character;
 
 import java.io.Serializable;
 
-import Character.Equipment.Inventory;
+import Character.Equipment.Armor;
+import Character.Equipment.Weapon;
 
 public abstract class Character implements Serializable {
     protected String name;
@@ -11,12 +12,8 @@ public abstract class Character implements Serializable {
     protected int power;
     protected String type;
 
-
-    // Equipment
-    protected Inventory inventory;
-
-    protected Ability kind;
-    protected Boolean mod;
+    protected Weapon weapon;
+    protected Armor armor;
 
     public Character() {
     }
@@ -60,13 +57,20 @@ public abstract class Character implements Serializable {
         this.power = power;
     }
 
-    public String getType() {
-        return type;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
 
 }
