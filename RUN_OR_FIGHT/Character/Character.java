@@ -8,8 +8,9 @@ public abstract class Character implements Serializable {
     protected String name;
     protected int gold;
     protected int health;
-    protected int attack;
+    protected int power;
     protected String type;
+
 
     // Equipment
     protected Inventory inventory;
@@ -20,16 +21,11 @@ public abstract class Character implements Serializable {
     public Character() {
     }
 
-    public Character(String name, int gold, int health, int attack, String type, Inventory inventory, Ability kind,
-            Boolean mod) {
+    public Character(String name, int gold, int health, int power) {
         this.name = name;
         this.gold = gold;
         this.health = health;
-        this.attack = attack;
-        this.type = type;
-        this.inventory = inventory;
-        this.kind = kind;
-        this.mod = mod;
+        this.power = power;
     }
 
     public String getName() {
@@ -56,12 +52,12 @@ public abstract class Character implements Serializable {
         this.health = health;
     }
 
-    public int getAttack() {
-        return attack;
+    public int getPower() {
+        return power;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
+    public void setPower(int power) {
+        this.power = power;
     }
 
     public String getType() {
@@ -72,28 +68,5 @@ public abstract class Character implements Serializable {
         this.type = type;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-    public Ability getKind() {
-        return kind;
-    }
-
-    public void setKind(Ability kind) {
-        this.kind = kind;
-    }
-
-    public Boolean getMod() {
-        return mod;
-    }
-
-    public void setMod(Boolean mod) {
-        this.mod = mod;
-    }
 
 }

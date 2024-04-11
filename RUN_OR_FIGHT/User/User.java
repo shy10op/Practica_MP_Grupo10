@@ -2,6 +2,7 @@ package User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import Character.Character;
 
 import Database.Initdata;
 
@@ -15,6 +16,7 @@ public class User implements Serializable {
     private String combatStatus;
     private String role;
     private Boolean logged;
+    private Character character;
 
     // Constructor
     public User(String nick, String password, String name, String role) {
@@ -103,4 +105,13 @@ public class User implements Serializable {
     public Boolean getLogged() {
         return logged;
     }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
 }

@@ -61,20 +61,6 @@ public class Initdata implements Serializable {
         saveUsersToFile();
     }
 
-    public static void startInitData() {
-        loadUsersFromFile();
-        generateBots();
-        InitSaveInventory();
-    }
-
-    public static String getFILENAME() {
-        return FILENAME;
-    }
-
-    public static ArrayList<User> getUsers() {
-        return users;
-    }
-
     private static void InitSaveInventory() {
         String path = "inventario.dat";
         File fichero = new File(path);
@@ -90,6 +76,20 @@ public class Initdata implements Serializable {
             // Si el fichero ya existe, cargar el inventario existente
             inventory = InventoryInitializer.LoadInventory(path);
         }
+    }
+
+    public static void startInitData() {
+        loadUsersFromFile();
+        generateBots();
+        //InitSaveInventory();
+    }
+
+    public static String getFILENAME() {
+        return FILENAME;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 
 }
