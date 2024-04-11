@@ -1,25 +1,32 @@
 package Character;
 
 import java.io.Serializable;
+import Character.Equipment.Inventory;
 
-import Character.Equipment.Armor;
-import Character.Equipment.Weapon;
-
-public class Hunter extends CharacterFactory implements Serializable, CharacterCreator{
+public class Hunter extends Character implements Serializable, CharacterCreator {
     private int willpoower;
     private Ability talent;
 
-    public Hunter(String name, Weapon weapon, Weapon activeWeapon, Armor armor, Armor armorActive, Minion minion,
-            int gold, int hp, int power, int strength) {
-        super(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
+    public Hunter() {
     }
 
-    @Override //rewrite the interface method CharacterCreator
-    public void handleCharacter(Character character) {
-        Hunter hunter = new Hunter(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
+    public Hunter(String name, int gold, int health, int attack, String type, Inventory inventory, Ability kind,
+            Boolean mod) {
+        super(name, gold, health, attack, type, inventory, kind, mod);
     }
 
-    //Getters and setters
+    public Hunter(int willpoower, Ability talent, String name, int gold, int health, int attack, String type,
+            Inventory inventory, Ability kind, Boolean mod) {
+        super(name, gold, health, attack, type, inventory, kind, mod);
+        this.willpoower = willpoower;
+        this.talent = talent;
+    }
+
+    public Hunter(String name, int gold, int health, int attack, Inventory inventory, Ability kind, Boolean mod) {
+        super(name, gold, health, attack, "hunter", inventory, kind, mod);
+    }
+
+    // Getters and setters
     public int getWillpoower() {
         return willpoower;
     }
@@ -34,5 +41,11 @@ public class Hunter extends CharacterFactory implements Serializable, CharacterC
 
     public void setTalent(Ability talent) {
         this.talent = talent;
-    }    
+    }
+
+    @Override
+    public void handleCharacter(Character character) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleCharacter'");
+    }
 }

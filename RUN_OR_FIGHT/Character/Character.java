@@ -2,31 +2,36 @@ package Character;
 
 import java.io.Serializable;
 
-import Character.Equipment.Weapon;
+import Character.Equipment.Inventory;
 
-public class Character implements Serializable {
-    private String name;
-    private int gold;
-    private int health;
-    private int attack;
+public abstract class Character implements Serializable {
+    protected String name;
+    protected int gold;
+    protected int health;
+    protected int attack;
+    protected String type;
 
     // Equipment
-    private Weapon weapon;
-    private Armor armor;
+    protected Inventory inventory;
 
-    // Kind of character
-    public enum Kind {
-        VAMPIRE, WEREWOLF, HUNTER
+    protected Ability kind;
+    protected Boolean mod;
+
+    public Character() {
     }
 
-    // Basic Constructors
-    private Character(String name, int gold, int health, int attack) {
+    public Character(String name, int gold, int health, int attack, String type, Inventory inventory, Ability kind,
+            Boolean mod) {
         this.name = name;
+        this.gold = gold;
         this.health = health;
         this.attack = attack;
+        this.type = type;
+        this.inventory = inventory;
+        this.kind = kind;
+        this.mod = mod;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }
@@ -58,4 +63,37 @@ public class Character implements Serializable {
     public void setAttack(int attack) {
         this.attack = attack;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Ability getKind() {
+        return kind;
+    }
+
+    public void setKind(Ability kind) {
+        this.kind = kind;
+    }
+
+    public Boolean getMod() {
+        return mod;
+    }
+
+    public void setMod(Boolean mod) {
+        this.mod = mod;
+    }
+
 }

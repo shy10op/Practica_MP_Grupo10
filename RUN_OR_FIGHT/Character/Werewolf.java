@@ -1,27 +1,24 @@
 package Character;
 
+import Character.Equipment.Inventory;
 import java.io.Serializable;
 
-import Character.Equipment.Armor;
-import Character.Equipment.Weapon;
-
-public class Werewolf extends CharacterFactory implements Serializable, CharacterCreator{
+public class Werewolf extends Character implements Serializable, CharacterCreator {
     private int rage;
     private Ability don;
 
-    public Werewolf(String name, Weapon weapon, Weapon activeWeapon, Armor armor, Armor armorActive, Minion minion,
-            int gold, int hp, int power, int strength, int rage, Ability don) {
-        super(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
+    public Werewolf(String name, int gold, int health, int attack, Inventory inventory, Ability kind, Boolean mod) {
+        super(name, gold, health, attack, "werewolf", inventory, kind, mod);
+    }
+
+    public Werewolf(int rage, Ability don, String name, int gold, int health, int attack, Inventory inventory,
+            Ability kind, Boolean mod) {
+        super(name, gold, health, attack, "werewolf", inventory, kind, mod);
         this.rage = rage;
         this.don = don;
     }
 
-    @Override //rewrite the interface method CharacterCreator
-    public void handleCharacter(Character character) {
-        Werewolf werewolf = new Werewolf(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength, rage, don);
-    }
-
-    //Getters and setters
+    // Getters and setters
     public int getRage() {
         return rage;
     }
@@ -36,5 +33,11 @@ public class Werewolf extends CharacterFactory implements Serializable, Characte
 
     public void setDon(Ability don) {
         this.don = don;
+    }
+
+    @Override
+    public void handleCharacter(Character character) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleCharacter'");
     }
 }

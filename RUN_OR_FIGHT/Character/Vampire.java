@@ -1,37 +1,27 @@
 package Character;
 
 import java.io.Serializable;
+import Character.Equipment.Inventory;
 
-import Character.Equipment.Armor;
-import Character.Equipment.Weapon;
-
-public class Vampire implements Serializable, CharacterCreator{
+public class Vampire extends Character implements Serializable, CharacterCreator {
     private int blood;
     private int age;
     private Ability discipline;
 
-    public Vampire(String name, Weapon weapon, Weapon activeWeapon, Armor armor, Armor armorActive, Minion minion,
-    int gold, int hp, int power, int strength, int blood, int age, Ability discipline) {
-        super(name, weapon, activeWeapon, armor, armorActive, minion, gold, hp, power, strength);
+    public Vampire(String name, int gold, int health, int attack, Inventory inventory, Ability kind, Boolean mod) {
+        super(name, gold, health, attack, "vampire", inventory, kind, mod);
+
+    }
+
+    public Vampire(int blood, int age, Ability discipline, String name, int gold, int health, int attack,
+            Inventory inventory, Ability kind, Boolean mod) {
+        super(name, gold, health, attack, "vampire", inventory, kind, mod);
         this.blood = blood;
-        this.age = age; 
+        this.age = age;
         this.discipline = discipline;
     }
 
-    public Vampire(Character character, int blood, int age, Ability discipline){
-        this.character = character; 
-        this.blood = blood;
-        this.age = age; 
-        this.discipline = discipline;
-
-    }
-
-    @Override //rewrite the interface method CharacterCreator
-    public void handleCharacter(Character character) {
-        Vampire vampire = new Vampire(minion, gold, hp, power, strength);
-    }
-
-    //Getters and setters
+    // Getters and setters
     public int getBlood() {
         return blood;
     }
@@ -55,7 +45,11 @@ public class Vampire implements Serializable, CharacterCreator{
     public void setDiscipline(Ability discipline) {
         this.discipline = discipline;
     }
-    
-    
+
+    @Override
+    public void handleCharacter(Character character) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleCharacter'");
+    }
 
 }
