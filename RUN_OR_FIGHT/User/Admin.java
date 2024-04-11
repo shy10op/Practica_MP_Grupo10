@@ -1,6 +1,6 @@
 package User;
 
-import Database.Initdata;
+//import Database.Initdata;
 import java.util.List;
 
 public class Admin extends User {
@@ -10,7 +10,7 @@ public class Admin extends User {
     public Admin(String nick, String password, String name) {
         super(nick, password, name, "admin");
         // Inicializar AdminTools con la lista de jugadores obtenida de Initdata
-        this.adminTools = new AdminTools(Initdata.getPlayers());
+        //this.adminTools = new AdminTools(Initdata.getPlayers());
     }
 
     // Método para mostrar los jugadores utilizando AdminTools
@@ -35,6 +35,6 @@ public class Admin extends User {
 
     // Método para actualizar la lista de jugadores en AdminTools
     public void updatePlayerList() {
-        adminTools.setPlayerList(Initdata.getPlayers());
+        //adminTools.setPlayerList(Initdata.getPlayers());
     }
 }

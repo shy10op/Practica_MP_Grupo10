@@ -2,10 +2,8 @@ package User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import Character.Character;
 
 import Database.Initdata;
-
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -16,7 +14,8 @@ public class User implements Serializable {
     private String combatStatus;
     private String role;
     private Boolean logged;
-    private Character character;
+    private Player player;
+    private Admin admin;
 
     // Constructor
     public User(String nick, String password, String name, String role) {
@@ -106,12 +105,20 @@ public class User implements Serializable {
         return logged;
     }
 
-    public Character getCharacter() {
-        return character;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    };
+
+    public Admin getAdmin() {
+        return admin;
     }
 
 }

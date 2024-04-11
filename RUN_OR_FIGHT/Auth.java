@@ -69,10 +69,12 @@ public class Auth {
 
         User newUser = new User(nick, password, name, role);
         if ("admin".equalsIgnoreCase(newUser.getRole())) {
-            newUser = new Admin(nick, password, name);
+            Admin newAdmin = new Admin(nick, password, role);
+            newUser.setAdmin(newAdmin);
             System.out.println("Registration successful. Welcome Admin, " + name + "!");
         } else if ("player".equalsIgnoreCase(newUser.getRole())) {
-            newUser = new Player(nick, password, name, RecordPlayer.generateRecord());
+            Player newPlayer = new Player(nick, name, RecordPlayer.generateRecord());
+            newUser.setPlayer(newPlayer);
             System.out.println("Registration successful. Welcome player, " + name + "!");
             System.out.println(RecordPlayer.generateRecord());
         } else {

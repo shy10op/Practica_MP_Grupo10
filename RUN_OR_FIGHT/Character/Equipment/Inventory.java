@@ -21,13 +21,12 @@ public class Inventory implements Serializable {
     }
 
     // Métodos para obtener las listas de armas y armors
-    public ArrayList<Weapon> obtenerArmas() {
+    public ArrayList<Weapon> getWeapons() {
         return weapons;
     }
 
-    public ArrayList<Armor> obtenerArmaduras() {
+    public ArrayList<Armor> getArmors() {
         return armors;
     }
 
-    // Metodos específicos
 }
