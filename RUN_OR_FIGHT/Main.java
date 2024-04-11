@@ -1,10 +1,13 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Character.CharacterFactory;
 import Character.Character;
 import User.Player;
+import User.Admin;
+import User.AdminTools;
 import User.User;
 import Database.Initdata;
 import SystemFunction.Menu;
@@ -142,7 +145,41 @@ public class Main {
 
             } else if (userRole.equals("admin")) {
                 Menu.adminMenu();
-                user.setLogged(false);
+                int option = scanner.nextInt();
+                scanner.nextLine();
+                switch (option) {
+                    case 1:
+                        List<Player> players = admin.getPlayerList(); // Obtiene la lista de jugadores
+                        admin.showPlayers(); // Muestra los jugadores
+
+                        System.out.println("Introduce el apodo del jugador para buscar:");
+                        String nick = scanner.nextLine(); // Lee el apodo por teclado
+                        Player player = admin.findPlayerByNick(nick); // Encuentra al jugador por su apodo
+
+                        if (player != null) {
+                            System.out.println("Introduce el nombre del atributo a modificar:");
+                            String attributeName = scanner.nextLine(); // Lee el nombre del atributo por teclado
+                            System.out.println("Introduce el nuevo valor para el atributo:");
+                            String newValue = scanner.nextLine(); // Lee el nuevo valor por teclado
+
+                            admin.modifyCharacterAttributes(nick, attributeName, newValue); // Modifica los atributos
+                                                                                            // del personaje
+                        } else {
+                            System.out.println("Jugador no encontrado.");
+                        }
+
+                        admin.updatePlayerList(); // Actualiza la lista de jugadores
+                        break;
+
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                        System.out.println("Running away");
+                        user.setLogged(false);
+                }
+
             }
         }
 
