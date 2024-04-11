@@ -41,7 +41,6 @@ public class AdminTools {
                     System.out.println("Atributo no válido.");
                     break;
             }
-            // Aquí deberías incluir la lógica para guardar los cambios en la base de datos
         } else {
             System.out.println("Jugador no encontrado o sin personaje.");
         }

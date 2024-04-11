@@ -45,7 +45,7 @@ public class Initdata implements Serializable {
 
     @SuppressWarnings("unchecked")
     public static void loadUsersFromFile() {
-        checkUsersFile(); // Asegúrate de que el archivo existe o es creado.
+        checkUsersFile(); 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
             users = (ArrayList<User>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -55,7 +55,7 @@ public class Initdata implements Serializable {
 
     @SuppressWarnings("unchecked")
     public static void loadInventoriesFromFile() {
-        checkInventoriesFile(); // Asegúrate de que el archivo existe o es creado.
+        checkInventoriesFile();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(INVENTORY))) {
             inventories = (ArrayList<Inventory>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
