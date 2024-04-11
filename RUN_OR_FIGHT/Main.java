@@ -6,6 +6,7 @@ import Character.CharacterFactory;
 import Character.Character;
 import User.Player;
 import User.User;
+import Character.Equipment.*;
 import Database.Initdata;
 import SystemFunction.Menu;
 import SystemFunction.Message;
@@ -17,10 +18,12 @@ public class Main {
         String FILENAME = Initdata.getFILENAME();
         Initdata.startInitData();
         ArrayList<User> users = Initdata.getUsers();
+        ArrayList<Inventory> inventories = Initdata.getInventories();
 
         Scanner scanner = new Scanner(System.in);
         User user = new User();
         boolean exit = false;
+        
         while (!exit) {
             Menu.authMenu();
             int option = scanner.nextInt();
@@ -59,7 +62,6 @@ public class Main {
 
             if (userRole.equals("player")) {
                 Player player = user.getPlayer();
-
                 if (player.getCharacter() == null) {
                     Menu.chooseMenu();
                     System.out.print("Enter your choice: ");
@@ -71,15 +73,18 @@ public class Main {
                                     0,
                                     0);
                             player.setCharacter(character);
+                            Initdata.saveUsersToFile();
                             break;
                         case 2:
                             character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 30, 5, 400,
                                     0);
                             player.setCharacter(character);
+                            Initdata.saveUsersToFile();
                             break;
                         case 3:
                             character = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 25, 0, 0, 1);
                             player.setCharacter(character);
+                            Initdata.saveUsersToFile();
                             break;
                         case 4:
                             System.out.println("Exiting the program...");
@@ -100,7 +105,8 @@ public class Main {
                     case 2:
                         // UnenrollCharacter();
                     case 3:
-                        // modify Item Menu
+                        Menu.inventoryMenu(inventories);
+                        break;
                     case 4:
                         System.out.println("Let's Challenge");
                         String rivalNick = scanner.nextLine();
@@ -125,16 +131,15 @@ public class Main {
                         } else {
                             System.out.println("Not fighting");
                         }
-
+                        //quitar el nick del rival
+                        user.setCombatStatus(null);
+                        break;
                     case 6:
                         // check Ranking
                         break;
                     case 7:// exit
                         System.out.println("Running away");
                         user.setLogged(false);
-                        // secret test case 8
-                    case 8:
-                        Message.sendCombat("Bot2", "Bot1");
                         break;
                     default:
                         System.out.println("Invalid option. Please try again.");

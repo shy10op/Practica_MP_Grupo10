@@ -1,10 +1,9 @@
 package User;
 
-import java.io.Serializable;
 
 import Character.Character;
 
-public class Player extends User implements Serializable {
+public class Player extends User {
     private String record;
     private Character character;
 
