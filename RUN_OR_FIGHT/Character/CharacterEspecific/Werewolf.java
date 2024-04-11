@@ -7,6 +7,6 @@ public class Werewolf extends Character {
 
     public Werewolf(String name, int gold, int hp, int power, int rage) {
         super(name, gold, hp, power);
-        this.rage = rage; // asumir que querías pasar 'rage' al constructor
+        this.rage = rage;
     }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Database.Initdata;
+import SystemFunction.Combate;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,7 +12,8 @@ public class User implements Serializable {
     private String password;
     private String name;
     private Boolean accountStatus;
-    private String combatStatus;
+    private Combate combate;
+
     private String role;
     private Boolean logged;
     private Player player;
@@ -93,14 +95,6 @@ public class User implements Serializable {
     // aqui cuando para hacer la comprobacion de que si tiene un combate pendiente,
     // devuelve null en caso de que no
     // en caso de que si, devolveria un nick de user
-    public String getCombatStatus() {
-        return combatStatus;
-    }
-
-    public void setCombatStatus(String combatStatus) {
-        this.combatStatus = combatStatus;
-    }
-
     public Boolean getLogged() {
         return logged;
     }
@@ -119,6 +113,14 @@ public class User implements Serializable {
 
     public Admin getAdmin() {
         return admin;
+    }
+
+    public Combate getCombate() {
+        return combate;
+    }
+
+    public void setCombate(Combate combate) {
+        this.combate = combate;
     }
 
 }

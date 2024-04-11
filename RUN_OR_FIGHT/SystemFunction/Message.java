@@ -4,24 +4,25 @@ import User.User;
 
 public class Message {
 
-    public static void sendCombat(String nick, String destinationNick) {
-        User destinationUser = User.findUser(destinationNick);
-        if (destinationUser != null) {
-            System.out.println("Combat sended: " + destinationUser.getNick()); // destino
-            destinationUser.setCombatStatus(nick); // origen
+    public static void sendCombat(Combate combate) {
+        User chanllenged = combate.getChanllenged();
+        if (chanllenged != null) {
+            System.out.println("Combat sended: " + chanllenged.getNick()); // destino
+            chanllenged.setCombate(combate); // ajustar el combatStatus con el nombre de Chanllenger
         } else {
             System.out.println("Destination user not found");
         }
     }
 
-    public static User receiveCombat(User user) {
-        String rivalNick = user.getCombatStatus();
-        if (rivalNick != null) {
-            // con esto puedes conseguir el usuario origen con la funcion findUser(nick) y
-            // devuelve un User
-            // y apartir de eso sacar los datos de ese usuario para realizar el combate
-            System.out.println("Combat received: " + rivalNick);
-            return User.findUser(rivalNick);
+    public static Combate receiveCombat(User user) {
+        
+        Combate combate = user.getCombate();
+        if (combate == null) {
+            return null;
+        }
+        if (combate.getChanllenger() != null) {
+            System.out.println("Combat received: " + combate.getChanllenger().getNick());
+            return combate;
         } else {
             System.out.println("No combat received");
             return null;

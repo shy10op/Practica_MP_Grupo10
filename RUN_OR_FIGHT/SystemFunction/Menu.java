@@ -73,8 +73,6 @@ public class Menu {
         System.out.printf("| Name: %-41s |\n", user.getName());
         System.out.printf("| Role: %-41s |\n", user.getRole());
 
-        // Condicionales para mostrar información del jugador o admin si están presentes
-
         Player player = user.getPlayer();
         if (player != null) {
             Character character = player.getCharacter();
@@ -82,19 +80,25 @@ public class Menu {
             System.out.println("|                    Player Info                  |");
             System.out.println("+-------------------------------------------------+");
             System.out.printf("| Record: %-37s\n", player.getRecord());
+            System.out.printf("| Name: %-37s\n", character.getName());
             System.out.printf("| Health: %-37s\n", character.getHealth());
             System.out.printf("| Gold: %-37s\n", character.getGold());
             System.out.printf("| Power: %-37s\n", character.getPower());
-            System.out.printf("| Armor: %-37s\n", character.getArmor().getName());
-            System.out.printf("| Weapon: %-37s\n", character.getWeapon().getName());
-            
+            if (character.getArmor() != null) {
+                System.out.printf("| Armor: %-37s\n", character.getArmor().getName());
+            }
+            if (character.getWeapon() != null) {
+                System.out.printf("| Weapon: %-37s\n", character.getWeapon().getName());
+            }
+            System.out.println("+-------------------------------------------------+");
+            System.out.println("\n");
 
         }
 
         // Admin admin = user.getAdmin();
         // if (admin != null) {
-        //     System.out.println("| Admin Info:                                     |");
-            
+        // System.out.println("| Admin Info: |");
+
         // }
         // System.out.println("+-------------------------------------------------+");
     }
