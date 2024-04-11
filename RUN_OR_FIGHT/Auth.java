@@ -58,7 +58,7 @@ public class Auth {
                 role = input;
                 validInput = true;
             } else {
-                System.out.println("Invalid input. Please enter true or false.");
+                System.out.println("Invalid input. Please enter admin or player.");
             }
         }
 
@@ -76,7 +76,7 @@ public class Auth {
             System.out.println("Registration successful. Welcome player, " + name + "!");
             System.out.println(RecordPlayer.generateRecord());
         } else {
-            System.out.println("Error: "+ newUser.getRole());
+            System.out.println("Error: " + newUser.getRole());
         }
         users.add(newUser);
 

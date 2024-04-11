@@ -8,7 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import User.User;
+import User.Player;
 import Character.Equipment.*;
 
 public class Initdata implements Serializable {
@@ -43,6 +45,16 @@ public class Initdata implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>();
+        for (User user : getUsers()) {
+            if (user instanceof Player && ((Player) user).getRecord() != null) {
+                players.add((Player) user);
+            }
+        }
+        return players;
     }
 
     public static void generateBots() {

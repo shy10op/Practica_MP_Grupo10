@@ -44,4 +44,13 @@ public class Menu {
         System.out.println("| 4. Exit                                       |");
         System.out.println("+------------------------------------------------+");
     }
+
+    public static void AdminOpcion1() {
+        System.out.println("+------------------Change Feature---------------+");
+        System.out.println("| 1. Name                                       |");
+        System.out.println("| 2. Power                                      |");
+        System.out.println("| 3. Health                                     |");
+        System.out.println("| 4. Exit                                       |");
+        System.out.println("+------------------------------------------------+");
+    }
 }
