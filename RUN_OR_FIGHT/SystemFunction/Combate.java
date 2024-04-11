@@ -5,13 +5,13 @@ import java.io.Serializable;
 import User.User;
 import Character.Character;
 
-public class Combat implements Serializable {
+public class Combate implements Serializable {
     private User Chanllenger;
     private User Chanllenged;
     private int amount;
     private String result;
 
-    public Combat(User Chanllenger, User Chanllenged, int amount) {
+    public Combate(User Chanllenger, User Chanllenged, int amount) {
         this.Chanllenger = Chanllenger;// origen
         this.Chanllenged = Chanllenged;// destino
         this.amount = amount;
@@ -49,7 +49,7 @@ public class Combat implements Serializable {
         this.result = result;
     }
 
-    public static void initialCombat(Combat combate) {
+    public static void initialCombat(Combate combate) {
         Character challenger = combate.getChanllenger().getPlayer().getCharacter();
         Character challenged = combate.getChanllenged().getPlayer().getCharacter();
 

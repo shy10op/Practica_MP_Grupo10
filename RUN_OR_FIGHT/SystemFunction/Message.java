@@ -4,25 +4,25 @@ import User.User;
 
 public class Message {
 
-    public static void sendCombat(Combat combat) {
-        User chanllenged = combat.getChanllenged();
+    public static void sendCombat(Combate combate) {
+        User chanllenged = combate.getChanllenged();
         if (chanllenged != null) {
             System.out.println("Combat sended: " + chanllenged.getNick()); // destino
-            chanllenged.setCombate(combat); // ajustar el combatStatus con el nombre de Chanllenger
+            chanllenged.setCombate(combate); // ajustar el combatStatus con el nombre de Chanllenger
         } else {
             System.out.println("Destination user not found");
         }
     }
 
-    public static Combat receiveCombat(User user) {
-
-        Combat combat = user.getCombate();
-        if (combat == null) {
+    public static Combate receiveCombat(User user) {
+        
+        Combate combate = user.getCombate();
+        if (combate == null) {
             return null;
         }
-        if (combat.getChanllenger() != null) {
-            System.out.println("Combat received: " + combat.getChanllenger().getNick());
-            return combat;
+        if (combate.getChanllenger() != null) {
+            System.out.println("Combat received: " + combate.getChanllenger().getNick());
+            return combate;
         } else {
             System.out.println("No combat received");
             return null;
