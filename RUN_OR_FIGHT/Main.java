@@ -23,7 +23,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
         boolean exit = false;
-        
+
         while (!exit) {
             Menu.authMenu();
             int option = scanner.nextInt();
@@ -59,9 +59,9 @@ public class Main {
 
         while (user.isLogged()) {
             String userRole = user.getRole();
+            Player player = user.getPlayer();
 
             if (userRole.equals("player")) {
-                Player player = user.getPlayer();
                 if (player.getCharacter() == null) {
                     Menu.chooseMenu();
                     System.out.print("Enter your choice: ");
@@ -100,12 +100,13 @@ public class Main {
                 scanner.nextLine();
                 switch (option) {
                     case 1:
-                        System.out.println(player.getCharacter().getName());
+                        Menu.userMenu(user);
                         break;
                     case 2:
                         // UnenrollCharacter();
                     case 3:
-                        Menu.inventoryMenu(inventories);
+                        Menu.inventoryMenu(inventories,scanner,player);
+                        Initdata.saveUsersToFile();
                         break;
                     case 4:
                         System.out.println("Let's Challenge");
@@ -131,7 +132,7 @@ public class Main {
                         } else {
                             System.out.println("Not fighting");
                         }
-                        //quitar el nick del rival
+                        // quitar el nick del rival
                         user.setCombatStatus(null);
                         break;
                     case 6:
@@ -154,5 +155,6 @@ public class Main {
 
         scanner.close();
         Initdata.saveUsersToFile();
+
     }
 }
