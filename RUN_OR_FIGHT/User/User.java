@@ -101,9 +101,6 @@ public class User implements Serializable {
         return accountStatus;
     }
 
-    // aqui cuando para hacer la comprobacion de que si tiene un combate pendiente,
-    // devuelve null en caso de que no
-    // en caso de que si, devolveria un nick de user
     public Boolean getLogged() {
         return logged;
     }

@@ -12,7 +12,6 @@ public class Weapon implements Serializable {
     public Weapon() {
     }
 
-    // Arma con modificador de ataque
     public Weapon(String name, int modAttack, int spaceHand) {
         this.name = name;
         this.modAttack = modAttack;

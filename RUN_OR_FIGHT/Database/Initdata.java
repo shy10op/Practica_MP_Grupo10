@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import User.User;
 import User.Admin;
 import User.Player;
+import Character.CharacterFactory;
+import Character.Character;
 import Character.Equipment.*;
 import User.RecordPlayer;
 
@@ -46,7 +48,7 @@ public class Initdata implements Serializable {
 
     @SuppressWarnings("unchecked")
     public static void loadUsersFromFile() {
-        checkUsersFile(); 
+        checkUsersFile();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
             users = (ArrayList<User>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -91,12 +93,17 @@ public class Initdata implements Serializable {
             user.setName("BotName" + i);
             user.setRole("player");
             String record = RecordPlayer.generateRecord();
-            Player newPlayer = new Player(user.getNick(),user.getName(),record);
+            Player newPlayer = new Player(user.getNick(), user.getName(), record);
             user.setPlayer(newPlayer);
-            Weapon botWeapon = EquipmentFactory.createWeapon("botweapon", 2,2,2);
+
+            Weapon botWeapon = EquipmentFactory.createWeapon("botweapon", 2, 2, 2);
             Armor botArmor = EquipmentFactory.createArmor("botArmor", 1, 2);
-            user.getPlayer().getCharacter().setWeapon(botWeapon);
-            user.getPlayer().getCharacter().setArmor(botArmor);
+            Character character = CharacterFactory.createCharacter("vampire", "Dracula_" + i, 200, 150, 10, 5, 400, 0);
+            character.setArmor(botArmor);
+            character.setWeapon(botWeapon);
+            character.setType("vampire");
+            user.getPlayer().setCharacter(character);
+
             users.add(user);
         }
 
@@ -105,10 +112,9 @@ public class Initdata implements Serializable {
         adminUser.setPassword("12345");
         adminUser.setName("AdminBot");
         adminUser.setRole("admin");
-        Admin newAdmin = new Admin(adminUser.getNick(),adminUser.getPassword(),adminUser.getName());
+        Admin newAdmin = new Admin(adminUser.getNick(), adminUser.getPassword(), adminUser.getName());
         adminUser.setAdmin(newAdmin);
 
-        
         saveUsersToFile();
     }
 
@@ -144,8 +150,8 @@ public class Initdata implements Serializable {
 
     public static void startInitData() {
         loadUsersFromFile();
-        generateBots();
         loadInventoriesFromFile();
+        generateBots();
         generateInitialInventories();
     }
 

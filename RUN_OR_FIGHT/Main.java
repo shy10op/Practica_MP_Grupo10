@@ -68,20 +68,23 @@ public class Main {
                         Character character = null;
                         switch (choice) {
                             case 1:
-                                character = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 20, 0,
+                                character = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0,
                                         0,
                                         0);
+                                character.setType("hunter");
                                 player.setCharacter(character);
                                 Initdata.saveUsersToFile();
                                 break;
                             case 2:
-                                character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 30, 5, 400,
+                                character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 10, 5, 400,
                                         0);
+                                character.setType("vampire");
                                 player.setCharacter(character);
                                 Initdata.saveUsersToFile();
                                 break;
                             case 3:
-                                character = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 25, 0, 0, 1);
+                                character = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
+                                character.setType("werewolf");
                                 player.setCharacter(character);
                                 Initdata.saveUsersToFile();
                                 break;

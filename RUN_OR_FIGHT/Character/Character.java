@@ -2,6 +2,7 @@ package Character;
 
 import java.io.Serializable;
 
+import Character.AbilityStrategy.Ability;
 import Character.Equipment.Armor;
 import Character.Equipment.Weapon;
 
@@ -12,6 +13,7 @@ public abstract class Character implements Serializable {
     protected int power;
     protected String type;
 
+    protected Ability ability;
     protected Weapon weapon;
     protected Armor armor;
 
@@ -73,4 +75,15 @@ public abstract class Character implements Serializable {
         this.armor = armor;
     }
 
+    public Ability getAbility() {
+        return ability;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

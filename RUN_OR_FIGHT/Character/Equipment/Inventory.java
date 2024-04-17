@@ -1,6 +1,7 @@
 package Character.Equipment;
 
 import java.util.ArrayList;
+
 import java.io.Serializable;
 
 public class Inventory implements Serializable {
@@ -20,7 +21,6 @@ public class Inventory implements Serializable {
         armors.add(armor);
     }
 
-    // Métodos para obtener las listas de armas y armors
     public ArrayList<Weapon> getWeapons() {
         return weapons;
     }

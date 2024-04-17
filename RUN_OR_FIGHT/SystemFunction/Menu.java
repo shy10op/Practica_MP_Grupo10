@@ -49,6 +49,7 @@ public class Menu {
     }
 
     public static void chooseMenu() {
+        
         System.out.println("+----------------Choose a character-------------+");
         System.out.println("| 1. Hunter                                     |");
         System.out.println("| 2. Vampire                                    |");
