@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import User.User;
+import User.Admin;
 import User.Player;
 import Character.Equipment.*;
 import User.RecordPlayer;
@@ -92,8 +93,22 @@ public class Initdata implements Serializable {
             String record = RecordPlayer.generateRecord();
             Player newPlayer = new Player(user.getNick(),user.getName(),record);
             user.setPlayer(newPlayer);
+            Weapon botWeapon = EquipmentFactory.createWeapon("botweapon", 2,2,2);
+            Armor botArmor = EquipmentFactory.createArmor("botArmor", 1, 2);
+            user.getPlayer().getCharacter().setWeapon(botWeapon);
+            user.getPlayer().getCharacter().setArmor(botArmor);
             users.add(user);
         }
+
+        User adminUser = new User();
+        adminUser.setNick("AdminBot");
+        adminUser.setPassword("12345");
+        adminUser.setName("AdminBot");
+        adminUser.setRole("admin");
+        Admin newAdmin = new Admin(adminUser.getNick(),adminUser.getPassword(),adminUser.getName());
+        adminUser.setAdmin(newAdmin);
+
+        
         saveUsersToFile();
     }
 

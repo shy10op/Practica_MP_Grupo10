@@ -6,6 +6,7 @@ import Character.Character;
 public class Player extends User {
     private String record;
     private Character character;
+    
 
     public Player(String nick, String name, String record) {
         super(nick, name, record, "player");

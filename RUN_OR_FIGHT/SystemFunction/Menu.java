@@ -7,6 +7,7 @@ import Character.Character;
 import Character.Equipment.Armor;
 import Character.Equipment.Inventory;
 import Character.Equipment.Weapon;
+import Database.Initdata;
 import User.Admin;
 import User.Player;
 import User.User;
@@ -95,12 +96,11 @@ public class Menu {
 
         }
 
-        // Admin admin = user.getAdmin();
-        // if (admin != null) {
-        // System.out.println("| Admin Info: |");
-
-        // }
-        // System.out.println("+-------------------------------------------------+");
+        Admin admin = user.getAdmin();
+        if (admin != null) {
+            System.out.println("| Admin Info: |");
+        }
+        System.out.println("+-------------------------------------------------+");
     }
 
     public static void inventoryMenu(ArrayList<Inventory> inventories, Scanner scanner, Player player) {
@@ -164,5 +164,6 @@ public class Menu {
                 System.out.println("Armor not found.");
             }
         }
+        Initdata.saveUsersToFile();
     }
 }

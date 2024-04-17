@@ -26,11 +26,6 @@ public class Auth {
         return null;
     }
 
-    /**
-     * @param scanner
-     * @param users
-     * @param FILENAME
-     */
     public static void signUp(Scanner scanner, List<User> users, String FILENAME) {
         System.out.print("Enter nick: ");
         String nick = scanner.nextLine().trim();

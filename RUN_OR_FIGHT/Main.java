@@ -102,7 +102,15 @@ public class Main {
                             Menu.userMenu(user);
                             break;
                         case 2:
-                            // UnenrollCharacter();
+                            System.out.println("Are you sure you want to delete your account? (yes/no)");
+                            String confirmation = scanner.nextLine();
+                            if ("yes".equalsIgnoreCase(confirmation)) {
+                                User.deleteUser(user.getNick());
+                                System.out.println("Your account has been successfully deleted.");
+                            } else {
+                                System.out.println("Account deletion canceled.");
+                            }
+                            break;
                         case 3:
                             Menu.inventoryMenu(inventories, scanner, player);
                             Initdata.saveUsersToFile();
@@ -129,7 +137,6 @@ public class Main {
                                     Combate.initialCombat(combate);
                                 } else if ("no".equals(combatOption)) {
                                     Character actualCharacter = user.getPlayer().getCharacter();
-                                    // Restar oro si rechaza el combate
                                     int result = actualCharacter.getGold() - combate.getAmount();
                                     System.out.println("Your current gold after declining the challenge is: " + result);
                                     actualCharacter.setGold(result);
@@ -143,7 +150,7 @@ public class Main {
                         case 6:
                             // check Ranking
                             break;
-                        case 7:// exit
+                        case 7:
                             System.out.println("Running away");
                             user.setLogged(false);
                             break;

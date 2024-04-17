@@ -40,6 +40,15 @@ public class User implements Serializable {
         return null;
     }
 
+    public static void deleteUser(String nick){
+        ArrayList<User> users = Initdata.getUsers();
+        User userToRemove = User.findUser(nick);
+        userToRemove.setLogged(false);
+        users.remove(userToRemove);
+        Initdata.saveUsersToFile();
+    }
+
+
     // Getters and Setters
 
     public Boolean isLogged() {
