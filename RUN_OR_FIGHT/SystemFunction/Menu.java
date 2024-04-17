@@ -1,6 +1,7 @@
 package SystemFunction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import Character.Character;
@@ -49,7 +50,7 @@ public class Menu {
     }
 
     public static void chooseMenu() {
-        
+
         System.out.println("+----------------Choose a character-------------+");
         System.out.println("| 1. Hunter                                     |");
         System.out.println("| 2. Vampire                                    |");
@@ -102,6 +103,24 @@ public class Menu {
             System.out.println("| Admin Info: |");
         }
         System.out.println("+-------------------------------------------------+");
+    }
+
+    public static void rankingMenu(ArrayList<User> users) {
+        int i = 1;
+        System.out.println("+-------------------------------------------------+");
+        System.out.println("|                    Ranking                      |");
+        System.out.println("+-------------------------------------------------+");
+        ArrayList<User> userList = users;
+        Collections.sort(userList,
+                (u1, u2) -> u2.getPlayer().getCharacter().getGold() - u1.getPlayer().getCharacter().getGold());
+
+        for (User user : userList) {
+            if (user.getPlayer().getCharacter() != null) {
+                System.out.println(
+                        "| " + i + ". " + user.getName() + " Gold : " + user.getPlayer().getCharacter().getGold());
+                i++;
+            }
+        }
     }
 
     public static void inventoryMenu(ArrayList<Inventory> inventories, Scanner scanner, Player player) {

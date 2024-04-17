@@ -14,4 +14,6 @@ public interface AbilityStrategy {
     public interface Talent {
         void talent(Hunter hunter);
     }
+
+    
 }

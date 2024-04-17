@@ -102,8 +102,8 @@ public class Initdata implements Serializable {
 
             Weapon botWeapon = EquipmentFactory.createWeapon("botweapon", 2, 2, 2);
             Armor botArmor = EquipmentFactory.createArmor("botArmor", 1, 2);
-            Character character = CharacterFactory.createCharacter("vampire", "Dracula_" + i, 200, 150,
-                    random.nextInt(20), 0, 400, 0);
+            Character character = CharacterFactory.createCharacter("vampire", "Dracula_" + i, random.nextInt(200), 150,
+                    random.nextInt(20), 0, random.nextInt(400), 0);
             character.setArmor(botArmor);
             character.setWeapon(botWeapon);
             character.setType("vampire");

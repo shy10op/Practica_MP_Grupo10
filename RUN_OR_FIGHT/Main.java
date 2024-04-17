@@ -147,7 +147,7 @@ public class Main {
                             }
                             break;
                         case 6:
-                            // check Ranking
+                            Menu.rankingMenu(users);
                             break;
                         case 7:
                             System.out.println("Running away");

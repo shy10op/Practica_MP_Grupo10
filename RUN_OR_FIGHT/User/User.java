@@ -15,7 +15,7 @@ public class User implements Serializable {
     private Combate combate;
 
     private String role;
-    private Boolean logged;
+    private Boolean logged = false;
     private Player player;
     private Admin admin;
 
