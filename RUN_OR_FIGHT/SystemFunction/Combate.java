@@ -130,17 +130,17 @@ public class Combate implements Serializable {
         switch (character.getType()) {
             case "hunter":
                 ((Hunter) character).setTalento(new HunterAbility());
-                System.out.println(character.getName() + "used Willpower");
+                System.out.println(character.getName() + " used Willpower");
                 ((Hunter) character).useAbility();
                 break;
             case "vampire":
                 ((Vampire) character).setDiscipline(new VampireAbility());
-                System.out.println(character.getName() + "used Blood");
+                System.out.println(character.getName() + " used Blood");
                 ((Vampire) character).useAbility();
                 break;
             case "werewolf":
                 ((Werewolf) character).setDon(new WereWolfAbility());
-                System.out.println(character.getName() + "used Rage");
+                System.out.println(character.getName() + " used Rage");
                 ((Werewolf) character).useAbility();
         }
     }

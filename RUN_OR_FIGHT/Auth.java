@@ -75,6 +75,7 @@ public class Auth {
         } else {
             System.out.println("Error: " + newUser.getRole());
         }
+        newUser.setLogged(false);
         users.add(newUser);
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {

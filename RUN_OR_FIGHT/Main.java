@@ -41,15 +41,11 @@ public class Main {
                     break;
                 case 2:
                     Auth.signUp(scanner, users, FILENAME);
+                    user.setLogged(false);
                     break;
                 case 3:
                     System.out.println("Exiting...");
                     System.exit(0);
-                    break;
-                case 4:
-                    for (User user2 : users) {
-                        System.out.println("username: " + user2.getName());
-                    }
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");

@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
+
 import User.User;
 import User.Admin;
 import User.Player;
@@ -83,6 +85,8 @@ public class Initdata implements Serializable {
     }
 
     public static void generateBots() {
+
+        Random random = new Random();
         if (!users.isEmpty()) {
             return;
         }
@@ -98,7 +102,8 @@ public class Initdata implements Serializable {
 
             Weapon botWeapon = EquipmentFactory.createWeapon("botweapon", 2, 2, 2);
             Armor botArmor = EquipmentFactory.createArmor("botArmor", 1, 2);
-            Character character = CharacterFactory.createCharacter("vampire", "Dracula_" + i, 200, 150, 10, 5, 400, 0);
+            Character character = CharacterFactory.createCharacter("vampire", "Dracula_" + i, 200, 150,
+                    random.nextInt(20), 0, 400, 0);
             character.setArmor(botArmor);
             character.setWeapon(botWeapon);
             character.setType("vampire");
