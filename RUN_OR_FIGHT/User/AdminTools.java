@@ -46,11 +46,11 @@ public class AdminTools {
                     character.setHealth((Integer) newValue);
                     break;
                 default:
-                    System.out.println("Atributo no válido.");
+                    System.out.println("Invalid attribute");
                     break;
             }
         } else {
-            System.out.println("Jugador no encontrado o sin personaje.");
+            System.out.println("Player not found or without chracter");
         }
     }
 
