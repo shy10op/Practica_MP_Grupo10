@@ -49,12 +49,22 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
-    public static void chooseMenu() {
+    public static void chooseCharacterMenu() {
 
         System.out.println("+----------------Choose a character-------------+");
         System.out.println("| 1. Hunter                                     |");
         System.out.println("| 2. Vampire                                    |");
         System.out.println("| 3. Werewolf                                   |");
+        System.out.println("| 4. Exit                                       |");
+        System.out.println("+-----------------------------------------------+");
+    }
+
+    public static void chooseMinionMenu() {
+
+        System.out.println("+----------------Choose a character-------------+");
+        System.out.println("| 1. Human                                      |");
+        System.out.println("| 2. Demon                                      |");
+        System.out.println("| 3. Ghoul                                      |");
         System.out.println("| 4. Exit                                       |");
         System.out.println("+-----------------------------------------------+");
     }

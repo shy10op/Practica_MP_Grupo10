@@ -5,6 +5,7 @@ import java.io.Serializable;
 import Character.AbilityStrategy.Ability;
 import Character.Equipment.Armor;
 import Character.Equipment.Weapon;
+import Character.Minions.Minion;
 
 public abstract class Character implements Serializable {
     protected String name;
@@ -16,6 +17,7 @@ public abstract class Character implements Serializable {
     protected Ability ability;
     protected Weapon weapon;
     protected Armor armor;
+    protected Minion minion;
 
     public Character() {
     }
@@ -85,5 +87,13 @@ public abstract class Character implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public void setMinions(Minion minion) {
+        this.minion = minion;
+    }
+
+    public Minion getMinion() {
+        return minion;
     }
 }

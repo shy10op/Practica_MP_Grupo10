@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Character.CharacterFactory;
@@ -7,6 +8,9 @@ import Character.Character;
 import User.Player;
 import User.User;
 import Character.Equipment.*;
+import Character.Minions.Minion;
+import Character.Minions.MinionFactory;
+import Character.Minions.MinionEspecific.Human.Loyalty;
 import Database.Initdata;
 import SystemFunction.Combate;
 import SystemFunction.Menu;
@@ -26,6 +30,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
         boolean exit = false;
+        Random rand = new Random();
 
         while (!exit) {
             Menu.authMenu();
@@ -60,7 +65,7 @@ public class Main {
 
                 if (userRole.equals("player")) {
                     if (player.getCharacter() == null) {
-                        Menu.chooseMenu();
+                        Menu.chooseCharacterMenu();
                         System.out.print("Enter your choice: ");
                         int choice = scanner.nextInt();
                         Character character = null;
@@ -87,12 +92,56 @@ public class Main {
                                 Initdata.saveUsersToFile();
                                 break;
                             case 4:
-                                System.out.println("Exiting the program...");
-                                System.exit(0);
+                                user.setLogged(false);
+                                break;
                             default:
                                 System.out.println("Invalid choice, please try again.");
                                 continue;
                         }
+                    }
+
+                    if (player.getCharacter().getMinion() == null) {
+                        Menu.chooseMinionMenu();
+                        System.out.print("Enter your choice: ");
+                        int choice = scanner.nextInt();
+                        Minion minion = null;
+                        switch (choice) {
+                            case 1:
+                                minion = MinionFactory.createMinion("human", "humanKnight", rand.nextInt(40),
+                                        Loyalty.NORMAL,
+                                        false, null, 0);
+                                minion.setType("human");
+                                if (player.getCharacter().getType().equals("vampire")) {
+                                    System.out.println("Vampire cant have human minions");
+                                }
+                                player.getCharacter().setMinions(minion);
+                                Initdata.saveUsersToFile();
+                                break;
+                            case 2:
+                                String description = "this is the description about the demon";
+                                minion = MinionFactory.createMinion("demon", "demonKnight", rand.nextInt(40),
+                                        Loyalty.NORMAL,
+                                        true, description, 0);
+                                minion.setType("demon");
+                                player.getCharacter().setMinions(minion);
+                                Initdata.saveUsersToFile();
+                                break;
+                            case 3:
+                                minion = MinionFactory.createMinion("ghoul", "ghoulKnight", rand.nextInt(40),
+                                        Loyalty.NORMAL,
+                                        false, null, 4);
+                                minion.setType("ghoul");
+                                player.getCharacter().setMinions(minion);
+                                Initdata.saveUsersToFile();
+                                break;
+                            case 4:
+                                user.setLogged(false);
+                                break;
+                            default:
+                                System.out.println("Invalid choice, please try again.");
+                                continue;
+                        }
+
                     }
 
                     Menu.playerMenu();

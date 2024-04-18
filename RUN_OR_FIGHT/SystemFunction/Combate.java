@@ -64,8 +64,15 @@ public class Combate implements Serializable {
         Character challenger = combate.getChanllenger().getPlayer().getCharacter();
         Character challenged = combate.getChanllenged().getPlayer().getCharacter();
 
-        int challengerAuxHP = challenger.getHealth();
-        int challengedAuxHP = challenged.getHealth();
+        int challengerHP = challenger.getHealth();
+        int challengedHP = challenged.getHealth();
+        int challengerMinionsHP = challenger.getMinion().getHealth();
+        int challengedMinionsHP = challenged.getMinion().getHealth();
+
+        int challengerAuxHP = challengerHP + challengerMinionsHP;
+        int challengedAuxHP = challengedHP + challengedMinionsHP;
+        System.out.println("Chanllenger HP: " + challengerHP + ", minions HP: " + challengerMinionsHP);
+        System.out.println("Chanllenged HP: " + challengedHP + ", minions HP: " + challengedMinionsHP);
 
         Random random = new Random();
         int round = 1;
