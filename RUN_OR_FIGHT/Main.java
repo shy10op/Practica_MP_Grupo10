@@ -46,7 +46,7 @@ public class Main {
                     }
                 case "2":
                     Auth.signUp(scanner, users, FILENAME);
-                    user.setLogged(false);
+                    // user.setLogged(false);
                     break;
                 case "3":
                     System.out.println("Exiting...");
@@ -215,12 +215,13 @@ public class Main {
                     int optionAdmin = scanner.nextInt();
                     switch (optionAdmin) {
                         case 1:
-                            // Imprime los dos Strings sin esperar a que lea por teclado
+                            String userNick = scanner.nextLine();// Imprime los dos Strings sin esperar a que lea por teclado
                             System.out.println("Enter the nick of the player");
-                            String userNick = scanner.nextLine();
+                            scanner.nextLine(); 
                             System.out.println("Searching");
                             User destinationUser = User.findUser(userNick);
                             if (destinationUser != null) {
+                                
                                 System.out.println("Enter the changed value");
                                 String changed = scanner.nextLine();
                                 System.out.println(("Enter the new value"));
