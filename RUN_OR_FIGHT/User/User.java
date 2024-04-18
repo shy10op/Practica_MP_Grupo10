@@ -11,7 +11,7 @@ public class User implements Serializable {
     private String nick;
     private String password;
     private String name;
-    private Boolean accountStatus;
+    private Boolean accountStatus = true;
     private Combate combate;
 
     private String role;

@@ -238,6 +238,13 @@ public class Main {
                         case 3:
 
                         case 4:
+                            System.out.print("List of players nicknames:");
+                            ArrayList<User> listPlayers =  admin.getPlayers();
+                            int i = 0;
+                            for (User userPlayer: listPlayers){
+                                i = i+1;
+                                System.out.println("User Nick " + i + " : " +userPlayer.getNick());
+                            }
                             System.out.println("Enter the nick of the player who will be banned");
                             String banned = scanner.nextLine();
                             Admin.banUser(banned);

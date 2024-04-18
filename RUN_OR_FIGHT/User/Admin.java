@@ -6,14 +6,14 @@ import Database.Initdata;
 
 public class Admin extends User {
 
-    ArrayList<User> users = Initdata.getUsers();
     private AdminTools adminTools;
 
     public Admin(String nick, String password, String name) {
         super(nick, password, name, "admin");
     }
 
-    public ArrayList<User> getPlayers() {
+    public static ArrayList<User> getPlayers() {
+        ArrayList<User> users = Initdata.getUsers();
         ArrayList<User> playerList = new ArrayList<>();
         for (User user : users) {
             if (user.getPlayer() != null) {
