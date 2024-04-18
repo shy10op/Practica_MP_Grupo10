@@ -11,6 +11,8 @@ import Database.Initdata;
 import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
+import User.Admin;
+import User.AdminTools;
 
 public class Main {
 
@@ -160,11 +162,44 @@ public class Main {
 
                 } else if (userRole.equals("admin")) {
                     Menu.adminMenu();
-                    user.setLogged(false);
+                    System.out.print("Enter your choice: ");
+                    int optionAdmin = scanner.nextInt();
+                    //user.setLogged(false);
+                    switch (optionAdmin) {
+                        case 1:
+                                System.out.println("Enter the nick of the player");
+                                String nick = scanner.nextLine();
+                                User.findUser(nick);
+                                if (user!=null){
+                                    System.out.println("Enter the changed value");
+                                    String changed = scanner.nextLine();
+                                    System.out.println(("Enter the new value"));
+                                    String newValue = scanner.nextLine();
+                                    
+                                    //Aqui pasar la funcion modifyCharacterAttributes
+                                }
+                                System.out.println("Invalid option. Please try again.");
+                        case 2:
+
+                        case 3:
+
+                        case 4: 
+                                System.out.println("Enter the nick of the player who will be banned");
+                                String banned = scanner.nextLine();
+                                Admin.banUser(banned);
+                                System.out.println("Player banned successfully");
+                        case 5: 
+                        
+                        case 6:
+                                System.out.println("Exiting the program...");
+                                System.exit(0);
+                        default:
+                            System.out.println("Invalid option. Please try again.");
+                            break;
+                    }
                 }
             }
         }
-
         scanner.close();
         Initdata.saveUsersToFile();
 

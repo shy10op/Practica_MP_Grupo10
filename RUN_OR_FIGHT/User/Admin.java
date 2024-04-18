@@ -22,8 +22,7 @@ public class Admin extends User {
         return playerList;
     }
 
-
-    public void banUser(String nick) {
+    public static void banUser(String nick) {
         User user = User.findUser(nick);
         if (user.getAccountStatus()) {
             user.setAccountStatus(false);
