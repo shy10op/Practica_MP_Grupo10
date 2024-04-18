@@ -16,7 +16,6 @@ import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
 import User.Admin;
-import User.AdminTools;
 
 public class Main {
 
@@ -220,8 +219,8 @@ public class Main {
                             // Imprime los dos Strings sin esperar a que lea por teclado
                             System.out.println("Enter the nick of the player");
                             String nick = scanner.nextLine();
-                            User.findUser(nick);
-                            if (user != null) {
+                            User destinationUser = User.findUser(nick);
+                            if (destinationUser != null) {
                                 System.out.println("Enter the changed value");
                                 String changed = scanner.nextLine();
                                 System.out.println(("Enter the new value"));
@@ -229,8 +228,10 @@ public class Main {
 
                                 // Aqui pasar la funcion modifyCharacterAttributes
                                 admin.modifyCharacterAttributes(nick, changed, newValue);
+                            } else {
+                                System.out.println("Invalid option. Please try again.");
                             }
-                            System.out.println("Invalid option. Please try again.");
+                            break;
                         case 2:
 
                         case 3:
