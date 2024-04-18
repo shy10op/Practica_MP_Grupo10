@@ -97,6 +97,9 @@ public class Menu {
             System.out.printf("| Health: %-37s\n", character.getHealth());
             System.out.printf("| Gold: %-37s\n", character.getGold());
             System.out.printf("| Power: %-37s\n", character.getPower());
+            if (character.getMinion() != null) {
+                System.out.printf("| Minion: %-37s\n", character.getMinion().getType());
+            }
             if (character.getArmor() != null) {
                 System.out.printf("| Armor: %-37s\n", character.getArmor().getName());
             }
