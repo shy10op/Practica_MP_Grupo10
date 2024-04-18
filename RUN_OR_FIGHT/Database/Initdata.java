@@ -119,6 +119,7 @@ public class Initdata implements Serializable {
         adminUser.setRole("admin");
         Admin newAdmin = new Admin(adminUser.getNick(), adminUser.getPassword(), adminUser.getName());
         adminUser.setAdmin(newAdmin);
+        users.add(adminUser);
 
         saveUsersToFile();
     }

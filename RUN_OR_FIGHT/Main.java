@@ -33,29 +33,28 @@ public class Main {
 
         while (!exit) {
             Menu.authMenu();
-            int option = scanner.nextInt();
-            scanner.nextLine();
-
+            String option = scanner.nextLine();
             switch (option) {
-                case 1:
+                case "1":
                     user = Auth.login(scanner, users);
                     if (user != null) {
                         System.out.println("Welcome, " + user.getName() + "!");
+                        break;
                     } else {
                         System.out.println("Invalid username or password.");
+                        continue;
                     }
-                    break;
-                case 2:
+                case "2":
                     Auth.signUp(scanner, users, FILENAME);
                     user.setLogged(false);
                     break;
-                case 3:
+                case "3":
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
-                    break;
+                    continue;
             }
 
             while (user.isLogged()) {
@@ -112,8 +111,9 @@ public class Main {
                                 minion.setType("human");
                                 if (player.getCharacter().getType().equals("vampire")) {
                                     System.out.println("Vampire cant have human minions");
+                                } else {
+                                    player.getCharacter().setMinions(minion);
                                 }
-                                player.getCharacter().setMinions(minion);
                                 Initdata.saveUsersToFile();
                                 break;
                             case 2:
@@ -213,13 +213,13 @@ public class Main {
                     Menu.adminMenu();
                     System.out.print("Enter your choice: ");
                     int optionAdmin = scanner.nextInt();
-                    // user.setLogged(false);
                     switch (optionAdmin) {
                         case 1:
                             // Imprime los dos Strings sin esperar a que lea por teclado
                             System.out.println("Enter the nick of the player");
-                            String nick = scanner.nextLine();
-                            User destinationUser = User.findUser(nick);
+                            String userNick = scanner.nextLine();
+                            System.out.println("Searching");
+                            User destinationUser = User.findUser(userNick);
                             if (destinationUser != null) {
                                 System.out.println("Enter the changed value");
                                 String changed = scanner.nextLine();
@@ -227,7 +227,7 @@ public class Main {
                                 String newValue = scanner.nextLine();
 
                                 // Aqui pasar la funcion modifyCharacterAttributes
-                                admin.modifyCharacterAttributes(nick, changed, newValue);
+                                admin.modifyCharacterAttributes(userNick, changed, newValue);
                             } else {
                                 System.out.println("Invalid option. Please try again.");
                             }
@@ -245,7 +245,7 @@ public class Main {
 
                         case 6:
                             System.out.println("Exiting the program...");
-                            System.exit(0);
+                            user.setLogged(false);
                         default:
                             System.out.println("Invalid option. Please try again.");
                             break;

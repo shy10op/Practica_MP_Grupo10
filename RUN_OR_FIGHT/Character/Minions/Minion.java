@@ -1,6 +1,8 @@
 package Character.Minions;
 
-public class Minion {
+import java.io.Serializable;
+
+public class Minion implements Serializable {
 
     private String name;
     private int hp;
