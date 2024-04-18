@@ -1,24 +1,31 @@
 package User;
 
 import java.util.List;
+import Character.Character;
 
 public class AdminTools {
-    private List<Player> playerList;
+    private List<User> playerList;
 
-    public AdminTools(List<Player> playerList) {
+    public AdminTools(List<User> playerList) {
         this.playerList = playerList;
     }
 
     public void showPlayers() {
-        for (Player player : playerList) {
-            System.out.println(player.getNick() + " - " + player.getName());
+        for (User user : playerList) {
+            if (user instanceof Player) {
+                Player player = (Player) user;
+                System.out.println(player.getNick() + " - " + player.getName());
+            }
         }
     }
 
     public Player findPlayerByNick(String nick) {
-        for (Player player : playerList) {
-            if (player.getNick().equals(nick)) {
-                return player;
+        for (User user : playerList) {
+            if (user instanceof Player) {
+                Player player = (Player) user;
+                if (player.getNick().equals(nick)) {
+                    return player;
+                }
             }
         }
         return null;
@@ -27,15 +34,16 @@ public class AdminTools {
     public void modifyCharacterAttributes(String nick, String attributeName, Object newValue) {
         Player player = findPlayerByNick(nick);
         if (player != null && player.getCharacter() != null) {
+            Character character = player.getCharacter();
             switch (attributeName.toLowerCase()) {
                 case "name":
-                    player.getCharacter().setName((String) newValue);
+                    character.setName((String) newValue);
                     break;
                 case "power":
-                    player.getCharacter().setPower((Integer) newValue);
+                    character.setPower((Integer) newValue);
                     break;
                 case "health":
-                    player.getCharacter().setHealth((Integer) newValue);
+                    character.setHealth((Integer) newValue);
                     break;
                 default:
                     System.out.println("Atributo no válido.");
@@ -46,12 +54,11 @@ public class AdminTools {
         }
     }
 
-    public List<Player> getPlayerList() {
+    public List<User> getPlayerList() {
         return playerList;
     }
 
-    public void setPlayerList(List<Player> playerList) {
+    public void setPlayerList(List<User> playerList) {
         this.playerList = playerList;
     }
-
 }
