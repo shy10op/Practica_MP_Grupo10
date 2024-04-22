@@ -16,6 +16,7 @@ import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
 import User.Admin;
+import org.junit.jupiter.api.Test;
 
 public class Main {
 
