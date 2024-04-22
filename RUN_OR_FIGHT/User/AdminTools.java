@@ -1,22 +1,14 @@
 package User;
 
+import java.io.Serializable;
 import java.util.List;
 import Character.Character;
 
-public class AdminTools {
+public class AdminTools implements Serializable {
     private List<User> playerList;
 
     public AdminTools(List<User> playerList) {
         this.playerList = playerList;
-    }
-
-    public void showPlayers() {
-        for (User user : playerList) {
-            if (user instanceof Player) {
-                Player player = (Player) user;
-                System.out.println(player.getNick() + " - " + player.getName());
-            }
-        }
     }
 
     public Player findPlayerByNick(String nick) {
@@ -40,17 +32,25 @@ public class AdminTools {
                     character.setName((String) newValue);
                     break;
                 case "power":
-                    character.setPower((Integer) newValue);
+                    if (newValue instanceof Integer) {
+                        character.setPower((Integer) newValue);
+                    } else {
+                        System.out.println("Invalid value for power attribute");
+                    }
                     break;
                 case "health":
-                    character.setHealth((Integer) newValue);
+                    if (newValue instanceof Integer) {
+                        character.setHealth((Integer) newValue);
+                    } else {
+                        System.out.println("Invalid value for health attribute");
+                    }
                     break;
                 default:
                     System.out.println("Invalid attribute");
                     break;
             }
         } else {
-            System.out.println("Player not found or without chracter");
+            System.out.println("Player not found or without character");
         }
     }
 

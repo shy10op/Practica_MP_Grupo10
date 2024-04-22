@@ -10,6 +10,7 @@ public class Admin extends User {
 
     public Admin(String nick, String password, String name) {
         super(nick, password, name, "admin");
+        this.adminTools = new AdminTools(getPlayers());
     }
 
     public static ArrayList<User> getPlayers() {
@@ -24,7 +25,13 @@ public class Admin extends User {
     }
 
     public void showPlayers() {
-        adminTools.showPlayers();
+        ArrayList<User> playerList = Initdata.getUsers();
+        for (User user : playerList) {
+            if (user instanceof Player) {
+                Player player = (Player) user;
+                System.out.println(player.getNick() + " - " + player.getName());
+            }
+        }
     }
 
     public User findPlayerByNick(String nick) {

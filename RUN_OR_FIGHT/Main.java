@@ -211,17 +211,21 @@ public class Main {
                 } else if (userRole.equals("admin")) {
                     Admin admin = user.getAdmin();
                     Menu.adminMenu();
+                    admin.showPlayers();
                     System.out.print("Enter your choice: ");
                     int optionAdmin = scanner.nextInt();
+                    scanner.nextLine();
                     switch (optionAdmin) {
                         case 1:
-                            String userNick = scanner.nextLine();// Imprime los dos Strings sin esperar a que lea por teclado
+                            System.out.println("About to show players");
+
+                            admin.showPlayers();
                             System.out.println("Enter the nick of the player");
-                            scanner.nextLine(); 
+                            String userNick = scanner.nextLine();
                             System.out.println("Searching");
                             User destinationUser = User.findUser(userNick);
                             if (destinationUser != null) {
-                                
+
                                 System.out.println("Enter the changed value");
                                 String changed = scanner.nextLine();
                                 System.out.println(("Enter the new value"));
@@ -239,11 +243,11 @@ public class Main {
 
                         case 4:
                             System.out.print("List of players nicknames:");
-                            ArrayList<User> listPlayers =  admin.getPlayers();
+                            ArrayList<User> listPlayers = Admin.getPlayers();
                             int i = 0;
-                            for (User userPlayer: listPlayers){
-                                i = i+1;
-                                System.out.println("User Nick " + i + " : " +userPlayer.getNick());
+                            for (User userPlayer : listPlayers) {
+                                i = i + 1;
+                                System.out.println("User Nick " + i + " : " + userPlayer.getNick());
                             }
                             System.out.println("Enter the nick of the player who will be banned");
                             String banned = scanner.nextLine();
