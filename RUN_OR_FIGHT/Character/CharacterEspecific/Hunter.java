@@ -20,8 +20,8 @@ public class Hunter extends Character {
         this.willpower = willpower;
     }
 
-    public void setTalento(Talent talento) {
-        this.talent = talento;
+    public void setTalent(Talent talent) {
+        this.talent = talent;
     }
 
     public void useAbility() {

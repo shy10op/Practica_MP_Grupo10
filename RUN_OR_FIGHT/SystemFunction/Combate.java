@@ -136,7 +136,7 @@ public class Combate implements Serializable {
     private static void combatAbility(Character character) {
         switch (character.getType()) {
             case "hunter":
-                ((Hunter) character).setTalento(new HunterAbility());
+                ((Hunter) character).setTalent(new HunterAbility());
                 System.out.println(character.getName() + " used Willpower");
                 ((Hunter) character).useAbility();
                 break;

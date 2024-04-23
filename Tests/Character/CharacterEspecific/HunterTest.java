@@ -13,14 +13,21 @@ class HunterTest {
     }
 
     @Test
-    void setWillpower() {
+    public void testSetWillpower() {
+        Hunter hunter = new Hunter("Van Helsing", 100, 50, 10);
+        hunter.setWillpower(3);
+        assertEquals(3, hunter.getWillpower());
     }
 
     @Test
-    void setTalento() {
+    void testSetTalent() {
+        Hunter hunter = new Hunter ("Van Helsing", 100, 50, 13);
+        assertEquals(13, hunter.getPower());
     }
 
     @Test
-    void useAbility() {
+    void testUseAbility() {
+        Hunter hunter = new Hunter ("Van Helsing", 100, 50, 16);
+        assertEquals(16, hunter.getPower());
     }
 }
