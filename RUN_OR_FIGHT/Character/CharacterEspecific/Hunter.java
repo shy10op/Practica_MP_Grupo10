@@ -9,7 +9,7 @@ public class Hunter extends Character {
 
     public Hunter(String name, int gold, int hp, int power) {
         super(name, gold, hp, power);
-        this.willpower = 3; // willpower inicial es 3
+        this.willpower = 3; // willpower initial is 3
     }
 
     public int getWillpower() {
