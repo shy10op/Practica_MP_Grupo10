@@ -8,6 +8,9 @@ public class Admin extends User {
 
     private AdminTools adminTools;
 
+    public Admin(){
+    }
+
     public Admin(String nick, String password, String name) {
         super(nick, password, name, "admin");
         this.adminTools = new AdminTools(getPlayers());
