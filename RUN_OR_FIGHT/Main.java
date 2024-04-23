@@ -169,13 +169,19 @@ public class Main {
                         case 4:
                             System.out.println("Let's Challenge");
                             String rivalNick = scanner.nextLine();
-                            System.out.println("Enter stake gold");
-                            int amount = scanner.nextInt();
-                            User chanllenged = User.findUser(rivalNick);
-                            Combate combat = new Combate(user, chanllenged, amount);
+                            if (rivalNick.equals(user.getNick())) {
+                                System.out.println("You can't challenge yourself.");
+                                continue;
+                            } else {
+                                System.out.println("Enter stake gold");
+                                int amount = scanner.nextInt();
+                                User chanllenged = User.findUser(rivalNick);
+                                Combate combat = new Combate(user, chanllenged, amount);
 
-                            Message.sendCombat(combat);
-                            System.out.println("You: " + user.getNick() + " vs Rival: " + rivalNick);
+                                Message.sendCombatToAdmin(combat);
+                                System.out.println("You: " + user.getNick() + " vs Rival: " + rivalNick);
+                            }
+                            Initdata.saveUsersToFile();
                             break;
                         case 5:
                             System.out.println("Checking for incoming challenges...");
@@ -204,11 +210,6 @@ public class Main {
                         case 7:
                             System.out.println("Running away");
                             user.setLogged(false);
-                            break;
-                        case 8:
-                            if (users.equals(null)){
-                                System.out.println("There are no players in the game");
-                            }
                             break;
                         default:
                             System.out.println("Invalid option. Please try again.");
@@ -247,7 +248,24 @@ public class Main {
                         case 2:
 
                         case 3:
-
+                            Menu.combatListMenu();
+                            System.out.print("Enter the nickname of the Challenger or Challenged to view details: ");
+                            String combatnick = scanner.nextLine();
+                            Combate selectedCombate = Menu.combatMenu(combatnick);
+                            if (selectedCombate == null) {
+                                System.out.println("Invalid combate. Please try again.");
+                                continue;
+                            }
+                            System.out.print("Do you want to validate this combat? (y/n): ");
+                            String validate = scanner.nextLine().trim().toLowerCase();
+                            if (validate.equals("y")) {
+                                Message.sendCombatToChallenged(selectedCombate);
+                                System.out.println("The combat has been sent to the challenged.");
+                            } else {
+                                Combate.deleteCombate(selectedCombate);
+                            }
+                            System.out.println("\n");
+                            break;
                         case 4:
                             System.out.print("List of players nicknames:");
                             ArrayList<User> listPlayers = Admin.getPlayers();

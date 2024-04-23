@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import User.User;
@@ -16,13 +17,16 @@ import User.Player;
 import Character.CharacterFactory;
 import Character.Character;
 import Character.Equipment.*;
+import SystemFunction.Combate;
 import User.RecordPlayer;
 
 public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
     private static final String INVENTORY = "inventory.dat";
+    private static final String COMBATES = "combates.dat";
     private static ArrayList<Inventory> inventories = new ArrayList<>();
     private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<Combate> combates = new ArrayList<>();
 
     private static void checkUsersFile() {
         File file = new File(FILENAME);
@@ -40,6 +44,18 @@ public class Initdata implements Serializable {
         File file = new File(INVENTORY);
         if (!file.exists()) {
             System.out.println("Inventory file not found. Creating new inventory database.");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void checkCombatesFile() {
+        File file = new File(COMBATES);
+        if (!file.exists()) {
+            System.out.println("Combates file not found. Creating new combates database.");
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -68,6 +84,16 @@ public class Initdata implements Serializable {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public static void loadCombatesFromFile() {
+        checkCombatesFile();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(COMBATES))) {
+            combates = (ArrayList<Combate>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void saveUsersToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME, false))) {
             oos.writeObject(users);
@@ -79,6 +105,14 @@ public class Initdata implements Serializable {
     public static void saveInventoriesToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(INVENTORY, false))) {
             oos.writeObject(inventories);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveCombatesToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(COMBATES, false))) {
+            oos.writeObject(combates);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,11 +188,42 @@ public class Initdata implements Serializable {
         saveInventoriesToFile();
     }
 
+    public static void generateRandomCombates() {
+        Random random = new Random();
+        ArrayList<User> availableUsers = new ArrayList<>();
+        for (User user : users) {
+            if (user.getPlayer() != null) {
+                availableUsers.add(user);
+            }
+        }
+
+        Collections.shuffle(availableUsers);
+        for (int i = 0; i < availableUsers.size() - 1; i += 2) {
+            User challenger = availableUsers.get(i);
+            User challenged = availableUsers.get(i + 1);
+            int amount = random.nextInt(20) + 1;
+            Combate combate = new Combate(challenger, challenged, amount);
+            challenger.setCombate(combate);
+            combates.add(combate);
+        }
+        saveCombatesToFile();
+    }
+
     public static void startInitData() {
         loadUsersFromFile();
         loadInventoriesFromFile();
-        generateBots();
-        generateInitialInventories();
+        loadCombatesFromFile();
+
+        if (users.isEmpty()) {
+            generateBots();
+        }
+        if (inventories.isEmpty()) {
+            generateInitialInventories();
+        }
+        if (combates.isEmpty()) {
+            generateRandomCombates();
+        }
+
     }
 
     public static String getFILENAME() {
@@ -175,6 +240,10 @@ public class Initdata implements Serializable {
 
     public static ArrayList<Inventory> getInventories() {
         return inventories;
+    }
+
+    public static ArrayList<Combate> getCombates() {
+        return combates;
     }
 
 }

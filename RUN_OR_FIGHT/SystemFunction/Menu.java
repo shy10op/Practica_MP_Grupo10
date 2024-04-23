@@ -48,6 +48,82 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
+    public static void combatListMenu() {
+        printHeader("Combat List");
+        ArrayList<Combate> combates = Initdata.getCombates();
+        if (combates.isEmpty()) {
+            System.out.println("No hay combates en este momento.");
+            return;
+        }
+
+        System.out.println("+-------------------------------------------------+");
+        System.out.println("| Challenger VS Challenged                        |");
+        System.out.println("+-------------------------------------------------+");
+        for (Combate combate : combates) {
+            String challengerName = combate.getChallenger().getNick();
+            String challengedName = combate.getChallenged().getNick();
+            System.out.printf("| %s VS %s" + "  Gold: %d \n", challengerName, challengedName,
+                    combate.getAmount());
+        }
+        System.out.println("+-------------------------------------------------+");
+        System.out.print("\n");
+    }
+
+    public static Combate combatMenu(String nick) {
+        printHeader("Combat found involving " + nick + ":");
+        ArrayList<Combate> combates = Initdata.getCombates();
+        boolean found = false;
+        for (Combate combate : combates) {
+            if (combate.getChallenger().getNick().equals(nick) ||
+                    combate.getChallenged().getNick().equals(nick)) {
+                Character challenger = combate.getChallenger().getPlayer().getCharacter();
+                Character challenged = combate.getChallenged().getPlayer().getCharacter();
+                printHeader("Challenger: ");
+                printCharacterInfo(challenger);
+                printHeader("Challenged: ");
+                printCharacterInfo(challenged);
+
+                System.out.println("+-------------------------------------------------+");
+                System.out.printf("| Stake: %d\n", combate.getAmount());
+                System.out.println("+-------------------------------------------------+");
+                found = true;
+                return combate;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No combats found for " + nick);
+        }
+        return null;
+    }
+
+    private static void printCharacterInfo(Character character) {
+        System.out.printf("| Name: %s, Type: %s, Health: %d, Power: %d, Gold: %d\n",
+                character.getName(), character.getType(), character.getHealth(),
+                character.getPower(), character.getGold());
+        if (character.getWeapon() != null) {
+            System.out.println("| Weapon: " + character.getWeapon().getName()
+                    + "  Attack Mod: " + character.getWeapon().getModAttack()
+                    + "  Defense Mod: " + character.getWeapon().getModDefense());
+        } else {
+            System.out.println("| Weapon: None");
+        }
+        if (character.getArmor() != null) {
+            System.out.println("| Armor: " + character.getArmor().getName()
+                    + "  Attack Mod: " + character.getArmor().getModAttack()
+                    + "  Defense Mod: " + character.getArmor().getModDefense());
+        } else {
+            System.out.println("| Armor: None");
+        }
+        if (character.getMinion() != null) {
+            System.out.println(
+                    "| Minion: " + character.getMinion().getName() + "  Type: " + character.getMinion().getType()
+                            + "  Health: " + character.getMinion().getHealth());
+        } else {
+            System.out.println("| Minion: None");
+        }
+    }
+
     public static void authMenu() {
         printHeader("Auth Menu");
         System.out.println("| 1. Login                                        |");

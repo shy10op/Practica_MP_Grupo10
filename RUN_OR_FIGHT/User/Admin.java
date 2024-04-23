@@ -50,5 +50,4 @@ public class Admin extends User {
             user.setAccountStatus(true);
         }
     }
-
 }
