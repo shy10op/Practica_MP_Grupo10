@@ -1,8 +1,9 @@
 package SystemFunction;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Character.Character;
 import Character.Equipment.Armor;
@@ -15,73 +16,76 @@ import User.User;
 
 public class Menu {
 
+    private static void printHeader(String title) {
+        String header = "+-------------------------------------------------+";
+        System.out.println(header);
+        System.out.printf("| %-48s|\n", title);
+        System.out.println(header);
+    }
+
     public static void playerMenu() {
-        System.out.println("+-------------------Main Menu-------------------+");
-        System.out.println("| 1. View Character                             |");
-        System.out.println("| 2. Delete Character                           |");
-        System.out.println("| 3. Modify Active Items                        |");
-        System.out.println("| 4. Challenge another user                     |");
-        System.out.println("| 5. Message                                    |");
-        System.out.println("| 6. Check World Ranking                        |");
-        System.out.println("| 7. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+        printHeader("Main Menu");
+        System.out.println("| 1. View Character                               |");
+        System.out.println("| 2. Delete Character                             |");
+        System.out.println("| 3. Modify Active Items                          |");
+        System.out.println("| 4. Challenge another user                       |");
+        System.out.println("| 5. Message                                      |");
+        System.out.println("| 6. Check World Ranking                          |");
+        System.out.println("| 7. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
         System.out.print("Choose an option: ");
     }
 
     public static void adminMenu() {
-        System.out.println("+-------------------Admin Menu------------------+");
-        System.out.println("| 1. Edit Character                             |");
-        System.out.println("| 2. Add Items To The Character                 |");
-        System.out.println("| 3. Validate Challenges                        |");
-        System.out.println("| 4. Block Players                              |");
-        System.out.println("| 5. Unlock Players                             |");
-        System.out.println("| 6. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+        printHeader("Admin Menu");
+        System.out.println("| 1. Edit Character                               |");
+        System.out.println("| 2. Add Items To The Character                   |");
+        System.out.println("| 3. Validate Challenges                          |");
+        System.out.println("| 4. Block Players                                |");
+        System.out.println("| 5. Unlock Players                               |");
+        System.out.println("| 6. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
         System.out.print("Choose an option: ");
     }
 
     public static void authMenu() {
-        System.out.println("+-------------------Auth Menu-------------------+");
-        System.out.println("| 1. Login                                      |");
-        System.out.println("| 2. Register                                   |");
-        System.out.println("| 3. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+        printHeader("Auth Menu");
+        System.out.println("| 1. Login                                        |");
+        System.out.println("| 2. Register                                     |");
+        System.out.println("| 3. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
         System.out.print("Choose an option: ");
     }
 
     public static void chooseCharacterMenu() {
-
-        System.out.println("+----------------Choose a character-------------+");
-        System.out.println("| 1. Hunter                                     |");
-        System.out.println("| 2. Vampire                                    |");
-        System.out.println("| 3. Werewolf                                   |");
-        System.out.println("| 4. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+        printHeader("Choose a Character");
+        System.out.println("| 1. Hunter                                       |");
+        System.out.println("| 2. Vampire                                      |");
+        System.out.println("| 3. Werewolf                                     |");
+        System.out.println("| 4. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
     }
 
     public static void chooseMinionMenu() {
-
-        System.out.println("+----------------Choose a character-------------+");
-        System.out.println("| 1. Human                                      |");
-        System.out.println("| 2. Demon                                      |");
-        System.out.println("| 3. Ghoul                                      |");
-        System.out.println("| 4. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+        printHeader("Choose a Minion");
+        System.out.println("| 1. Human                                        |");
+        System.out.println("| 2. Demon                                        |");
+        System.out.println("| 3. Ghoul                                        |");
+        System.out.println("| 4. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
     }
 
-    public static void AdminOpcion1() {
-        System.out.println("+------------------Change Feature---------------+");
-        System.out.println("| 1. Name                                       |");
-        System.out.println("| 2. Power                                      |");
-        System.out.println("| 3. Health                                     |");
-        System.out.println("| 4. Exit                                       |");
-        System.out.println("+-----------------------------------------------+");
+    public static void AdminOption1() {
+        printHeader("Change Feature");
+        System.out.println("| 1. Name                                         |");
+        System.out.println("| 2. Power                                        |");
+        System.out.println("| 3. Health                                       |");
+        System.out.println("| 4. Exit                                         |");
+        System.out.println("+-------------------------------------------------+");
     }
 
     public static void userMenu(User user) {
-        System.out.println("+-------------------------------------------------+");
-        System.out.println("|                    User Info                    |");
-        System.out.println("+-------------------------------------------------+");
+        printHeader("User Info");
         System.out.printf("| Nickname: %-37s |\n", user.getNick());
         System.out.printf("| Name: %-41s |\n", user.getName());
         System.out.printf("| Role: %-41s |\n", user.getRole());
@@ -89,79 +93,73 @@ public class Menu {
         Player player = user.getPlayer();
         if (player != null) {
             Character character = player.getCharacter();
-            System.out.println("+-------------------------------------------------+");
-            System.out.println("|                    Player Info                  |");
-            System.out.println("+-------------------------------------------------+");
-            System.out.printf("| Record: %-37s\n", player.getRecord());
-            System.out.printf("| Name: %-37s\n", character.getName());
-            System.out.printf("| Health: %-37s\n", character.getHealth());
-            System.out.printf("| Gold: %-37s\n", character.getGold());
-            System.out.printf("| Power: %-37s\n", character.getPower());
+            printHeader("Player Info");
+            System.out.printf("| Record: %-38s \n", player.getRecord());
+            System.out.printf("| Name: %-38s \n", character.getName());
+            System.out.printf("| Health: %-36s \n", character.getHealth());
+            System.out.printf("| Gold: %-38s \n", character.getGold());
+            System.out.printf("| Power: %-38s \n", character.getPower());
             if (character.getMinion() != null) {
-                System.out.printf("| Minion: %-37s\n", character.getMinion().getType());
+                System.out.printf("| Minion: %-38s \n", character.getMinion().getType());
             }
             if (character.getArmor() != null) {
-                System.out.printf("| Armor: %-37s\n", character.getArmor().getName());
+                System.out.printf("| Armor: %-38s \n", character.getArmor().getName());
             }
             if (character.getWeapon() != null) {
-                System.out.printf("| Weapon: %-37s\n", character.getWeapon().getName());
+                System.out.printf("| Weapon: %-38s \n", character.getWeapon().getName());
             }
-            System.out.println("+-------------------------------------------------+");
-            System.out.println("\n");
-
         }
 
         Admin admin = user.getAdmin();
         if (admin != null) {
-            System.out.println("| Admin Info: |");
+            System.out.println("| Admin Info:                                     |");
+            System.out.println("+-------------------------------------------------+");
         }
-        System.out.println("+-------------------------------------------------+");
+
+        System.out.println("\n");
     }
 
     public static void rankingMenu(ArrayList<User> users) {
-        int i = 1;
-        System.out.println("+-------------------------------------------------+");
-        System.out.println("|                    Ranking                      |");
-        System.out.println("+-------------------------------------------------+");
-        ArrayList<User> userList = users;
-        Collections.sort(userList,
-                (u1, u2) -> u2.getPlayer().getCharacter().getGold() - u1.getPlayer().getCharacter().getGold());
+        printHeader("Ranking");
+        List<User> filteredSortedUsers = users.stream()
+                .filter(u -> u.getPlayer() != null && u.getPlayer().getCharacter() != null)
+                .sorted((u1, u2) -> Integer.compare(u2.getPlayer().getCharacter().getGold(),
+                        u1.getPlayer().getCharacter().getGold()))
+                .collect(Collectors.toList());
 
-        for (User user : userList) {
-            if (user.getPlayer().getCharacter() != null) {
-                System.out.println(
-                        "| " + i + ". " + user.getName() + " Gold : " + user.getPlayer().getCharacter().getGold());
-                i++;
-            }
+        int rank = 1;
+        for (User user : filteredSortedUsers) {
+            if (rank > 20)
+                break;
+            int gold = user.getPlayer().getCharacter().getGold();
+            System.out.printf("| %d. %-20s Gold: %d \n", rank, user.getName(), gold);
+            rank++;
         }
+        System.out.println("\n");
     }
 
     public static void inventoryMenu(ArrayList<Inventory> inventories, Scanner scanner, Player player) {
         Character character = player.getCharacter();
-
-        System.out.println("+-------------------------------------------------+");
-        System.out.println("|                    Inventory                    |");
-        System.out.println("+-------------------------------------------------+");
+        printHeader("Inventory");
 
         for (Inventory inventory : inventories) {
             // Weapons
             System.out.println("| Weapons:                                        |");
             if (!inventory.getWeapons().isEmpty()) {
                 for (Weapon weapon : inventory.getWeapons()) {
-                    System.out.printf("|%-15s Attack Mod: %-3d Defense Mod: %-3d Hand Space: %-3d \n",
-                            weapon.getName(), weapon.getModAttack(), weapon.getModDefense(), weapon.getSpaceHand());
+                    System.out.printf("| %-47s |\n", weapon.getName() + " Attack Mod: " + weapon.getModAttack()
+                            + " Defense Mod: " + weapon.getModDefense() + " Hand Space: " + weapon.getSpaceHand());
                 }
             } else {
                 System.out.println("|   No weapons in inventory.                      |");
             }
 
-            System.out.println("+-------------------------------------------------+");
             // Armors
             System.out.println("| Armors:                                         |");
             if (!inventory.getArmors().isEmpty()) {
                 for (Armor armor : inventory.getArmors()) {
-                    System.out.printf("| %-15s Attack Mod: %-3d Defense Mod: %-3d\n",
-                            armor.getName(), armor.getModAttack(), armor.getModDefense());
+                    System.out.printf("| %-47s |\n", armor.getName() + " Attack Mod: " + armor.getModAttack()
+                            + " Defense Mod: " + armor.getModDefense());
                 }
             } else {
                 System.out.println("|   No armors in inventory.                       |");
@@ -169,7 +167,6 @@ public class Menu {
 
             System.out.println("+-------------------------------------------------+");
             System.out.println("Enter the name of the weapon you'd like to choose:");
-
             String weaponName = scanner.nextLine();
             Weapon chosenWeapon = inventory.getWeapons().stream()
                     .filter(weapon -> weapon.getName().equalsIgnoreCase(weaponName))
@@ -198,5 +195,6 @@ public class Menu {
             }
         }
         Initdata.saveUsersToFile();
+        System.out.println("\n");
     }
 }

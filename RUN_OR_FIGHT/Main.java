@@ -16,7 +16,7 @@ import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
 import User.Admin;
-import org.junit.jupiter.api.*;
+//import org.junit.jupiter.api.*;
 
 public class Main {
 
@@ -112,6 +112,7 @@ public class Main {
                                 minion.setType("human");
                                 if (player.getCharacter().getType().equals("vampire")) {
                                     System.out.println("Vampire cant have human minions");
+                                    continue;
                                 } else {
                                     player.getCharacter().setMinions(minion);
                                 }
@@ -203,6 +204,11 @@ public class Main {
                         case 7:
                             System.out.println("Running away");
                             user.setLogged(false);
+                            break;
+                        case 8:
+                            if (users.equals(null)){
+                                System.out.println("There are no players in the game");
+                            }
                             break;
                         default:
                             System.out.println("Invalid option. Please try again.");
