@@ -39,8 +39,14 @@ public class Main {
                 case "1":
                     user = Auth.login(scanner, users);
                     if (user != null) {
-                        System.out.println("Welcome, " + user.getName() + "!");
-                        break;
+                        if (user.getAccountStatus()) {
+                            System.out.println("Welcome, " + user.getName() + "!");
+                            break;
+                        } else {
+                            System.out.println("Your account has been banned.");
+                            user = null;
+                            continue;
+                        }
                     } else {
                         System.out.println("Invalid username or password.");
                         continue;
@@ -70,13 +76,15 @@ public class Main {
                         Character character = null;
                         switch (choice) {
                             case 1:
-                                character = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0, 0, 0);
+                                character = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0,
+                                        0, 0);
                                 character.setType("hunter");
                                 player.setCharacter(character);
                                 Initdata.saveUsersToFile();
                                 break;
                             case 2:
-                                character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 10, 5, 400, 0);
+                                character = CharacterFactory.createCharacter("vampire", "Dracula", 200, 150, 10, 5, 400,
+                                        0);
                                 character.setType("vampire");
                                 player.setCharacter(character);
                                 Initdata.saveUsersToFile();
@@ -265,18 +273,25 @@ public class Main {
                             break;
                         case 4:
                             System.out.print("List of players nicknames:");
-                            ArrayList<User> listPlayers = Admin.getPlayers();
+                            ArrayList<User> PlayerList = Admin.getPlayers();
                             int i = 0;
-                            for (User userPlayer : listPlayers) {
-                                i = i + 1;
-                                System.out.println("User Nick " + i + " : " + userPlayer.getNick());
+                            for (User userPlayer : PlayerList) {
+                                if (userPlayer.getAccountStatus()) {
+                                    System.out.println("User Nick " + i + " : " + userPlayer.getNick());
+                                    i = i + 1;
+                                }
                             }
-                            System.out.println("Enter the nick of the player who will be banned");
+                            System.out.println("Enter the nick of the player who will be banned (exit)");
                             String banned = scanner.nextLine();
-                            Admin.banUser(banned);
-                            System.out.println("Player banned successfully");
+                            if (banned.equals("exit")) {
+                                break;
+                            } else {
+                                Admin.banUser(banned);
+                                Initdata.saveUsersToFile();
+                                continue;
+                            }
                         case 5:
-
+                            // Desbloquear User;
                         case 6:
                             System.out.println("Exiting the program...");
                             user.setLogged(false);

@@ -8,7 +8,7 @@ public class Admin extends User {
 
     private AdminTools adminTools;
 
-    public Admin(){
+    public Admin() {
     }
 
     public Admin(String nick, String password, String name) {
@@ -47,10 +47,20 @@ public class Admin extends User {
 
     public static void banUser(String nick) {
         User user = User.findUser(nick);
-        if (user.getAccountStatus()) {
+        if (user.getAccountStatus() && user != null) {
             user.setAccountStatus(false);
-        } else if (user.getAccountStatus().equals(false)) {
-            user.setAccountStatus(true);
+            System.out.println("Player banned successfully");
+        } else {
+            System.out.println("User not found");
         }
     }
+
+    public static void unBanUser(String nick) {
+        User user = User.findUser(nick);
+        if (user.getAccountStatus() == false && user != null) {
+            user.setAccountStatus(true);
+        }
+
+    }
+
 }
