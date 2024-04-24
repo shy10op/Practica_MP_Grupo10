@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -271,12 +272,12 @@ public class Main {
                             Initdata.saveCombatesToFile();
                             break;
                         case 4:
-                            System.out.print("List of players nicknames:");
+                            System.out.print("List of players nicknames: \n");
                             ArrayList<User> PlayerList = Admin.getPlayers();
                             int i = 0;
                             for (User userPlayer : PlayerList) {
                                 if (userPlayer.getAccountStatus()) {
-                                    System.out.println("User Nick " + i + " : " + userPlayer.getNick());
+                                    System.out.printf("User %d : %s \n", i, userPlayer.getNick());
                                     i = i + 1;
                                 }
                             }
@@ -290,10 +291,41 @@ public class Main {
                                 continue;
                             }
                         case 5:
-                            // Desbloquear User;
+                            System.out.print("BanList: \n");
+                            ArrayList<User> banList = Admin.getPlayers();
+                            Iterator<User> iterator = banList.iterator();
+
+                            int j = 0;
+
+                            while (iterator.hasNext()) {
+                                User bannedUser = iterator.next();
+                                if (!bannedUser.getAccountStatus()) {
+                                    System.out.printf("User %d : %s \n", j, bannedUser.getNick());
+                                    j++;
+                                } else {
+                                    iterator.remove();
+                                }
+                            }
+
+                            if (banList.isEmpty()) {
+                                System.out.println("There are no banned players");
+                                break;
+                            }
+
+                            System.out.println("Enter the nick of the player who will be unbanned (exit)");
+                            String unBanned = scanner.nextLine();
+                            if (unBanned.equals("exit")) {
+                                break;
+                            } else {
+                                Admin.unBanUser(unBanned);
+                                Initdata.saveUsersToFile();
+                                break;
+                            }
+
                         case 6:
                             System.out.println("Exiting the program...");
                             user.setLogged(false);
+                            break;
                         default:
                             System.out.println("Invalid option. Please try again.");
                             break;
