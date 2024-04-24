@@ -14,7 +14,7 @@ public class Ability {
 
     public static class WereWolfAbility implements Don, Serializable {
         public void don(Werewolf werewolf) {
-            int power = werewolf.getPower();    
+            int power = werewolf.getPower();
             int rage = werewolf.getRage();
             if (rage >= 0) {
                 int ragePower = werewolf.getPower() + werewolf.getRage();
@@ -29,7 +29,7 @@ public class Ability {
     public static class VampireAbility implements Discipline, Serializable {
         public void discipline(Vampire vampire) {
             Random rand = new Random();
-            int blood = rand.nextInt(vampire.getBlood());
+            int blood = rand.nextInt(vampire.getBlood() + 1);
             int hp = vampire.getHealth();
             int power = vampire.getPower();
 

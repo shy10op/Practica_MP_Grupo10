@@ -127,7 +127,6 @@ public class Combate implements Serializable {
                 System.out.println("You lost " + combate.getAmount() + " gold");
                 challenger.setGold(challenger.getGold() + combate.getAmount());
                 challenged.setGold(challenged.getGold() - combate.getAmount());
-                Combate.deleteCombate(combate);
                 deleteMinion(challenged);
                 break;
             }
@@ -143,7 +142,6 @@ public class Combate implements Serializable {
                 System.out.println("You earned " + combate.getAmount() + " gold");
                 challenger.setGold(challenger.getGold() - combate.getAmount());
                 challenged.setGold(challenged.getGold() + combate.getAmount());
-                Combate.deleteCombate(combate);
                 deleteMinion(challenger);
                 break;
             }

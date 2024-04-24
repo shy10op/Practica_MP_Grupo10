@@ -40,7 +40,6 @@ public class Main {
                     user = Auth.login(scanner, users);
                     if (user != null) {
                         if (user.getAccountStatus()) {
-                            System.out.println("Welcome, " + user.getName() + "!");
                             break;
                         } else {
                             System.out.println("Your account has been banned.");
@@ -53,7 +52,6 @@ public class Main {
                     }
                 case "2":
                     Auth.signUp(scanner, users, FILENAME);
-                    // user.setLogged(false);
                     break;
                 case "3":
                     System.out.println("Exiting...");
@@ -147,7 +145,6 @@ public class Main {
                                 System.out.println("Invalid choice, please try again.");
                                 continue;
                         }
-
                     }
 
                     Menu.playerMenu();
@@ -182,9 +179,7 @@ public class Main {
                                 int amount = scanner.nextInt();
                                 User chanllenged = User.findUser(rivalNick);
                                 Combate combat = new Combate(user, chanllenged, amount);
-
                                 Message.sendCombatToAdmin(combat);
-                                System.out.println("You: " + user.getNick() + " vs Rival: " + rivalNick);
                             }
                             Initdata.saveUsersToFile();
                             break;
@@ -193,11 +188,11 @@ public class Main {
                             Combate combate = Message.receiveCombat(user);
                             if (combate != null) {
                                 System.out.println("You have been challenged! Fight amount: " + combate.getAmount());
-                                System.out.println("Do you want to fight? (yes/no)");
+                                System.out.println("Do you want to fight? (y/n)");
                                 String combatOption = scanner.nextLine();
-                                if ("yes".equals(combatOption)) {
+                                if ("y".equals(combatOption)) {
                                     Combate.initialCombat(combate);
-                                } else if ("no".equals(combatOption)) {
+                                } else if ("n".equals(combatOption)) {
                                     Character actualCharacter = user.getPlayer().getCharacter();
                                     int result = actualCharacter.getGold() - combate.getAmount();
                                     System.out.println("Your current gold after declining the challenge is: " + result);
@@ -254,7 +249,8 @@ public class Main {
 
                         case 3:
                             Menu.combatListMenu();
-                            System.out.print("Enter the nickname of the Challenger or Challenged to view details: ");
+                            System.out.print(
+                                    "Enter the nickname of the Challenger or Challenged to view details (exit): ");
                             String combatnick = scanner.nextLine();
                             Combate selectedCombate = Menu.combatMenu(combatnick);
                             if (selectedCombate == null) {
@@ -265,11 +261,14 @@ public class Main {
                             String validate = scanner.nextLine().trim().toLowerCase();
                             if (validate.equals("y")) {
                                 Message.sendCombatToChallenged(selectedCombate);
-                                System.out.println("The combat has been sent to the challenged.");
+                                System.out.println("The combat has been sent to the challenged: "
+                                        + selectedCombate.getChallenged().getNick());
+                                Combate.deleteCombate(selectedCombate);
                             } else {
                                 Combate.deleteCombate(selectedCombate);
                             }
                             System.out.println("\n");
+                            Initdata.saveCombatesToFile();
                             break;
                         case 4:
                             System.out.print("List of players nicknames:");

@@ -203,7 +203,6 @@ public class Initdata implements Serializable {
             User challenged = availableUsers.get(i + 1);
             int amount = random.nextInt(20) + 1;
             Combate combate = new Combate(challenger, challenged, amount);
-            challenger.setCombate(combate);
             combates.add(combate);
         }
         saveCombatesToFile();

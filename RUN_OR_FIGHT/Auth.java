@@ -18,6 +18,7 @@ public class Auth {
 
         for (User user : users) {
             if (user.getNick().equals(nick) && user.getPassword().equals(password)) {
+                System.out.println("Welcome, " + user.getName() + "!");
                 user.setLogged(true);
                 return user;
             }

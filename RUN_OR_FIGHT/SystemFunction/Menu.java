@@ -207,9 +207,11 @@ public class Menu {
         for (User user : filteredSortedUsers) {
             if (rank > 20)
                 break;
-            int gold = user.getPlayer().getCharacter().getGold();
-            System.out.printf("| %d. %-20s Gold: %d \n", rank, user.getName(), gold);
-            rank++;
+            if (user.getAccountStatus()) {
+                int gold = user.getPlayer().getCharacter().getGold();
+                System.out.printf("| %d. %-20s Gold: %d \n", rank, user.getName(), gold);
+                rank++;
+            }
         }
         System.out.println("\n");
     }
