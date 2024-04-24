@@ -29,7 +29,7 @@ public class Ability {
     public static class VampireAbility implements Discipline, Serializable {
         public void discipline(Vampire vampire) {
             Random rand = new Random();
-            int blood = rand.nextInt(10);
+            int blood = rand.nextInt(vampire.getBlood());
             int hp = vampire.getHealth();
             int power = vampire.getPower();
 

@@ -4,30 +4,42 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import Character.CharacterFactory;
+import Character.Character;
+import Character.AbilityStrategy.Ability;
+
 class HunterTest {
-    //
+
     @Test // return expected value 3
     public void testGetWillpower() {
-        Hunter hunter = new Hunter("Van Helsing", 100, 50, 10);
-        assertEquals(3, hunter.getWillpower());
+        Character hunter = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0, 0, 0);
+        hunter.setType("hunter");
+        assertEquals(3, ((Hunter) hunter).getWillpower());
     }
 
     @Test
     public void testSetWillpower() {
-        Hunter hunter = new Hunter("Van Helsing", 100, 50, 10);
-        hunter.setWillpower(3);
-        assertEquals(3, hunter.getWillpower());
+        Character hunter = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0, 0, 0);
+        hunter.setType("hunter");
+        ((Hunter) hunter).setWillpower(5);
+        assertEquals(5, ((Hunter) hunter).getWillpower());
     }
 
     @Test
     void testSetTalent() {
-        Hunter hunter = new Hunter ("Van Helsing", 100, 50, 13);
-        assertEquals(13, hunter.getPower());
+        Character hunter = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 15, 0, 0, 0);
+        hunter.setType("hunter");
+        ((Hunter) hunter).setTalent(new Ability.HunterAbility());
+        ((Hunter) hunter).useAbility();
+        assertEquals(18, hunter.getPower());
     }
 
     @Test
     void testUseAbility() {
-        Hunter hunter = new Hunter ("Van Helsing", 100, 50, 16);
-        assertEquals(16, hunter.getPower());
+        Character hunter = CharacterFactory.createCharacter("hunter", "Van Helsing", 100, 100, 20, 0, 0, 0);
+        hunter.setType("hunter");
+        ((Hunter) hunter).setTalent(new Ability.HunterAbility());
+        ((Hunter) hunter).useAbility();
+        assertEquals(23, hunter.getPower());
     }
 }
