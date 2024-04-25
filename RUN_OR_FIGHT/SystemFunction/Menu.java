@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import Character.Character;
 import Character.CharacterFactory;
 import Character.Equipment.Armor;
+import Character.Equipment.EquipmentFactory;
 import Character.Equipment.Inventory;
 import Character.Equipment.Weapon;
 import Database.Initdata;
@@ -40,7 +41,7 @@ public class Menu {
     public static void adminMenu() {
         printHeader("Admin Menu");
         System.out.println("| 1. Edit Character                               |");
-        System.out.println("| 2. Add Items To The Character                   |");
+        System.out.println("| 2. Edit Inventory                               |");
         System.out.println("| 3. Validate Challenges                          |");
         System.out.println("| 4. Block Players                                |");
         System.out.println("| 5. Unlock Players                               |");
@@ -277,63 +278,125 @@ public class Menu {
         System.out.println("\n");
     }
 
-    public static void inventoryMenu(ArrayList<Inventory> inventories, Scanner scanner, Player player) {
-        Character character = player.getCharacter();
+    public static void inventoryMenu(ArrayList<Inventory> inventories, Scanner scanner, User user) {
         printHeader("Inventory");
-
         for (Inventory inventory : inventories) {
             // Weapons
-            System.out.println("| Weapons:                                        |");
+            System.out.println("| Weapons:                                        ");
             if (!inventory.getWeapons().isEmpty()) {
                 for (Weapon weapon : inventory.getWeapons()) {
-                    System.out.printf("| %-47s |\n", weapon.getName() + " Attack Mod: " + weapon.getModAttack()
+                    System.out.printf("| %-47s \n", weapon.getName() + " Attack Mod: " + weapon.getModAttack()
                             + " Defense Mod: " + weapon.getModDefense() + " Hand Space: " + weapon.getSpaceHand());
                 }
             } else {
-                System.out.println("|   No weapons in inventory.                      |");
+                System.out.println("|   No weapons in inventory.                      ");
             }
 
             // Armors
-            System.out.println("| Armors:                                         |");
+            System.out.println("| Armors:                                         ");
             if (!inventory.getArmors().isEmpty()) {
                 for (Armor armor : inventory.getArmors()) {
-                    System.out.printf("| %-47s |\n", armor.getName() + " Attack Mod: " + armor.getModAttack()
+                    System.out.printf("| %-47s \n", armor.getName() + " Attack Mod: " + armor.getModAttack()
                             + " Defense Mod: " + armor.getModDefense());
                 }
             } else {
-                System.out.println("|   No armors in inventory.                       |");
+                System.out.println("|   No armors in inventory.                       ");
             }
 
-            System.out.println("+-------------------------------------------------+");
-            System.out.println("Enter the name of the weapon you'd like to choose:");
-            String weaponName = scanner.nextLine();
-            Weapon chosenWeapon = inventory.getWeapons().stream()
-                    .filter(weapon -> weapon.getName().equalsIgnoreCase(weaponName))
-                    .findFirst()
-                    .orElse(null);
+            if (user.getRole().equals("player")) {
+                Character character = user.getPlayer().getCharacter();
+                System.out.println("+-------------------------------------------------+");
+                System.out.println("Enter the name of the weapon you'd like to choose:");
+                String weaponName = scanner.nextLine();
+                Weapon chosenWeapon = inventory.getWeapons().stream()
+                        .filter(weapon -> weapon.getName().equalsIgnoreCase(weaponName))
+                        .findFirst()
+                        .orElse(null);
 
-            if (chosenWeapon != null) {
-                character.setWeapon(chosenWeapon);
-                System.out.println("You have chosen: " + chosenWeapon.getName());
-            } else {
-                System.out.println("Weapon not found.");
+                if (chosenWeapon != null) {
+                    character.setWeapon(chosenWeapon);
+                    System.out.println("You have chosen: " + chosenWeapon.getName());
+                } else {
+                    System.out.println("Weapon not found.");
+                }
+
+                System.out.println("Enter the name of the armor you'd like to choose:");
+                String armorName = scanner.nextLine();
+                Armor chosenArmor = inventory.getArmors().stream()
+                        .filter(armor -> armor.getName().equalsIgnoreCase(armorName))
+                        .findFirst()
+                        .orElse(null);
+
+                if (chosenArmor != null) {
+                    character.setArmor(chosenArmor);
+                    System.out.println("You have chosen: " + chosenArmor.getName());
+                } else {
+                    System.out.println("Armor not found.");
+                }
+            } else if (user.getRole().equals("admin")) {
+                System.out.println("+-------------------------------------------------+");
+                System.out.println("Edit Inventory (add/delete/exit)");
+                String op = scanner.nextLine();
+                switch (op) {
+                    case "add":
+                        System.out.println("Enter the type (armor/weapon) :");
+                        String type = scanner.nextLine();
+                        System.out.println("Enter the Name:");
+                        String name = scanner.nextLine();
+                        System.out.println("Enter the Mod Atack:");
+                        int modAttack = scanner.nextInt();
+                        System.out.println("Enter the Mod Defense:");
+                        int modDefense = scanner.nextInt();
+                        System.out.println("Enter the Space Hand:");
+                        int spaceHand = scanner.nextInt();
+
+                        if (type.equals("weapon")) {
+                            Weapon weapon = EquipmentFactory.createWeapon(name, modAttack, modDefense, spaceHand);
+                            inventory.addWeapon(weapon);
+                        } else if (type.equals("armor")) {
+                            Armor armor = EquipmentFactory.createArmor(name, modAttack, modDefense);
+                            inventory.addArmor(armor);
+                        }
+                        break;
+                    case "delete":
+                        System.out.println("Enter the type (armor/weapon) you want to delete:");
+                        String deleteType = scanner.nextLine();
+                        System.out.println("Enter the name of the item to delete:");
+                        String itemName = scanner.nextLine();
+                        if (deleteType.equalsIgnoreCase("weapon")) {
+                            Weapon weaponToDelete = inventory.getWeapons().stream()
+                                    .filter(w -> w.getName().equalsIgnoreCase(itemName))
+                                    .findFirst()
+                                    .orElse(null);
+                            if (weaponToDelete != null) {
+                                inventory.getWeapons().remove(weaponToDelete);
+                                System.out.println(itemName + " has been removed from weapons.");
+                            } else {
+                                System.out.println("Weapon not found.");
+                            }
+                        } else if (deleteType.equalsIgnoreCase("armor")) {
+                            Armor armorToDelete = inventory.getArmors().stream()
+                                    .filter(a -> a.getName().equalsIgnoreCase(itemName))
+                                    .findFirst()
+                                    .orElse(null);
+                            if (armorToDelete != null) {
+                                inventory.getArmors().remove(armorToDelete);
+                                System.out.println(itemName + " has been removed from armors.");
+                            } else {
+                                System.out.println("Armor not found.");
+                            }
+                        }
+                        break;
+                    case "exit":
+                        break;
+                    default:
+                        System.out.println("Invalid option");
+                        break;
+                }
+                Initdata.saveInventoriesToFile();
             }
-
-            System.out.println("Enter the name of the armor you'd like to choose:");
-            String armorName = scanner.nextLine();
-            Armor chosenArmor = inventory.getArmors().stream()
-                    .filter(armor -> armor.getName().equalsIgnoreCase(armorName))
-                    .findFirst()
-                    .orElse(null);
-
-            if (chosenArmor != null) {
-                character.setArmor(chosenArmor);
-                System.out.println("You have chosen: " + chosenArmor.getName());
-            } else {
-                System.out.println("Armor not found.");
-            }
+            Initdata.saveUsersToFile();
+            System.out.println("\n");
         }
-        Initdata.saveUsersToFile();
-        System.out.println("\n");
     }
 }

@@ -166,7 +166,7 @@ public class Main {
                             }
                             break;
                         case 3:
-                            Menu.inventoryMenu(inventories, scanner, player);
+                            Menu.inventoryMenu(inventories, scanner, user);
                             Initdata.saveUsersToFile();
                             break;
                         case 4:
@@ -240,7 +240,8 @@ public class Main {
                                 continue;
                             }
                         case 2:
-
+                            Menu.inventoryMenu(inventories, scanner, user);
+                            break;
                         case 3:
                             Menu.combatListMenu();
                             System.out.print(
