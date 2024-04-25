@@ -220,32 +220,25 @@ public class Main {
                 } else if (userRole.equals("admin")) {
                     Admin admin = user.getAdmin();
                     Menu.adminMenu();
-                    admin.showPlayers();
+
                     System.out.print("Enter your choice: ");
                     int optionAdmin = scanner.nextInt();
                     scanner.nextLine();
                     switch (optionAdmin) {
                         case 1:
-                            System.out.println("About to show players");
-
                             admin.showPlayers();
                             System.out.println("Enter the nick of the player");
                             String userNick = scanner.nextLine();
                             System.out.println("Searching");
                             User destinationUser = User.findUser(userNick);
                             if (destinationUser != null) {
-
-                                System.out.println("Enter the changed value");
-                                String changed = scanner.nextLine();
-                                System.out.println(("Enter the new value"));
-                                String newValue = scanner.nextLine();
-
-                                // Aqui pasar la funcion modifyCharacterAttributes
-                                admin.modifyCharacterAttributes(userNick, changed, newValue);
+                                Menu.changeUserMenu(destinationUser, scanner);
+                                Menu.changeUserCharacterMenu(destinationUser, scanner);
+                                break;
                             } else {
                                 System.out.println("Invalid option. Please try again.");
+                                continue;
                             }
-                            break;
                         case 2:
 
                         case 3:
@@ -254,7 +247,7 @@ public class Main {
                                     "Enter the nickname of the Challenger or Challenged to view details (exit): ");
                             String combatnick = scanner.nextLine();
                             Combate selectedCombate = Menu.combatMenu(combatnick);
-                            if (selectedCombate == null) {
+                            if (selectedCombate == null || combatnick.equals("exit")) {
                                 System.out.println("Invalid combate. Please try again.");
                                 continue;
                             }
@@ -272,7 +265,7 @@ public class Main {
                             Initdata.saveCombatesToFile();
                             break;
                         case 4:
-                            System.out.print("List of players nicknames: \n");
+                            System.out.print("List of players nick: \n");
                             ArrayList<User> PlayerList = Admin.getPlayers();
                             int i = 0;
                             for (User userPlayer : PlayerList) {

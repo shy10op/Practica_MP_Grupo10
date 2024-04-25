@@ -3,6 +3,7 @@ package User;
 import java.util.ArrayList;
 
 import Database.Initdata;
+import SystemFunction.Menu;
 
 public class Admin extends User {
 
@@ -28,10 +29,11 @@ public class Admin extends User {
     }
 
     public void showPlayers() {
+        Menu.printHeader("Players");
         ArrayList<User> playerList = Initdata.getUsers();
         for (User user : playerList) {
-            if (user instanceof Player) {
-                Player player = (Player) user;
+            if (user.getRole().equals("player")) {
+                Player player = user.getPlayer();
                 System.out.println(player.getNick() + " - " + player.getName());
             }
         }

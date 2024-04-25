@@ -13,12 +13,20 @@ public class Inventory implements Serializable {
         armors = new ArrayList<>();
     }
 
-    public void addWeapon(Weapon arma) {
-        weapons.add(arma);
+    public void addWeapon(Weapon weapon) {
+        weapons.add(weapon);
     }
 
     public void addArmor(Armor armor) {
         armors.add(armor);
+    }
+
+    public void deleteWeapon(Weapon weapon) {
+        weapons.remove(weapon);
+    }
+
+    public void deleteArmor(Armor armor) {
+        armors.remove(armor);
     }
 
     public ArrayList<Weapon> getWeapons() {

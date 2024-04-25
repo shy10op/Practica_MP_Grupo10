@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import Character.Character;
+import Character.CharacterFactory;
 import Character.Equipment.Armor;
 import Character.Equipment.Inventory;
 import Character.Equipment.Weapon;
@@ -16,7 +17,7 @@ import User.User;
 
 public class Menu {
 
-    private static void printHeader(String title) {
+    public static void printHeader(String title) {
         String header = "+-------------------------------------------------+";
         System.out.println(header);
         System.out.printf("| %-48s|\n", title);
@@ -46,6 +47,66 @@ public class Menu {
         System.out.println("| 6. Exit                                         |");
         System.out.println("+-------------------------------------------------+");
         System.out.print("Choose an option: ");
+    }
+
+    public static void changeUserMenu(User destinationUser, Scanner scanner) {
+        Menu.printHeader("User");
+        System.out.printf("UserNick: %s To ", destinationUser.getNick());
+        String newNick = scanner.nextLine();
+        destinationUser.setNick(newNick);
+
+        System.out.printf("UserName: %s To ", destinationUser.getName());
+        String newName = scanner.nextLine();
+        destinationUser.setName(newName);
+
+        Initdata.saveUsersToFile();
+    }
+
+    public static void changeUserCharacterMenu(User destinationUser, Scanner scanner) {
+        Menu.printHeader("User Character");
+        Character destinationCharacter = destinationUser.getPlayer().getCharacter();
+        System.out.printf("Character Name: %s  To ", destinationCharacter.getName());
+        String newName = scanner.nextLine();
+        destinationCharacter.setName(newName);
+
+        System.out.printf("Character Health : %d  To ", destinationCharacter.getHealth());
+        int newHealth = scanner.nextInt();
+        destinationCharacter.setHealth(newHealth);
+
+        System.out.printf("Character Power : %d  To ", destinationCharacter.getPower());
+        int newPower = scanner.nextInt();
+        destinationCharacter.setPower(newPower);
+
+        System.out.printf("Character Gold: %d  To ", destinationCharacter.getGold());
+        int newGold = scanner.nextInt();
+        destinationCharacter.setGold(newGold);
+
+        System.out.printf("Character type : %s To (hunter,vampire,werewolf)",
+                destinationCharacter.getType());
+        String newType = scanner.next();
+        destinationCharacter.setType(newType);
+
+        int newAge = 0;
+        int newBlood = 0;
+        int newRage = 0;
+        if (newType.equals("vampire")) {
+            System.out.printf("Set a new Age: ");
+            newAge = scanner.nextInt();
+            System.out.printf("Set a new Blood: ");
+            newBlood = scanner.nextInt();
+        }
+
+        if (newType.equals("werewolf")) {
+            System.out.printf("Set a new Rage: ");
+            newRage = scanner.nextInt();
+        }
+
+        Character newCharacter = CharacterFactory.createCharacter(newType, newName, newGold,
+                newHealth, newPower, newBlood, newAge, newRage);
+        destinationUser.getPlayer().setCharacter(newCharacter);
+        System.out.println("User changed successfully");
+
+        Initdata.saveUsersToFile();
     }
 
     public static void combatListMenu() {
