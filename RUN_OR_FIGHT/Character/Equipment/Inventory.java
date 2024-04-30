@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Inventory implements Serializable {
-    private ArrayList<Weapon> weapons;
-    private ArrayList<Armor> armors;
+    private static ArrayList<Weapon> weapons;
+    private static ArrayList<Armor> armors;
 
     public Inventory() {
         weapons = new ArrayList<>();
@@ -21,15 +21,15 @@ public class Inventory implements Serializable {
         armors.add(armor);
     }
 
-    public void deleteWeapon(Weapon weapon) {
+    public static void deleteWeapon(Weapon weapon) {
         weapons.remove(weapon);
     }
 
-    public void deleteArmor(Armor armor) {
+    public static void deleteArmor(Armor armor) {
         armors.remove(armor);
     }
 
-    public Weapon findWeapon(String name) {
+    public static Weapon findWeapon(String name) {
         for (Weapon weapon : weapons) {
             if (weapon.getName().equals(name)) {
                 return weapon;
@@ -38,7 +38,7 @@ public class Inventory implements Serializable {
         return null;
     }
 
-    public Armor findArmor(String name) {
+    public static Armor findArmor(String name) {
         for (Armor armor : armors) {
             if (armor.getName().equals(name)) {
                 return armor;

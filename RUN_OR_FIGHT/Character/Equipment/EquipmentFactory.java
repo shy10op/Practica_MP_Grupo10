@@ -12,7 +12,7 @@ public class EquipmentFactory {
         return new Weapon(name, modAttack, spaceHand);
     }
 
-    // Armor con solo ataque
+    // Armor con solo defensa
     public static Armor createArmor(String name, int modDefense) {
         return new Armor(name, modDefense);
     }
