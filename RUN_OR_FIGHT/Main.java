@@ -23,8 +23,6 @@ import User.Auth;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-        String FILENAME = Initdata.getFILENAME();
         Initdata.startInitData();
         ArrayList<User> users = Initdata.getUsers();
         ArrayList<Inventory> inventories = Initdata.getInventories();
@@ -53,7 +51,7 @@ public class Main {
                         continue;
                     }
                 case "2":
-                    Auth.signUp(scanner, users, FILENAME);
+                    Auth.signUp(scanner);
                     break;
                 case "3":
                     System.out.println("Exiting...");

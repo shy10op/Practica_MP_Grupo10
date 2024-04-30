@@ -1,21 +1,13 @@
 package User;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import Database.Initdata;
 
-
 public class Auth {
     private static ArrayList<User> users = Initdata.getUsers();
-
-    public Auth(){
-
-    }
 
     public static User login(Scanner scanner) throws IOException {
         System.out.print("Enter nick: ");
@@ -36,7 +28,7 @@ public class Auth {
         return null;
     }
 
-    public static void signUp(Scanner scanner, List<User> users, String FILENAME) {
+    public static void signUp(Scanner scanner) {
         System.out.print("Enter nick: ");
         String nick = scanner.nextLine().trim();
 
@@ -86,13 +78,6 @@ public class Auth {
             System.out.println("Error: " + newUser.getRole());
         }
         users.add(newUser);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
-            oos.writeObject(users);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error writing users to file: " + e.getMessage());
-        }
-
+        Initdata.saveUsersToFile();
     }
 }

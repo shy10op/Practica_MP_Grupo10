@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import Database.Initdata;
 
-public class AuthTest{
+public class AuthTest {
     public ArrayList<User> users = Initdata.getUsers();
 
     @BeforeAll
@@ -23,7 +23,14 @@ public class AuthTest{
 
     @Test
     public void signInTest() {
-
+        String nick = "BotTest";
+        String password = "12345";
+        String name = "BotTest";
+        String role = "player";
+        User newUser = new User(nick, password, name, role);
+        users.add(newUser);
+        Initdata.saveUsersToFile();
+        User user = User.findUser(nick);
+        assertNotNull(user);
     }
-
 }

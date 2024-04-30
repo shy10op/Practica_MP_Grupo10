@@ -40,6 +40,5 @@ public class AdminTest {
             test = true;
         }
         assertTrue(test);
-    }
-
+    } 
 }
