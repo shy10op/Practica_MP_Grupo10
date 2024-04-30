@@ -76,7 +76,7 @@ public class Combate implements Serializable {
         }
     }
 
-    public static void initialCombat(Combate combate) {
+    public static int initialCombat(Combate combate) {
         Character challenger = combate.getChallenger().getPlayer().getCharacter();
         Character challenged = combate.getChallenged().getPlayer().getCharacter();
 
@@ -150,6 +150,7 @@ public class Combate implements Serializable {
         combate.getChallenged().setCombate(null);
         combate.getChallenger().setCombate(null);
         Initdata.saveCombatesToFile();
+        return round;
     }
 
     private static int calculateDamage(Character attacker, Character defender) {

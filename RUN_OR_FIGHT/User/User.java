@@ -33,7 +33,7 @@ public class User implements Serializable {
     public static User findUser(String nick) {
         ArrayList<User> users = Initdata.getUsers();
         for (User user : users) {
-            if ((user.getNick().equals(nick))) {
+            if ((user.getNick().equalsIgnoreCase(nick))) {
                 return user;
             }
         }

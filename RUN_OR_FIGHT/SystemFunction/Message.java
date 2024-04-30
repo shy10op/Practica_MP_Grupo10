@@ -28,7 +28,6 @@ public class Message {
         if (combate != null) {
             User challenged = combate.getChallenged();
             challenged.setCombate(combate);
-            Initdata.saveUsersToFile();
         } else {
             System.out.println("Combate not found");
         }

@@ -18,7 +18,7 @@ import Character.CharacterFactory;
 import Character.Character;
 import Character.Equipment.*;
 import SystemFunction.Combate;
-import User.RecordPlayer;
+import User.Auth;
 
 public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
@@ -79,7 +79,6 @@ public class Initdata implements Serializable {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(INVENTORY))) {
             inventories = (Inventory) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -129,7 +128,7 @@ public class Initdata implements Serializable {
             user.setPassword("12345");
             user.setName("BotName" + i);
             user.setRole("player");
-            String record = RecordPlayer.generateRecord();
+            String record = Auth.generateRecord();
             Player newPlayer = new Player(user.getNick(), user.getName(), record);
             user.setPlayer(newPlayer);
 

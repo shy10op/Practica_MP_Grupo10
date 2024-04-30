@@ -21,8 +21,8 @@ public class MessageTest {
     public void sendCombatToAdminTest() {
         ArrayList<Combate> combates = Initdata.getCombates();
 
-        User user1 = User.findUser("Bot1");
-        User user2 = User.findUser("Bot2");
+        User user1 = new User("testBot1", "12345", "testBot1", "player");
+        User user2 = new User("testBot2", "12345", "testBot2", "player");
         int amount = 10;
         Combate combate = new Combate(user1, user2, amount);
         Message.sendCombatToAdmin(combate);
@@ -33,8 +33,8 @@ public class MessageTest {
     public void sendCombatToChallengedTest() {
         ArrayList<Combate> combates = Initdata.getCombates();
 
-        User user1 = User.findUser("Bot1");
-        User user2 = User.findUser("Bot2");
+        User user1 = new User("testBot1", "12345", "testBot1", "player");
+        User user2 = new User("testBot2", "12345", "testBot2", "player");
         int amount = 10;
         Combate combate = new Combate(user1, user2, amount);
         combates.add(combate);
@@ -45,10 +45,13 @@ public class MessageTest {
     @Test
     public void receiveCombatTest() {
         ArrayList<Combate> combates = Initdata.getCombates();
-        User user1 = User.findUser("Bot1");
-        User user2 = User.findUser("Bot2");
+
+        User user1 = new User("testBot1", "12345", "testBot1", "player");
+        User user2 = new User("testBot2", "12345", "testBot2", "player");
         int amount = 10;
+
         Combate combate = new Combate(user1, user2, amount);
+
         combates.add(combate);
         Message.sendCombatToChallenged(combate);
         Message.receiveCombat(user2);

@@ -255,6 +255,7 @@ public class Main {
                             String validate = scanner.nextLine().trim().toLowerCase();
                             if (validate.equals("y")) {
                                 Message.sendCombatToChallenged(selectedCombate);
+                                Initdata.saveUsersToFile();
                                 System.out.println("The combat has been sent to the challenged: "
                                         + selectedCombate.getChallenged().getNick());
                                 Combate.deleteCombate(selectedCombate);
