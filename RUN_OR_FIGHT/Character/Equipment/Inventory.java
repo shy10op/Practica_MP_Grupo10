@@ -29,6 +29,24 @@ public class Inventory implements Serializable {
         armors.remove(armor);
     }
 
+    public Weapon findWeapon(String name) {
+        for (Weapon weapon : weapons) {
+            if (weapon.getName().equals(name)) {
+                return weapon;
+            }
+        }
+        return null;
+    }
+
+    public Armor findArmor(String name) {
+        for (Armor armor : armors) {
+            if (armor.getName().equals(name)) {
+                return armor;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Weapon> getWeapons() {
         return weapons;
     }
