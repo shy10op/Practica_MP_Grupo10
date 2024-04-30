@@ -24,7 +24,7 @@ public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
     private static final String INVENTORY = "inventory.dat";
     private static final String COMBATES = "combates.dat";
-    private static ArrayList<Inventory> inventories = new ArrayList<>();
+    private static Inventory inventories = new Inventory();
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Combate> combates = new ArrayList<>();
 
@@ -74,11 +74,10 @@ public class Initdata implements Serializable {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static void loadInventoriesFromFile() {
         checkInventoriesFile();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(INVENTORY))) {
-            inventories = (ArrayList<Inventory>) ois.readObject();
+            inventories = (Inventory) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -159,32 +158,30 @@ public class Initdata implements Serializable {
     }
 
     public static void generateInitialInventories() {
-        if (!inventories.isEmpty()) {
+        if (inventories.getWeapons().size() == 0 && inventories.getArmors().size() == 0) {
             return;
         }
-        Inventory inventory = new Inventory();
         Weapon weapon1 = EquipmentFactory.createWeapon("Longsword", 3, 1, 2);
         Weapon weapon2 = EquipmentFactory.createWeapon("Short Sword", 2, 0, 1);
         Weapon weapon3 = EquipmentFactory.createWeapon("One-handed axe", 2, 1, 1);
         Weapon weapon4 = EquipmentFactory.createWeapon("Axe", 3, 2, 2);
         Weapon weapon5 = EquipmentFactory.createWeapon("Spear", 2, 1, 2);
-        inventory.addWeapon(weapon1);
-        inventory.addWeapon(weapon2);
-        inventory.addWeapon(weapon3);
-        inventory.addWeapon(weapon4);
-        inventory.addWeapon(weapon5);
+        inventories.addWeapon(weapon1);
+        inventories.addWeapon(weapon2);
+        inventories.addWeapon(weapon3);
+        inventories.addWeapon(weapon4);
+        inventories.addWeapon(weapon5);
         Armor armor1 = EquipmentFactory.createArmor("Bronze Armor", 0, 2);
         Armor armor2 = EquipmentFactory.createArmor("Aluminum Armor", 2, 1);
         Armor armor3 = EquipmentFactory.createArmor("Silver Armor", 1, 2);
         Armor armor4 = EquipmentFactory.createArmor("Gold Armor", 0, 2);
         Armor armor5 = EquipmentFactory.createArmor("Titanium Armor", 2, 3);
-        inventory.addArmor(armor1);
-        inventory.addArmor(armor2);
-        inventory.addArmor(armor3);
-        inventory.addArmor(armor4);
-        inventory.addArmor(armor5);
+        inventories.addArmor(armor1);
+        inventories.addArmor(armor2);
+        inventories.addArmor(armor3);
+        inventories.addArmor(armor4);
+        inventories.addArmor(armor5);
 
-        inventories.add(inventory);
         saveInventoriesToFile();
     }
 
@@ -216,9 +213,7 @@ public class Initdata implements Serializable {
         if (users.isEmpty()) {
             generateBots();
         }
-        if (inventories.isEmpty()) {
-            generateInitialInventories();
-        }
+        generateInitialInventories();
         if (combates.isEmpty()) {
             generateRandomCombates();
         }
@@ -237,7 +232,7 @@ public class Initdata implements Serializable {
         return users;
     }
 
-    public static ArrayList<Inventory> getInventories() {
+    public static Inventory getInventories() {
         return inventories;
     }
 

@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Initdata.startInitData();
         ArrayList<User> users = Initdata.getUsers();
-        ArrayList<Inventory> inventories = Initdata.getInventories();
+        Inventory inventories = Initdata.getInventories();
 
         Scanner scanner = new Scanner(System.in);
         User user = new User();
