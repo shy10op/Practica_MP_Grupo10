@@ -24,7 +24,7 @@ public class AdminTest {
     }
 
     @Test
-    public void unBannedUserTest() {
+    public void unBanUserTest() {
         User user = User.findUser("Bot5");
         user.setAccountStatus(false);
         Admin.unBanUser(user.getNick());

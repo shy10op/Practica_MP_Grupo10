@@ -2,12 +2,34 @@ package User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Database.Initdata;
 
 public class Auth {
     private static ArrayList<User> users = Initdata.getUsers();
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final int LENGTH = 1;
+    private static Random random = new Random();
+
+    public static String generateRecord() {
+        StringBuilder registro = new StringBuilder();
+
+        for (int i = 0; i < LENGTH; i++) {
+            registro.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+        }
+
+        for (int i = 0; i < 2; i++) {
+            registro.append(random.nextInt(10));
+        }
+
+        for (int i = 0; i < LENGTH + 1; i++) {
+            registro.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+        }
+
+        return registro.toString();
+    }
 
     public static User login(Scanner scanner) throws IOException {
         System.out.print("Enter nick: ");
@@ -70,10 +92,10 @@ public class Auth {
             newUser.setAdmin(newAdmin);
             System.out.println("Registration successful. Welcome Admin, " + name + "!");
         } else if ("player".equalsIgnoreCase(newUser.getRole())) {
-            Player newPlayer = new Player(nick, name, RecordPlayer.generateRecord());
+            Player newPlayer = new Player(nick, name, generateRecord());
             newUser.setPlayer(newPlayer);
             System.out.println("Registration successful. Welcome player, " + name + "!");
-            System.out.println(RecordPlayer.generateRecord());
+            System.out.println(generateRecord());
         } else {
             System.out.println("Error: " + newUser.getRole());
         }

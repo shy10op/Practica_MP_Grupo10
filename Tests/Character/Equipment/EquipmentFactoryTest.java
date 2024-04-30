@@ -17,7 +17,7 @@ class EquipmentFactoryTest {
     }
 
     @Test //modo ataque
-    public void testCreate2Weapon() {
+    public void testCreateWeapon2() {
         Weapon weapon = EquipmentFactory.createWeapon("nameAttack", 1, 1);
         Inventory inventory = Initdata.getInventories();
         inventory.addWeapon(weapon);
@@ -35,7 +35,7 @@ class EquipmentFactoryTest {
     }
 
     @Test
-    public void testCreate2Armor() {
+    public void testCreateArmor2() {
         Armor armor = EquipmentFactory.createArmor("nameDefense", 1);
         Inventory inventory = Initdata.getInventories();
         inventory.addArmor(armor);
