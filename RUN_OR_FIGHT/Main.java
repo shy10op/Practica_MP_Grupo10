@@ -17,6 +17,7 @@ import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
 import User.Admin;
+import User.Auth;
 //import org.junit.jupiter.api.*;
 
 public class Main {
@@ -38,7 +39,7 @@ public class Main {
             String option = scanner.nextLine();
             switch (option) {
                 case "1":
-                    user = Auth.login(scanner, users);
+                    user = Auth.login(scanner);
                     if (user != null) {
                         if (user.getAccountStatus()) {
                             break;

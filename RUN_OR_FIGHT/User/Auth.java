@@ -1,21 +1,31 @@
+package User;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import User.User;
-import User.Admin;
-import User.Player;
-import User.RecordPlayer;
+
+import Database.Initdata;
+
 
 public class Auth {
+    private static ArrayList<User> users = Initdata.getUsers();
 
-    public static User login(Scanner scanner, List<User> users) throws IOException {
+    public Auth(){
+
+    }
+
+    public static User login(Scanner scanner) throws IOException {
         System.out.print("Enter nick: ");
         String nick = scanner.nextLine().trim();
         System.out.print("Enter password: ");
         String password = scanner.nextLine().trim();
+        return loginAuth(nick, password);
+    }
 
+    public static User loginAuth(String nick, String password) {
         for (User user : users) {
             if (user.getNick().equals(nick) && user.getPassword().equals(password)) {
                 System.out.println("Welcome, " + user.getName() + "!");

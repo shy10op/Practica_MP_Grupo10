@@ -7,14 +7,11 @@ import SystemFunction.Menu;
 
 public class Admin extends User {
 
-    private AdminTools adminTools;
-
     public Admin() {
     }
 
     public Admin(String nick, String password, String name) {
         super(nick, password, name, "admin");
-        this.adminTools = new AdminTools(getPlayers());
     }
 
     public static ArrayList<User> getPlayers() {
@@ -37,14 +34,6 @@ public class Admin extends User {
                 System.out.println(player.getNick() + " - " + player.getName());
             }
         }
-    }
-
-    public User findPlayerByNick(String nick) {
-        return adminTools.findPlayerByNick(nick);
-    }
-
-    public void modifyCharacterAttributes(String nick, String attributeName, Object newValue) {
-        adminTools.modifyCharacterAttributes(nick, attributeName, newValue);
     }
 
     public static void banUser(String nick) {

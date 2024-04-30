@@ -145,5 +145,4 @@ class UserTest {
         user1.setCombate(combate);
         assertEquals(combate ,user1.getCombate());
     }
-
 }
