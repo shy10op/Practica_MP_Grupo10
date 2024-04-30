@@ -11,7 +11,6 @@ import Database.Initdata;
 public class AdminTest {
     public ArrayList<User> users = Initdata.getUsers();
 
-
     @BeforeAll
     public static void setup() {
         Initdata.startInitData();
@@ -26,9 +25,8 @@ public class AdminTest {
 
     @Test
     public void unBannedUserTest() {
-        User user = User.findUser("Bot1");
+        User user = User.findUser("Bot5");
         user.setAccountStatus(false);
-        Initdata.saveUsersToFile();
         Admin.unBanUser(user.getNick());
         assertTrue(user.getAccountStatus());
     }
@@ -40,5 +38,5 @@ public class AdminTest {
             test = true;
         }
         assertTrue(test);
-    } 
+    }
 }
