@@ -1,12 +1,13 @@
 package User;
 
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import Database.Initdata;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import Database.Initdata;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminTest {
     public ArrayList<User> users = Initdata.getUsers();

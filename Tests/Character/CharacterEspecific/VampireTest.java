@@ -1,12 +1,12 @@
 package Character.CharacterEspecific;
 
+import Character.AbilityStrategy.Ability;
+import Character.Character;
+import Character.CharacterFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import Character.CharacterFactory;
-import Character.Character;
-import Character.AbilityStrategy.Ability;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VampireTest {
 

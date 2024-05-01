@@ -1,11 +1,11 @@
 package Character;
 
-import java.io.Serializable;
-
 import Character.AbilityStrategy.Ability;
 import Character.Equipment.Armor;
 import Character.Equipment.Weapon;
 import Character.Minions.Minion;
+
+import java.io.Serializable;
 
 public abstract class Character implements Serializable {
     protected String name;

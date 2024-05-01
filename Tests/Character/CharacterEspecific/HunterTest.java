@@ -1,12 +1,11 @@
 package Character.CharacterEspecific;
 
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import Character.CharacterFactory;
-import Character.Character;
 import Character.AbilityStrategy.Ability;
+import Character.Character;
+import Character.CharacterFactory;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HunterTest {
 

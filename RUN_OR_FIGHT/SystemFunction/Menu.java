@@ -1,10 +1,5 @@
 package SystemFunction;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 import Character.Character;
 import Character.CharacterFactory;
 import Character.Equipment.Armor;
@@ -15,6 +10,11 @@ import Database.Initdata;
 import User.Admin;
 import User.Player;
 import User.User;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Menu {
 

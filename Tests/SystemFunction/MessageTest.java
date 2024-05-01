@@ -1,14 +1,13 @@
 package SystemFunction;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
+import Database.Initdata;
+import User.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import Database.Initdata;
-import User.User;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MessageTest {
 

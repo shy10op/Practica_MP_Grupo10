@@ -1,7 +1,7 @@
 package Character.CharacterEspecific;
 
-import Character.Character;
 import Character.AbilityStrategy.AbilityStrategy.Discipline;
+import Character.Character;
 
 public class Vampire extends Character {
     private int blood;

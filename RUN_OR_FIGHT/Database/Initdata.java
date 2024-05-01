@@ -1,24 +1,21 @@
 package Database;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import Character.Character;
+import Character.CharacterFactory;
+import Character.Equipment.Armor;
+import Character.Equipment.EquipmentFactory;
+import Character.Equipment.Inventory;
+import Character.Equipment.Weapon;
+import SystemFunction.Combate;
+import User.Admin;
+import User.Auth;
+import User.Player;
+import User.User;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import User.User;
-import User.Admin;
-import User.Player;
-import Character.CharacterFactory;
-import Character.Character;
-import Character.Equipment.*;
-import SystemFunction.Combate;
-import User.Auth;
 
 public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";

@@ -1,9 +1,11 @@
 package User;
 
-import SystemFunction.Combate;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 import Database.Initdata;
+import SystemFunction.Combate;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 

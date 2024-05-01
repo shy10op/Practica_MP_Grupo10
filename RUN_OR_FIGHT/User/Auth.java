@@ -1,11 +1,11 @@
 package User;
 
+import Database.Initdata;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
-import Database.Initdata;
 
 public class Auth {
     private static ArrayList<User> users = Initdata.getUsers();
