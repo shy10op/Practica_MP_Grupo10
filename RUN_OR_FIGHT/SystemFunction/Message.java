@@ -1,9 +1,9 @@
 package SystemFunction;
 
-import java.util.ArrayList;
-
 import Database.Initdata;
 import User.User;
+
+import java.util.ArrayList;
 
 public class Message {
 

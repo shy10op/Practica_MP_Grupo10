@@ -1,11 +1,11 @@
 package Character.Minions;
 
-import java.io.Serializable;
-
 import Character.Minions.MinionEspecific.Demon;
 import Character.Minions.MinionEspecific.Ghoul;
 import Character.Minions.MinionEspecific.Human;
 import Character.Minions.MinionEspecific.Human.Loyalty;
+
+import java.io.Serializable;
 
 public class MinionFactory implements Serializable {
     public static Minion createMinion(String type, String name, int hp, Loyalty loyalty, Boolean pact,

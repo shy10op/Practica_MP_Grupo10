@@ -1,14 +1,14 @@
 package Character.AbilityStrategy;
 
-import java.io.Serializable;
-import java.util.Random;
-
 import Character.AbilityStrategy.AbilityStrategy.Discipline;
 import Character.AbilityStrategy.AbilityStrategy.Don;
 import Character.AbilityStrategy.AbilityStrategy.Talent;
 import Character.CharacterEspecific.Hunter;
 import Character.CharacterEspecific.Vampire;
 import Character.CharacterEspecific.Werewolf;
+
+import java.io.Serializable;
+import java.util.Random;
 
 public class Ability {
 

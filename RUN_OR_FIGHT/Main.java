@@ -1,23 +1,23 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Scanner;
-
-import Character.CharacterFactory;
 import Character.Character;
-import User.Player;
-import User.User;
-import Character.Equipment.*;
+import Character.CharacterFactory;
+import Character.Equipment.Inventory;
 import Character.Minions.Minion;
-import Character.Minions.MinionFactory;
 import Character.Minions.MinionEspecific.Human.Loyalty;
+import Character.Minions.MinionFactory;
 import Database.Initdata;
 import SystemFunction.Combate;
 import SystemFunction.Menu;
 import SystemFunction.Message;
 import User.Admin;
 import User.Auth;
+import User.Player;
+import User.User;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Scanner;
 //import org.junit.jupiter.api.*;
 
 public class Main {

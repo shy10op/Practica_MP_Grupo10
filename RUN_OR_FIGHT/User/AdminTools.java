@@ -1,8 +1,9 @@
 package User;
 
+import Character.Character;
+
 import java.io.Serializable;
 import java.util.List;
-import Character.Character;
 
 public class AdminTools implements Serializable {
     private List<User> playerList;

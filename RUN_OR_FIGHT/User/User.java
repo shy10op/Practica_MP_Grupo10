@@ -1,10 +1,10 @@
 package User;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import Database.Initdata;
 import SystemFunction.Combate;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;

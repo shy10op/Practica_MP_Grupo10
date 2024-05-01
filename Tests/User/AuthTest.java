@@ -1,9 +1,12 @@
 package User;
 
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
 import Database.Initdata;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthTest {
     public ArrayList<User> users = Initdata.getUsers();

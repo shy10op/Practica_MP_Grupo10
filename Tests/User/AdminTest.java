@@ -1,12 +1,13 @@
 package User;
 
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import Database.Initdata;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import Database.Initdata;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminTest {
     public ArrayList<User> users = Initdata.getUsers();
@@ -34,7 +35,7 @@ public class AdminTest {
     @Test
     public void showUserListTest() {
         Boolean test = false;
-        if (users.size() >= 0) {
+        if (users.size() >= 1) {
             test = true;
         }
         assertTrue(test);

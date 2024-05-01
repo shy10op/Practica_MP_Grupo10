@@ -1,6 +1,8 @@
 package Character.AbilityStrategy;
 
-import Character.CharacterEspecific.*;
+import Character.CharacterEspecific.Hunter;
+import Character.CharacterEspecific.Vampire;
+import Character.CharacterEspecific.Werewolf;
 
 public interface AbilityStrategy {
     public interface Discipline {

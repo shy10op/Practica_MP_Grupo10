@@ -1,16 +1,18 @@
 package SystemFunction;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Random;
-
-import User.User;
+import Character.AbilityStrategy.Ability.HunterAbility;
+import Character.AbilityStrategy.Ability.VampireAbility;
+import Character.AbilityStrategy.Ability.WereWolfAbility;
 import Character.Character;
-import Character.AbilityStrategy.Ability.*;
 import Character.CharacterEspecific.Hunter;
 import Character.CharacterEspecific.Vampire;
 import Character.CharacterEspecific.Werewolf;
 import Database.Initdata;
+import User.User;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Combate implements Serializable {
     private User Chanllenger;

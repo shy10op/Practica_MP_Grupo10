@@ -1,7 +1,7 @@
 package Character.CharacterEspecific;
 
-import Character.Character;
 import Character.AbilityStrategy.AbilityStrategy.Don;
+import Character.Character;
 
 public class Werewolf extends Character {
     private int rage;

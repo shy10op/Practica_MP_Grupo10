@@ -1,7 +1,7 @@
 package Character.CharacterEspecific;
 
-import Character.Character;
 import Character.AbilityStrategy.AbilityStrategy.Talent;
+import Character.Character;
 
 public class Hunter extends Character {
     private int willpower;

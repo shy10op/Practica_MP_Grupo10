@@ -1,10 +1,10 @@
 package Character;
 
-import java.io.Serializable;
-
+import Character.CharacterEspecific.Hunter;
 import Character.CharacterEspecific.Vampire;
 import Character.CharacterEspecific.Werewolf;
-import Character.CharacterEspecific.Hunter;
+
+import java.io.Serializable;
 
 public class CharacterFactory implements Serializable {
     public static Character createCharacter(String type, String name, int gold, int health, int power, int blood,

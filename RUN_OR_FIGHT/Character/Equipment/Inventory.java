@@ -1,8 +1,7 @@
 package Character.Equipment;
 
-import java.util.ArrayList;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Inventory implements Serializable {
     private static ArrayList<Weapon> weapons;

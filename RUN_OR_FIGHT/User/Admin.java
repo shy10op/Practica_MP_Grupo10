@@ -1,9 +1,9 @@
 package User;
 
-import java.util.ArrayList;
-
 import Database.Initdata;
 import SystemFunction.Menu;
+
+import java.util.ArrayList;
 
 public class Admin extends User {
 
