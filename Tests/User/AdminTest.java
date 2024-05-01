@@ -34,7 +34,7 @@ public class AdminTest {
     @Test
     public void showUserListTest() {
         Boolean test = false;
-        if (users.size() >= 0) {
+        if (users.size() >= 1) {
             test = true;
         }
         assertTrue(test);

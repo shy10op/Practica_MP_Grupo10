@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import Character.Character;
 import Character.CharacterFactory;
-import Database.Initdata;
+//import Database.Initdata;
 
 public class CombateTest {
 
@@ -34,4 +34,5 @@ public class CombateTest {
         int round = Combate.initialCombat(combat);
         assertTrue(round > 1);
     }
+
 }
