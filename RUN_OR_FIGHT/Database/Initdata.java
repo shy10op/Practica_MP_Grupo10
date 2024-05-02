@@ -154,7 +154,7 @@ public class Initdata implements Serializable {
     }
 
     public static void generateInitialInventories() {
-        if (inventories.getWeapons().size() == 0 && inventories.getArmors().size() == 0) {
+        if (inventories.getWeapons().size() != 0 && inventories.getArmors().size() != 0) {
             return;
         }
         Weapon weapon1 = EquipmentFactory.createWeapon("Longsword", 3, 1, 2);
