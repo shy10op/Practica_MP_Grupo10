@@ -5,7 +5,7 @@ import Character.Character;
 
 public class Werewolf extends Character {
     private int rage;
-    private Don don;
+    private transient Don don;
 
     public Werewolf(String name, int gold, int hp, int power, int rage) {
         super(name, gold, hp, power);

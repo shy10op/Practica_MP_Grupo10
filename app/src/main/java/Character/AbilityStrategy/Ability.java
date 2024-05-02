@@ -8,9 +8,10 @@ import Character.CharacterEspecific.Vampire;
 import Character.CharacterEspecific.Werewolf;
 
 import java.io.Serializable;
-import java.util.Random;
+import java.security.SecureRandom;
 
-public class Ability {
+public class Ability implements Serializable {
+    private static final SecureRandom rand = new SecureRandom();
 
     public static class WereWolfAbility implements Don, Serializable {
         public void don(Werewolf werewolf) {
@@ -28,7 +29,6 @@ public class Ability {
 
     public static class VampireAbility implements Discipline, Serializable {
         public void discipline(Vampire vampire) {
-            Random rand = new Random();
             int blood = rand.nextInt(vampire.getBlood() + 1) + 1;
             int hp = vampire.getHealth();
             int power = vampire.getPower();

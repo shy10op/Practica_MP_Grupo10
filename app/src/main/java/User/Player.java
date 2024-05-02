@@ -1,13 +1,12 @@
 package User;
 
-
 import Character.Character;
 
 public class Player extends User {
     private String record;
     private Character character;
 
-    public Player(){
+    public Player() {
     }
 
     public Player(String nick, String name, String record) {

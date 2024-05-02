@@ -11,14 +11,15 @@ import Database.Initdata;
 import User.User;
 
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Combate implements Serializable {
     private User Chanllenger;
     private User Chanllenged;
     private int amount;
     private String result;
+    private static final SecureRandom random = new SecureRandom();
 
     public enum CharacterType {
         HUNTER,
@@ -101,7 +102,6 @@ public class Combate implements Serializable {
         System.out.println("Chanllenger HP: " + challengerHP + ", minions HP: " + challengerMinionsHP);
         System.out.println("Chanllenged HP: " + challengedHP + ", minions HP: " + challengedMinionsHP);
 
-        Random random = new Random();
         int round = 1;
         while (challengerAuxHP > 0 && challengedAuxHP > 0) {
             System.out.println("Round " + round + ":");
@@ -188,6 +188,9 @@ public class Combate implements Serializable {
                 ((Werewolf) character).setDon(new WereWolfAbility());
                 System.out.println(character.getName() + " used Rage");
                 ((Werewolf) character).useAbility();
+                break;
+            default:
+                System.out.println("Magikarp used Splash, and nothing happends");
         }
     }
 }

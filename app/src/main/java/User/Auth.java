@@ -3,15 +3,15 @@ package User;
 import Database.Initdata;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Auth {
     private static ArrayList<User> users = Initdata.getUsers();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int LENGTH = 1;
-    private static Random random = new Random();
+    private static final SecureRandom random = new SecureRandom();
 
     public static String generateRecord() {
         StringBuilder registro = new StringBuilder();

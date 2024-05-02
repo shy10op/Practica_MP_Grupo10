@@ -1,11 +1,12 @@
 package Character.CharacterEspecific;
 
 import Character.AbilityStrategy.AbilityStrategy.Talent;
+
 import Character.Character;
 
 public class Hunter extends Character {
     private int willpower;
-    private Talent talent;
+    private transient Talent talent;
 
     public Hunter(String name, int gold, int hp, int power) {
         super(name, gold, hp, power);

@@ -13,9 +13,11 @@ import User.Player;
 import User.User;
 
 import java.io.*;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Initdata implements Serializable {
     private static final String FILENAME = "users.dat";
@@ -23,42 +25,33 @@ public class Initdata implements Serializable {
     private static final String COMBATES = "combates.dat";
     private static Inventory inventories = new Inventory();
     private static ArrayList<User> users = new ArrayList<>();
-    private static ArrayList<Combate> combates = new ArrayList<>();
+    private static ArrayList<Combate> combateList = new ArrayList<>();
+    private static final SecureRandom random = new SecureRandom();
 
-    private static void checkUsersFile() {
-        File file = new File(FILENAME);
+    private static final Logger LOGGER = Logger.getLogger("AppLogger");
+
+    private static void checkFile(String filePath, String fileType) {
+        File file = new File(filePath);
         if (!file.exists()) {
-            System.out.println("User file not found. Creating new user database.");
+            logFileNotFound(fileType);
             try {
-                file.createNewFile();
+                handleFileCreation(file, fileType);
             } catch (IOException e) {
-                e.printStackTrace();
+                logSevereException(fileType, e);
             }
         }
     }
 
-    private static void checkInventoriesFile() {
-        File file = new File(INVENTORY);
-        if (!file.exists()) {
-            System.out.println("Inventory file not found. Creating new inventory database.");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public static void checkUsersFile() {
+        checkFile(FILENAME, "User");
     }
 
-    private static void checkCombatesFile() {
-        File file = new File(COMBATES);
-        if (!file.exists()) {
-            System.out.println("Combates file not found. Creating new combates database.");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public static void checkInventoriesFile() {
+        checkFile(INVENTORY, "Inventory");
+    }
+
+    public static void checkCombatesFile() {
+        checkFile(COMBATES, "Combates");
     }
 
     @SuppressWarnings("unchecked")
@@ -67,7 +60,7 @@ public class Initdata implements Serializable {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
             users = (ArrayList<User>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -83,9 +76,9 @@ public class Initdata implements Serializable {
     public static void loadCombatesFromFile() {
         checkCombatesFile();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(COMBATES))) {
-            combates = (ArrayList<Combate>) ois.readObject();
+            combateList = (ArrayList<Combate>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -93,7 +86,7 @@ public class Initdata implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME, false))) {
             oos.writeObject(users);
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -101,21 +94,20 @@ public class Initdata implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(INVENTORY, false))) {
             oos.writeObject(inventories);
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
     public static void saveCombatesToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(COMBATES, false))) {
-            oos.writeObject(combates);
+            oos.writeObject(combateList);
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
     public static void generateBots() {
 
-        Random random = new Random();
         if (!users.isEmpty()) {
             return;
         }
@@ -182,7 +174,6 @@ public class Initdata implements Serializable {
     }
 
     public static void generateRandomCombates() {
-        Random random = new Random();
         ArrayList<User> availableUsers = new ArrayList<>();
         for (User user : users) {
             if (user.getPlayer() != null) {
@@ -196,7 +187,7 @@ public class Initdata implements Serializable {
             User challenged = availableUsers.get(i + 1);
             int amount = random.nextInt(20) + 1;
             Combate combate = new Combate(challenger, challenged, amount);
-            combates.add(combate);
+            combateList.add(combate);
         }
         saveCombatesToFile();
     }
@@ -210,10 +201,45 @@ public class Initdata implements Serializable {
             generateBots();
         }
         generateInitialInventories();
-        if (combates.isEmpty()) {
+        if (combateList.isEmpty()) {
             generateRandomCombates();
         }
 
+    }
+
+    private static void logFileNotFound(String fileType) {
+        if (LOGGER.isLoggable(Level.INFO)) {
+            LOGGER.info(
+                    String.format("%s file not found. Creating new %s database.", fileType, fileType.toLowerCase()));
+        }
+    }
+
+    private static void handleFileCreation(File file, String fileType) throws IOException {
+        if (file.createNewFile()) {
+            logFileCreationSuccess(fileType);
+        } else {
+            logFileAlreadyExists(fileType);
+        }
+    }
+
+    private static void logFileCreationSuccess(String fileType) {
+        if (LOGGER.isLoggable(Level.INFO)) {
+            LOGGER.info(String.format("%s database created successfully.", fileType));
+        }
+    }
+
+    private static void logFileAlreadyExists(String fileType) {
+        if (LOGGER.isLoggable(Level.WARNING)) {
+            LOGGER.warning(String.format("Attempt to create %s database failed; file already exists.",
+                    fileType.toLowerCase()));
+        }
+    }
+
+    private static void logSevereException(String fileType, IOException e) {
+        if (LOGGER.isLoggable(Level.SEVERE)) {
+            LOGGER.log(Level.SEVERE,
+                    String.format("Failed to create %s database due to an IOException.", fileType.toLowerCase()), e);
+        }
     }
 
     public static String getFILENAME() {
@@ -233,7 +259,7 @@ public class Initdata implements Serializable {
     }
 
     public static ArrayList<Combate> getCombates() {
-        return combates;
+        return combateList;
     }
 
 }

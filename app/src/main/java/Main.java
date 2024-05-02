@@ -14,13 +14,14 @@ import User.Player;
 import User.User;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Scanner;
 //import org.junit.jupiter.api.*;
 
 public class Main {
+    private static final SecureRandom rand = new SecureRandom();
 
     public static void main(String[] args) throws IOException {
         Initdata.startInitData();
@@ -30,7 +31,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
         boolean exit = false;
-        Random rand = new Random();
 
         while (!exit) {
             Menu.authMenu();
