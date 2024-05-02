@@ -1,3 +1,5 @@
+# Ignore Gradle project-specific cache directory
+.gradle
 
-*.dat
-*.class
+# Ignore Gradle build output directory
+build
