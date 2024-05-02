@@ -64,7 +64,7 @@ class InitdataTest {
 
 
     @Test
-    public void testGenerateBotsWithEmptyUsers() throws Exception {
+    public void testGenerateBots() throws Exception {
 
         Initdata.generateBots();
 
@@ -160,7 +160,7 @@ class InitdataTest {
     }
 
     @Test
-    public void loadUsersFromFileTest() throws NoSuchFieldException, IllegalAccessException {
+    public void testLoadUsersFromFile() throws NoSuchFieldException, IllegalAccessException {
         Initdata.loadUsersFromFile();
         Field usersField = Initdata.class.getDeclaredField("users");
         usersField.setAccessible(true);
@@ -171,7 +171,7 @@ class InitdataTest {
     }
 
     @Test
-    public void loadInventoriesFromFileTest() throws NoSuchFieldException,
+    public void  testLoadInventoriesFromFile() throws NoSuchFieldException,
             IllegalAccessException {
 
         Initdata.loadInventoriesFromFile();
@@ -184,7 +184,7 @@ class InitdataTest {
     }
 
     @Test
-    public void TestLoadCombatesFromFile() throws NoSuchFieldException,
+    public void testLoadCombatesFromFile() throws NoSuchFieldException,
             IllegalAccessException {
         Initdata.loadCombatesFromFile();
 
@@ -197,7 +197,7 @@ class InitdataTest {
     }
 
     @Test
-    public void saveUsersToFileTest() throws IOException,
+    public void testSaveUsersToFile() throws IOException,
             ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         Initdata.saveUsersToFile();
 
@@ -213,14 +213,14 @@ class InitdataTest {
             assertEquals(expectedUsers.size(), actualUsers.size());
 
             for (int i = 0; i < expectedUsers.size(); i++) {
-                assertEquals(expectedUsers.get(i).getNick(), actualUsers.get(i).getNick(), "Los nicks de los usuarios deberían coincidir");
+                assertEquals(expectedUsers.get(i).getNick(), actualUsers.get(i).getNick());
 
             }
         }
     }
 
     @Test
-    public void saveInventoriesToFileTest() throws IOException,
+    public void testSaveInventoriesToFile() throws IOException,
             ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         Inventory inventoryTest = new Inventory();
 
@@ -241,7 +241,7 @@ class InitdataTest {
     }
 
     @Test
-    public void saveCombatesToFileTest() throws IOException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+    public void testSaveCombatesToFile() throws IOException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         ArrayList<Combate> combatesTest = new ArrayList<>();
         User user1 = new User("Bot3", "12345", "BotName3", "player");
         User user2 = new User("Bot4", "12345", "BotName4", "player");
