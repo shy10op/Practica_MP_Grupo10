@@ -153,7 +153,7 @@ class InitdataTest {
     }
 
     @Test
-    public void testFileCreation() {
+    public void testInidataStart() {
         assertNotNull(Initdata.getUsers());
         assertNotNull(Initdata.getInventories());
         assertNotNull(Initdata.getCombates());
