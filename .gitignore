@@ -5,3 +5,6 @@
 build
 combates.dat
 users.dat
+*.class
+*.dat
+
