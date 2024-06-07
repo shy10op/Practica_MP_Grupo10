@@ -12,6 +12,26 @@ public class Admin extends User {
     super(nick, password, name, "admin");
   }
 
+  public static void showPlayers() {
+    ArrayList<User> playerList = getPlayers();
+    Menu.printHeader("Players");
+    for (User user : playerList) {
+      Player player = user.getPlayer();
+      System.out.println(player.getNick() + " - " + player.getRecord());
+    }
+  }
+
+  public static ArrayList<User> getPlayers() {
+    ArrayList<User> users = Initdata.getUsers();
+    ArrayList<User> playerList = new ArrayList<>();
+    for (User user : users) {
+      if (user.getPlayer() != null) {
+        playerList.add(user);
+      }
+    }
+    return playerList;
+  }
+
   public static void banUser(String nick) {
     User user = User.findUser(nick);
     if (user.getAccountStatus() && user != null) {
