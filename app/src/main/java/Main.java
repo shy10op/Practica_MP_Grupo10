@@ -317,17 +317,17 @@ public class Main {
             scanner.nextLine(); // consume the newline after the number
             switch (optionAdmin) {
               case 1:
-                admin.showPlayers();
+                Menu.showPlayer();
                 System.out.println("Enter the nick of the player");
                 String userNick = scanner.nextLine();
                 System.out.println("Searching...");
                 User destinationUser = User.findUser(userNick);
                 if (destinationUser != null) {
-                  Menu.changeUserMenu(destinationUser, scanner);
                   Menu.changeUserCharacterMenu(destinationUser, scanner);
                 } else {
                   System.out.println("No user found with that nickname.");
                 }
+                Initdata.saveUsersToFile();
                 break;
               case 2:
                 Menu.inventoryMenu(inventories, scanner, user);
@@ -369,18 +369,7 @@ public class Main {
                 break;
               case 4:
                 System.out.print("List of players nick: \n");
-                ArrayList<User> playerList = Admin.getPlayers();
-                int i = 0;
-                for (User userPlayer : playerList) {
-                  if (userPlayer.getAccountStatus()) {
-                    System.out.printf(
-                      "User %d: %s \n",
-                      i,
-                      userPlayer.getNick()
-                    );
-                    i++;
-                  }
-                }
+                Menu.showPlayer();
                 System.out.println(
                   "Enter the nick of the player who will be banned (exit)"
                 );

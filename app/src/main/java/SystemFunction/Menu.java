@@ -11,6 +11,7 @@ import User.Admin;
 import User.Player;
 import User.User;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -49,88 +50,124 @@ public class Menu {
     System.out.print("Choose an option: ");
   }
 
-  public static void changeUserMenu(User destinationUser, Scanner scanner) {
-    Menu.printHeader("User");
-    System.out.printf("UserNick: %s To ", destinationUser.getNick());
-    String newNick = scanner.nextLine();
-    destinationUser.setNick(newNick);
+  // Method to safely get an integer input from the user
+  public static int safeNextInt(Scanner scanner) {
+    while (!scanner.hasNextInt()) {
+      System.out.println("Invalid input. Please enter a valid number.");
+      scanner.next(); // Discard the incorrect input
+    }
+    return scanner.nextInt();
+  }
 
-    System.out.printf("UserName: %s To ", destinationUser.getName());
-    String newName = scanner.nextLine();
-    destinationUser.setName(newName);
-
-    Initdata.saveUsersToFile();
+  // Method to safely get a string that matches a list of valid options
+  public static String safeNextType(Scanner scanner, List<String> validTypes) {
+    String input = scanner.nextLine().trim();
+    while (!validTypes.contains(input.toLowerCase())) {
+      System.out.println(
+        "Invalid type. Please enter one of the following: " + validTypes
+      );
+      input = scanner.nextLine().trim();
+    }
+    return input;
   }
 
   public static void changeUserCharacterMenu(
     User destinationUser,
     Scanner scanner
   ) {
-    Menu.printHeader("User Character");
+    printHeader("User");
+
+    System.out.printf("User Nick: %s To ", destinationUser.getNick());
+    String newNick = scanner.nextLine();
+    destinationUser.setNick(newNick);
+
+    System.out.printf("User Name: %s To ", destinationUser.getName());
+    String newUserName = scanner.nextLine();
+    destinationUser.setName(newUserName);
+
+    printHeader("Character");
     Character destinationCharacter = destinationUser.getPlayer().getCharacter();
-    System.out.printf(
-      "Character Name: %s  To ",
-      destinationCharacter.getName()
-    );
+    System.out.printf("Character Name: %s To ", destinationCharacter.getName());
     String newName = scanner.nextLine();
     destinationCharacter.setName(newName);
 
     System.out.printf(
-      "Character Health : %d  To ",
+      "Character Health: %d To ",
       destinationCharacter.getHealth()
     );
-    int newHealth = scanner.nextInt();
+    int newHealth = safeNextInt(scanner);
+    scanner.nextLine(); // consume the newline
     destinationCharacter.setHealth(newHealth);
 
     System.out.printf(
-      "Character Power : %d  To ",
+      "Character Power: %d To ",
       destinationCharacter.getPower()
     );
-    int newPower = scanner.nextInt();
+    int newPower = safeNextInt(scanner);
+    scanner.nextLine(); // consume the newline
     destinationCharacter.setPower(newPower);
 
-    System.out.printf(
-      "Character Gold: %d  To ",
-      destinationCharacter.getGold()
-    );
-    int newGold = scanner.nextInt();
+    System.out.printf("Character Gold: %d To ", destinationCharacter.getGold());
+    int newGold = safeNextInt(scanner);
+    scanner.nextLine(); // consume the newline
     destinationCharacter.setGold(newGold);
 
     System.out.printf(
-      "Character type : %s To (hunter,vampire,werewolf)",
+      "Character Type: %s To (hunter, vampire, werewolf) ",
       destinationCharacter.getType()
     );
-    String newType = scanner.next();
+    List<String> validTypes = Arrays.asList("hunter", "vampire", "werewolf");
+    String newType = safeNextType(scanner, validTypes);
     destinationCharacter.setType(newType);
 
-    int newAge = 0;
-    int newBlood = 0;
-    int newRage = 0;
-    if (newType.equals("vampire")) {
-      System.out.printf("Set a new Age: ");
-      newAge = scanner.nextInt();
-      System.out.printf("Set a new Blood: ");
-      newBlood = scanner.nextInt();
+    if (newType.equals("vampire") || newType.equals("werewolf")) {
+      if (newType.equals("vampire")) {
+        System.out.print("Set a new Age: ");
+        int newAge = safeNextInt(scanner);
+        System.out.print("Set a new Blood: ");
+        int newBlood = safeNextInt(scanner);
+        destinationCharacter =
+          CharacterFactory.createCharacter(
+            newType,
+            newName,
+            newGold,
+            newHealth,
+            newPower,
+            newBlood,
+            newAge,
+            0
+          );
+      } else if (newType.equals("werewolf")) {
+        System.out.print("Set a new Rage: ");
+        int newRage = safeNextInt(scanner);
+        destinationCharacter =
+          CharacterFactory.createCharacter(
+            newType,
+            newName,
+            newGold,
+            newHealth,
+            newPower,
+            0,
+            0,
+            newRage
+          );
+      }
+    } else {
+      destinationCharacter =
+        CharacterFactory.createCharacter(
+          newType,
+          newName,
+          newGold,
+          newHealth,
+          newPower,
+          0,
+          0,
+          0
+        );
     }
 
-    if (newType.equals("werewolf")) {
-      System.out.printf("Set a new Rage: ");
-      newRage = scanner.nextInt();
-    }
-
-    Character newCharacter = CharacterFactory.createCharacter(
-      newType,
-      newName,
-      newGold,
-      newHealth,
-      newPower,
-      newBlood,
-      newAge,
-      newRage
-    );
-    destinationUser.getPlayer().setCharacter(newCharacter);
-    System.out.println("User changed successfully");
-
+    destinationUser.getPlayer().setCharacter(destinationCharacter);
+    System.out.println("User character updated successfully.");
     Initdata.saveUsersToFile();
   }
 
@@ -508,5 +545,14 @@ public class Menu {
     }
     Initdata.saveUsersToFile();
     System.out.println("\n");
+  }
+
+  public static void showPlayer() {
+    ArrayList<User> userList = Initdata.getUsers();
+    for (User user : userList) {
+      if (user.getRole().equals("player")) {
+        System.out.println(user.getNick());
+      }
+    }
   }
 }
