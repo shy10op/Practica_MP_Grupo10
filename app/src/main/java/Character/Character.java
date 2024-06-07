@@ -89,7 +89,7 @@ public abstract class Character implements Serializable {
         return type;
     }
 
-    public void setMinions(Minion minion) {
+    public void setMinion(Minion minion) {
         this.minion = minion;
     }
 

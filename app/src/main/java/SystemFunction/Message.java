@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Message {
 
     public static void sendCombatToAdmin(Combate combate) {
-        ArrayList<Combate> combates = Initdata.getCombates();
+        ArrayList<Combate> combates = Initdata.getCombateList();
         User challenged = combate.getChallenged();
         User challenger = combate.getChallenger();
         if (challenged != null) {

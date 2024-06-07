@@ -66,7 +66,7 @@ public class Combate implements Serializable {
     }
 
     public static void deleteCombate(Combate combate) {
-        ArrayList<Combate> combates = Initdata.getCombates();
+        ArrayList<Combate> combates = Initdata.getCombateList();
         if (!combates.contains(combate)) {
             System.out.println("Combate not found in the Combate File");
         }
@@ -166,7 +166,7 @@ public class Combate implements Serializable {
     private static void deleteMinion(Character loser) {
         if (loser.getMinion() != null) {
             System.out.printf("%s minion %s is dead\n", loser.getName(), loser.getMinion().getName());
-            loser.setMinions(null);
+            loser.setMinion(null);
         } else {
             System.out.println("you don't have a minion\n");
         }
