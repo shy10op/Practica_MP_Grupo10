@@ -246,7 +246,7 @@ public class Main {
                 String rivalNick = scanner.nextLine();
                 if (rivalNick.equals(user.getNick())) {
                   System.out.println("You can't challenge yourself.");
-                  continue;
+                  break;
                 } else {
                   System.out.println("Enter stake gold");
                   while (!scanner.hasNextInt()) {
@@ -306,7 +306,6 @@ public class Main {
                 break;
             }
           } else if (userRole.equals("admin")) {
-            Admin admin = user.getAdmin();
             Menu.adminMenu();
             while (!scanner.hasNextInt()) {
               System.out.println("Invalid input. Please enter a number.");

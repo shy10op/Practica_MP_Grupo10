@@ -34,9 +34,11 @@ public class Admin extends User {
 
   public static void banUser(String nick) {
     User user = User.findUser(nick);
-    if (user.getAccountStatus() && user != null) {
-      user.setAccountStatus(false);
-      System.out.println("Player banned successfully");
+    if (user != null) {
+      if (user.getAccountStatus()) {
+        user.setAccountStatus(false);
+        System.out.println("Player banned successfully");
+      }
     } else {
       System.out.println("User not found");
     }

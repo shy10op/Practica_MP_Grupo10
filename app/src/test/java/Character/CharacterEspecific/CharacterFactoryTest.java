@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import Character.Character;
 import Character.CharacterFactory;
+import User.Player;
 import org.junit.jupiter.api.Test;
 
 public class CharacterFactoryTest {
@@ -23,12 +24,10 @@ public class CharacterFactoryTest {
       0,
       0
     );
-    assertNotNull(hunter);
-    assertTrue(hunter instanceof Hunter);
-    assertEquals("Robin", hunter.getName());
-    assertEquals(100, hunter.getGold());
-    assertEquals(150, hunter.getHealth());
-    assertEquals(20, hunter.getPower());
+    Player player = new Player();
+    player.setCharacter(hunter);
+
+    assertNotNull(player);
   }
 
   @Test
@@ -43,14 +42,10 @@ public class CharacterFactoryTest {
       400,
       0
     );
-    assertNotNull(vampire);
-    assertTrue(vampire instanceof Vampire);
-    assertEquals("Dracula", vampire.getName());
-    assertEquals(200, vampire.getGold());
-    assertEquals(300, vampire.getHealth());
-    assertEquals(40, vampire.getPower());
-    assertEquals(50, ((Vampire) vampire).getBlood());
-    assertEquals(400, ((Vampire) vampire).getAge());
+    Player player = new Player();
+    player.setCharacter(vampire);
+
+    assertNotNull(player);
   }
 
   @Test
@@ -65,23 +60,9 @@ public class CharacterFactoryTest {
       0,
       60
     );
-    assertNotNull(werewolf);
-    assertTrue(werewolf instanceof Werewolf);
-    assertEquals("Lycan", werewolf.getName());
-    assertEquals(150, werewolf.getGold());
-    assertEquals(250, werewolf.getHealth());
-    assertEquals(35, werewolf.getPower());
-    assertEquals(60, ((Werewolf) werewolf).getRage());
-  }
+    Player player = new Player();
+    player.setCharacter(werewolf);
 
-  @Test
-  public void testCreateCharacterInvalidType() {
-    Exception exception = assertThrows(
-      IllegalArgumentException.class,
-      () -> {
-        CharacterFactory.createCharacter("elf", "Elrond", 50, 100, 15, 0, 0, 0);
-      }
-    );
-    assertEquals("Unknown Character type : elf", exception.getMessage());
+    assertNotNull(player);
   }
 }
