@@ -18,7 +18,7 @@ public class MessageTest {
 
     @Test
     public void sendCombatToAdminTest() {
-        ArrayList<Combate> combates = Initdata.getCombates();
+        ArrayList<Combate> combates = Initdata.getCombateList();
 
         User user1 = new User("testBot1", "12345", "testBot1", "player");
         User user2 = new User("testBot2", "12345", "testBot2", "player");
@@ -30,7 +30,7 @@ public class MessageTest {
 
     @Test
     public void sendCombatToChallengedTest() {
-        ArrayList<Combate> combates = Initdata.getCombates();
+        ArrayList<Combate> combates = Initdata.getCombateList();
 
         User user1 = new User("testBot1", "12345", "testBot1", "player");
         User user2 = new User("testBot2", "12345", "testBot2", "player");
@@ -43,7 +43,7 @@ public class MessageTest {
 
     @Test
     public void receiveCombatTest() {
-        ArrayList<Combate> combates = Initdata.getCombates();
+        ArrayList<Combate> combates = Initdata.getCombateList();
 
         User user1 = new User("testBot1", "12345", "testBot1", "player");
         User user2 = new User("testBot2", "12345", "testBot2", "player");
