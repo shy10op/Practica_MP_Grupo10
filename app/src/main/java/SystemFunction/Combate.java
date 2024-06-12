@@ -97,7 +97,7 @@ public class Combate implements Serializable {
             challengedMinionsHP = challenged.getMinion().getHealth();
         }
 
-        int challengerAuxHP = challengerHP + challengerMinionsHP;
+        int challengerAuxHP = challengerHP + challengerMinionsHP; 
         int challengedAuxHP = challengedHP + challengedMinionsHP;
         System.out.println("Chanllenger HP: " + challengerHP + ", minions HP: " + challengerMinionsHP);
         System.out.println("Chanllenged HP: " + challengedHP + ", minions HP: " + challengedMinionsHP);

@@ -17,7 +17,7 @@ public class CharacterFactory implements Serializable {
             case "werewolf":
                 return new Werewolf(name, gold, health, power, rage);
             default:
-                throw new IllegalArgumentException("Unknown Character type : " + type);
+                return null;
         }
     }
 }

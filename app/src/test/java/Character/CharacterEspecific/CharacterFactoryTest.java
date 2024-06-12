@@ -1,7 +1,9 @@
 package Character.CharacterEspecific;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,20 +16,17 @@ public class CharacterFactoryTest {
 
   @Test
   public void testCreateHunter() {
-    Character hunter = CharacterFactory.createCharacter(
-      "hunter",
-      "Robin",
-      100,
-      150,
-      20,
-      0,
-      0,
-      0
-    );
-    Player player = new Player();
-    player.setCharacter(hunter);
-
-    assertNotNull(player);
+      Character hunter = CharacterFactory.createCharacter(
+        "olaa",
+        "Robin",
+        100,
+        150,
+        20,
+        0,
+        0,
+        0
+      );
+      assertNotNull(hunter);
   }
 
   @Test

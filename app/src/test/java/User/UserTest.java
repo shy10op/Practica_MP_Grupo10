@@ -14,9 +14,6 @@ class UserTest {
   @BeforeEach
   public void setup() throws Exception {
     Initdata.startInitData();
-    Field field = Initdata.class.getDeclaredField("FILENAME");
-    field.setAccessible(true);
-    String filename = (String) field.get(null);
   }
 
   @AfterEach
@@ -26,26 +23,26 @@ class UserTest {
 
   @Test
   public void testFindUserExists() {
-    User testBot = new User("testBot", "12345678910111213", "BotName", "player");
-
-    User result = User.findUser(testBot.getNick());
-    assertNotNull(result);
-    assertEquals(nickExistente.toLowerCase(), result.getNick().toLowerCase());
-  }
-
-  @Test
-  public void testDeleteUser() {
-    User testBot = new User("testBot", "12345678910111213", "BotName", "elfo");
+    User testBot = new User("testBot", "123456789101112", "BotName", "player");
     
     assertNotNull(testBot);
     ArrayList<User> users = Initdata.getUsers();
     users.add(testBot);
     Initdata.saveUsersToFile();
 
-    User.deleteUser(testBot.getNick());
+    User result = User.findUser(testBot.getNick());
+    assertNotNull(result);
+    assertEquals(testBot.getNick().toLowerCase(), result.getNick().toLowerCase());
+  } 
 
-    User testBotDeleted = User.findUser(testBot.getNick());
-
-    assertNull(testBotDeleted);
+  @Test
+  public void testDeleteUser() {
+    String nick = "";
+    ArrayList<User> users = Initdata.getUsers();
+    int size = users.size();
+    User.deleteUser(nick);
+    int newSize = users.size();
+    assertTrue(size > newSize);
   }
+    
 }
