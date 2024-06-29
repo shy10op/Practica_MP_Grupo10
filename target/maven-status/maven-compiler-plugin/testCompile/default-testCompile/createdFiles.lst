@@ -1,0 +1,10 @@
+SystemFunction\CombateTest.class
+Character\CharacterEspecific\HunterTest.class
+Character\CharacterEspecific\VampireTest.class
+Character\CharacterEspecific\WerewolfTest.class
+Character\Equipment\EquipmentFactoryTest.class
+User\AdminTest.class
+User\AuthTest.class
+Character\CharacterEspecific\CharacterFactoryTest.class
+User\UserTest.class
+SystemFunction\MessageTest.class
