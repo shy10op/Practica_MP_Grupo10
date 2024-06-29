@@ -219,10 +219,8 @@ public class Main {
                         int op = scanner.nextInt();
                         scanner.nextLine(); // consume the newline after the number
                         switch (op) {
-                            case 1:
-                                Menu.userMenu(user);
-                                break;
-                            case 2:
+                            case 1 -> Menu.userMenu(user);
+                            case 2 -> {
                                 System.out.println(
                                         "Are you sure you want to delete your account? (yes/no)"
                                 );
@@ -235,12 +233,12 @@ public class Main {
                                 } else {
                                     System.out.println("Account deletion canceled.");
                                 }
-                                break;
-                            case 3:
+                            }
+                            case 3 -> {
                                 Menu.inventoryMenu(inventories, scanner, user);
                                 Initdata.saveUsersToFile();
-                                break;
-                            case 4:
+                            }
+                            case 4 -> {
                                 System.out.println("Let's Challenge");
                                 String rivalNick = scanner.nextLine();
                                 if (rivalNick.equals(user.getNick())) {
@@ -264,14 +262,14 @@ public class Main {
                                         System.out.println("No user found with that nickname.");
                                     }
                                 }
-                                break;
-                            case 5:
+                            }
+                            case 5 -> {
                                 System.out.println("Checking for incoming challenges...");
                                 Combate combate = Message.receiveCombat(user);
                                 if (combate != null) {
                                     System.out.println(
                                             "You have been challenged! Fight amount: "
-                                            + combate.getAmount()
+                                                    + combate.getAmount()
                                     );
                                     System.out.println("Do you want to fight? (y/n)");
                                     String combatOption = scanner.nextLine();
@@ -283,7 +281,7 @@ public class Main {
                                                 = actualCharacter.getGold() - combate.getAmount();
                                         System.out.println(
                                                 "Your current gold after declining the challenge is: "
-                                                + result
+                                                        + result
                                         );
                                         actualCharacter.setGold(result);
                                         System.out.println("You have chosen not to fight.");
@@ -292,17 +290,13 @@ public class Main {
                                 } else {
                                     System.out.println("No challenges at the moment.");
                                 }
-                                break;
-                            case 6:
-                                Menu.rankingMenu(users);
-                                break;
-                            case 7:
+                            }
+                            case 6 -> Menu.rankingMenu(users);
+                            case 7 -> {
                                 System.out.println("Exiting...");
                                 user.setLogged(false);
-                                break;
-                            default:
-                                System.out.println("Invalid option. Please try again.");
-                                break;
+                            }
+                            default -> System.out.println("Invalid option. Please try again.");
                         }
                     } else if (userRole.equals("admin")) {
                         Menu.adminMenu();
