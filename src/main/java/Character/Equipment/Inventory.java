@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Inventory implements Serializable {
-    private static ArrayList<Weapon> weapons;
-    private static ArrayList<Armor> armors;
 
-    public Inventory() {
-        weapons = new ArrayList<>();
-        armors = new ArrayList<>();
-    }
+    private static ArrayList<Weapon> weapons = new ArrayList<>();
+    private static ArrayList<Armor> armors = new ArrayList<>();
 
     public void addWeapon(Weapon weapon) {
         weapons.add(weapon);
@@ -46,11 +42,11 @@ public class Inventory implements Serializable {
         return null;
     }
 
-    public ArrayList<Weapon> getWeapons() {
+    public static ArrayList<Weapon> getWeapons() {
         return weapons;
     }
 
-    public ArrayList<Armor> getArmors() {
+    public static ArrayList<Armor> getArmors() {
         return armors;
     }
 

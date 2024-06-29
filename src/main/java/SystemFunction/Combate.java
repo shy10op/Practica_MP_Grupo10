@@ -15,8 +15,9 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Combate implements Serializable {
-    private User Chanllenger;
-    private User Chanllenged;
+
+    private User chanllenger;
+    private User chanllenged;
     private int amount;
     private String result;
     private static final SecureRandom random = new SecureRandom();
@@ -28,8 +29,8 @@ public class Combate implements Serializable {
     }
 
     public Combate(User Chanllenger, User Chanllenged, int amount) {
-        this.Chanllenger = Chanllenger;// origen
-        this.Chanllenged = Chanllenged;// destino
+        this.chanllenger = Chanllenger;// origen
+        this.chanllenged = Chanllenged;// destino
         this.amount = amount;
     }
 
@@ -42,19 +43,19 @@ public class Combate implements Serializable {
     }
 
     public User getChallenger() {
-        return Chanllenger;
+        return chanllenger;
     }
 
     public void setChallenger(User chanllenger) {
-        Chanllenger = chanllenger;
+        this.chanllenger = chanllenger;
     }
 
     public User getChallenged() {
-        return Chanllenged;
+        return chanllenged;
     }
 
     public void setChallenged(User chanllenged) {
-        Chanllenged = chanllenged;
+        this.chanllenged = chanllenged;
     }
 
     public String getResult() {
@@ -79,9 +80,9 @@ public class Combate implements Serializable {
         }
     }
 
-    public static int initialCombat(Combate combate) {
-        Character challenger = combate.getChallenger().getPlayer().getCharacter();
-        Character challenged = combate.getChallenged().getPlayer().getCharacter();
+    public int initialCombat() {
+        Character challenger = chanllenger.getPlayer().getCharacter();
+        Character challenged = chanllenged.getPlayer().getCharacter();
 
         int challengerHP = challenger.getHealth();
         int challengedHP = challenged.getHealth();
@@ -97,7 +98,7 @@ public class Combate implements Serializable {
             challengedMinionsHP = challenged.getMinion().getHealth();
         }
 
-        int challengerAuxHP = challengerHP + challengerMinionsHP; 
+        int challengerAuxHP = challengerHP + challengerMinionsHP;
         int challengedAuxHP = challengedHP + challengedMinionsHP;
         System.out.println("Chanllenger HP: " + challengerHP + ", minions HP: " + challengerMinionsHP);
         System.out.println("Chanllenged HP: " + challengedHP + ", minions HP: " + challengedMinionsHP);
@@ -122,13 +123,13 @@ public class Combate implements Serializable {
 
             System.out.println(
                     challenger.getName() + " attacks " + challenged.getName() + " causing " + damageToChallenged
-                            + " damage.");
+                    + " damage.");
 
             if (challengedAuxHP <= 0) {
                 System.out.println(challenged.getName() + " has been defeated!");
-                System.out.println("You lost " + combate.getAmount() + " gold");
-                challenger.setGold(challenger.getGold() + combate.getAmount());
-                challenged.setGold(challenged.getGold() - combate.getAmount());
+                System.out.println("You lost " + getAmount() + " gold");
+                challenger.setGold(challenger.getGold() + getAmount());
+                challenged.setGold(challenged.getGold() - getAmount());
                 deleteMinion(challenged);
                 break;
             }
@@ -137,20 +138,20 @@ public class Combate implements Serializable {
             challengerAuxHP -= damageToChallenger;
             System.out.println(
                     challenged.getName() + " attacks " + challenger.getName() + " causing " + damageToChallenger
-                            + " damage.");
+                    + " damage.");
 
             if (challengerAuxHP <= 0) {
                 System.out.println(challenger.getName() + " has been defeated!");
-                System.out.println("You earned " + combate.getAmount() + " gold");
-                challenger.setGold(challenger.getGold() - combate.getAmount());
-                challenged.setGold(challenged.getGold() + combate.getAmount());
+                System.out.println("You earned " + getAmount() + " gold");
+                challenger.setGold(challenger.getGold() - getAmount());
+                challenged.setGold(challenged.getGold() + getAmount());
                 deleteMinion(challenger);
                 break;
             }
             round++;
         }
-        combate.getChallenged().setCombate(null);
-        combate.getChallenger().setCombate(null);
+        getChallenged().setCombate(null);
+        getChallenger().setCombate(null);
         Initdata.saveCombatesToFile();
         return round;
     }
@@ -174,22 +175,22 @@ public class Combate implements Serializable {
 
     private static void combatAbility(Character character) {
         switch (character.getType()) {
-            case "hunter":
+            case "hunter" -> {
                 ((Hunter) character).setTalent(new HunterAbility());
                 System.out.println(character.getName() + " used Willpower");
                 ((Hunter) character).useAbility();
-                break;
-            case "vampire":
+            }
+            case "vampire" -> {
                 ((Vampire) character).setDiscipline(new VampireAbility());
                 System.out.println(character.getName() + " used Blood");
                 ((Vampire) character).useAbility();
-                break;
-            case "werewolf":
+            }
+            case "werewolf" -> {
                 ((Werewolf) character).setDon(new WereWolfAbility());
                 System.out.println(character.getName() + " used Rage");
                 ((Werewolf) character).useAbility();
-                break;
-            default:
+            }
+            default ->
                 System.out.println("Magikarp used Splash, and nothing happends");
         }
     }

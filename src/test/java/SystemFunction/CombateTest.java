@@ -20,10 +20,9 @@ public class CombateTest {
         newUser.setPlayer(player);
         secondUser.setPlayer(player);
 
-
         Character newCharacter = CharacterFactory.createCharacter("vampire", "newBot", 50, 100, 50, 0, 0, 0);
         Character secondCharacter = CharacterFactory.createCharacter("hunter", "secondBot", 100, 100, 50, 0, 0, 0);
-        
+
         newUser.getPlayer().setCharacter(newCharacter);
         secondUser.getPlayer().setCharacter(secondCharacter);
 
@@ -33,7 +32,7 @@ public class CombateTest {
         challengedCharacter.setType("hunter");
 
         Combate combat = new Combate(newUser, secondUser, 10);
-        int round = Combate.initialCombat(combat);
+        int round = combat.initialCombat();
         assertTrue(round > 1);
     }
 
