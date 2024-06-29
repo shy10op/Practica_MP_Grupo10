@@ -4,9 +4,9 @@ import Character.Character;
 import Character.CharacterFactory;
 import User.Player;
 import User.User;
-import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 //import Database.Initdata;
 
 public class CombateTest {

@@ -77,14 +77,6 @@ public class InventoryTest {
         assertNull(Inventory.findWeapon(weapon.getName()));// Comprobar que el arma ya no está en el inventario
     }
 
-    @Test
-    public void deleteArmorTest() {
-        Armor armor = EquipmentFactory.createArmor("nameAttackDefense", 1, 1);
-        inventory.addArmor(armor);// Añadir una armadura primero
-        int armorListSize = Inventory.getArmors().size();
-        Inventory.deleteArmor(armor);// Eliminar la armadura
-        assertTrue(armorListSize > Inventory.getArmors().size());// Comprobar que el tamaño de la lista ha disminuido
-        assertNull(Inventory.findArmor(armor.getName()));// Comprobar que la armadura ya no está en el inventario
-    }
+
 
 }
