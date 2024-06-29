@@ -58,7 +58,7 @@ public class InventoryTest {
 
     @Test
     public void findArmorTest() {
-        
+
         String name = "Bronze Armor";//Bronze Armor existe en la base de datos(Inventory.dat)
         Armor armor = Inventory.findArmor(name);//variable de entrada un string
         assertNotNull(armor);//Comprobar que el weapon no null
