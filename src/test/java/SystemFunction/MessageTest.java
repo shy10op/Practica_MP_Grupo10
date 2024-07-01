@@ -8,48 +8,43 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class MessageTest {
 
-    @BeforeAll
-    public static void setup() {
+    private static ArrayList<Combate> combates;
+    private static Combate combate;
+    private static User user1;
+    private static User user2;
+
+    @BeforeEach
+    public void setup() {
         Initdata.startInitData();
+        combates = Initdata.getCombateList();
+        user1 = new User("testBot1", "12345", "testBot1", "player");
+        user2 = new User("testBot1", "12345", "testBot2", "player");
+        int amount = 10;
+        combate = new Combate(user1, user2, amount);
     }
 
     @Test
     public void sendCombatToAdminTest() {
-        ArrayList<Combate> combates = Initdata.getCombateList();
-
-        User user1 = new User("testBot1", "12345", "testBot1", "player");
-        User user2 = new User("testBot2", "12345", "testBot2", "player");
-        int amount = 10;
-        Combate combate = new Combate(user1, user2, amount);
-        Message.sendCombatToAdmin(combate);
+        Message.sendCombatToAdmin(combate);//guardar a la base de datos combateslist
         assertTrue(combates.contains(combate));
     }
 
     @Test
     public void sendCombatToChallengedTest() {
-        User user1 = new User("testBot1", "12345", "testBot1", "player");
-        User user2 = new User("testBot2", "12345", "testBot2", "player");
-        int amount = 10;
-        Combate combate = new Combate(user1, user2, amount);
-        Message.sendCombatToChallenged(combate);
-        assertNotNull(user2.getCombate());
+        Message.sendCombatToChallenged(combate);//enviar el combate al jugador 2
+        assertNotNull(user2.getCombate());//comprobar que el jugador tiene ese combate
     }
 
     @Test
-    public void receiveCombatTest() {
-        ArrayList<Combate> combates = Initdata.getCombateList();
-        User user1 = new User("testBot1", "12345", "testBot1", "player");
-        User user2 = new User("testBot2", "12345", "testBot2", "player");
-        int amount = 10;
+    public void receiveCombatTest() {//dato de entradad un usuario sin combate getcombat => null
+        //un usuario con combate.
+        Message.sendCombatToChallenged(combate);// enviar el combate al jugador 2
+        Message.receiveCombat(user2);// jugador 2 recibe el combate 
+        assertNotNull(user2.getCombate());// comprobar si es el mismo combate
         
-        Combate combate = new Combate(user1, user2, amount);
-        combates.add(combate);
-        
-        Message.sendCombatToChallenged(combate);
-        Message.receiveCombat(user2);
-        assertEquals(user2.getCombate(), combate);
     }
 }

@@ -47,13 +47,14 @@ public class Initdata implements Serializable {
         if (Inventory.getWeapons().isEmpty() && Inventory.getArmors().isEmpty()) {
             generateInitialInventories();
         }
-        
+
         if (combateList.isEmpty()) {
             generateRandomCombates();
         }
 
         saveInventoriesToFile();
         saveCombatesToFile();
+        saveUsersToFile();
     }
 
     private static void checkFile(String filePath, String fileType) {
@@ -200,8 +201,6 @@ public class Initdata implements Serializable {
         );
         adminUser.setAdmin(newAdmin);
         users.add(adminUser);
-
-        saveUsersToFile();
     }
 
     public static void generateInitialInventories() {

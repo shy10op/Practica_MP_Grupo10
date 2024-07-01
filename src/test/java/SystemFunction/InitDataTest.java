@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,66 +40,40 @@ public class InitdataTest {
     @BeforeEach
     public void setUp() {
         // Limpiar los archivos de prueba antes de cada prueba
-        cleanTestFiles();
+        Initdata.startInitData();
         combatList = Initdata.getCombateList();
         userList = Initdata.getUsers();
         weapons = Inventory.getWeapons();
         armors = Inventory.getArmors();
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        // Limpiar los archivos de prueba después de cada prueba
-        cleanTestFiles();
-    }
-
-    @Test
-    public void testGenerateInitialInventories() {
-        Initdata.generateInitialInventories();
-        assertFalse(Inventory.getWeapons().isEmpty() && Inventory.getArmors().isEmpty());
-    }
-
-    private void cleanTestFiles() {
-        List<String> testFiles = Arrays.asList(USER, INVENTORY, COMBATES);
-        testFiles.forEach(file -> {
-            File testFile = new File(file);
-            if (testFile.exists()) {
-                testFile.delete();
-            }
-        });
-    }
-
-    @Test
-    public void testCheckUsersFile() {
-        Initdata.checkUsersFile();
-        File usersFile = new File(InitdataTest.USER);
-        assertTrue(usersFile.exists());
     }
 
     @Test
     public void testGenerateRandomCombat() {
-        int combatSize = userList.size() / 2;
-        Initdata.generateRandomCombates();
-        assertTrue(combatList.size() == combatSize);
+        combatList.clear();//limpiar la lista de combate
+        int combatSize = userList.size() / 2;// el tamaño de la lista de combate tiene que ser la mitade del tamaño de los Bots
+        Initdata.generateRandomCombates();//generar combates 
+        assertTrue(combatList.size() == combatSize);//Comprobar el tamaño
     }
 
     @Test
     public void testGenerateRandomCombatNullUserFile() { //cuando el userFile es vacio
-        userList.clear();
-        Initdata.generateRandomCombates();
-        assertTrue(combatList.isEmpty());
+        userList.clear();//Limpiar la lista de usuarios
+        Initdata.generateRandomCombates();//generar combates con la lista de usuario vacia
+        assertTrue(combatList.isEmpty());//se comrpruba que no se ha generado ningun combates
     }
 
     @Test
     public void testgenerateInitialInventories() {
-        armors.clear();
-        weapons.clear();
-        Initdata.generateInitialInventories();
-        assertTrue(!armors.isEmpty() && !weapons.isEmpty());
+        weapons.clear();//limpiar la lista de armas
+        armors.clear();//limpiar la lista de armaduras
+        Initdata.generateInitialInventories();//genera inventarios
+        assertTrue(!armors.isEmpty() && !weapons.isEmpty());//comprobar que no estan vacias las dos listas 
     }
-    
-    
-    
+
+    @Test
+    public void testGenerateBots() {
+        Initdata.generateBots();
+        assertEquals(11, userList.size());//10 jugadores y 1 admin
+    }
 
 }

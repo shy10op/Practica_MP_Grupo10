@@ -101,11 +101,16 @@ public class Auth {
             System.out.println("Error: " + newUser.getRole());
         }
         singUp(newUser);
+        Initdata.saveUsersToFile();
     }
 
     public static void singUp(User user) {
-        users.add(user);
-        Initdata.saveUsersToFile();
+        User userExist = User.findUser(user.getNick());
+        if (userExist != null) {
+            System.out.println("User Exist");
+        } else {
+            users.add(user);
+        }
     }
 
 }

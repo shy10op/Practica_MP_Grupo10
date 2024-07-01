@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 public class Message {
 
-    public static void sendCombatToAdmin(Combate combate) {
+    public static void sendCombatToAdmin(Combate combate) { //primer paso
         ArrayList<Combate> combates = Initdata.getCombateList();
         User challenged = combate.getChallenged();
         User challenger = combate.getChallenger();
-        if (challenged != null) {
+        if (challenger.equals(challenged)) {
+            System.out.println("You cant challenge yourself");
+        } else if (challenged != null) {
             if (challenged.getAccountStatus()) {
                 System.out.println("Combat sended: " + challenged.getNick());// destino
                 System.out.println("You: " + challenger.getNick() + " vs Rival: " + challenged.getNick());
@@ -24,7 +26,7 @@ public class Message {
         }
     }
 
-    public static void sendCombatToChallenged(Combate combate) {
+    public static void sendCombatToChallenged(Combate combate) {//Admin valida el combate y llama esta funcion para enviar al destino
         if (combate != null) {
             User challenged = combate.getChallenged();
             challenged.setCombate(combate);
@@ -34,10 +36,10 @@ public class Message {
 
     }
 
-    public static Combate receiveCombat(User user) {
+    public static Combate receiveCombat(User user) {//el destino recibe el combate
         Combate combate = user.getCombate();
         if (combate == null) {
-            System.out.println("XXXXXXXXX");
+            System.out.println("Combat Null");
             return null;
         }
         if (combate.getChallenger() != null) {

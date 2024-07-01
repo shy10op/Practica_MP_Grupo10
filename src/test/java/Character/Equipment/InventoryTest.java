@@ -8,6 +8,7 @@ import Database.Initdata;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  *
@@ -15,13 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class InventoryTest {
 
-    private Inventory inventory;
+    private static Inventory inventory;
 
-    public InventoryTest() {
-    }
-
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         Initdata.startInitData();//cargar los datos
         inventory = Initdata.getInventories();
     }
@@ -53,7 +51,6 @@ public class InventoryTest {
 
     @Test
     public void findArmorTest() {
-
         String name = "Bronze Armor";//Bronze Armor existe en la base de datos(Inventory.dat)
         Armor armor = Inventory.findArmor(name);//variable de entrada un string
         assertNotNull(armor);//Comprobar que el weapon no null
@@ -61,8 +58,7 @@ public class InventoryTest {
 
     @Test
     public void deleteWeaponTest() {
-        Weapon weapon = EquipmentFactory.createWeapon("nameAttackDefense", 1, 1, 1);
-        inventory.addWeapon(weapon);// Añadir un arma primero
+        Weapon weapon = Inventory.findWeapon("Longsword");
         int weaponListSize = Inventory.getWeapons().size();
         Inventory.deleteWeapon(weapon);// Eliminar el arma
         assertTrue(weaponListSize > Inventory.getWeapons().size());// Comprobar que el tamaño de la lista ha disminuido
@@ -70,8 +66,7 @@ public class InventoryTest {
 
     @Test
     public void deleteArmorTest() {
-        Armor armor = EquipmentFactory.createArmor("nameAttackDefense", 1, 1);
-        inventory.addArmor(armor);// Añadir un arma primero
+        Armor armor = Inventory.findArmor("Bronze Armor");
         int armorListSize = Inventory.getArmors().size();
         Inventory.deleteArmor(armor);// Eliminar el arma
         assertTrue(armorListSize > Inventory.getArmors().size());// Comprobar que el tamaño de la lista ha disminuido
