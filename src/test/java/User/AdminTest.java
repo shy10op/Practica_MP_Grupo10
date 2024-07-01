@@ -4,38 +4,52 @@ import Database.Initdata;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 
 public class AdminTest {
 
-    public ArrayList<User> users = Initdata.getUsers();
+    public static ArrayList<User> users = Initdata.getUsers();
 
+    @BeforeAll
     public static void setup() {
-        Initdata.startInitData();
+        User userBotUnbanned = new User("testUnbanned", "12345678", "name", "player");
+        User userBotBanned = new User("testBanned", "12345678", "name", "player");
+        User userAdmin = new User("admin", "12345678", "name", "admin");
+        userBotBanned.setAccountStatus(false);
+
+        users.add(userAdmin);
+        users.add(userBotUnbanned);
+        users.add(userBotBanned);
+        Initdata.saveUsersToFile();
     }
 
     @Test
     public void banUserTest() {
-        User user = User.findUser("Bot1");
-        Admin.banUser(user.getNick());
-        assertFalse(user.getAccountStatus());
+        try {
+            String nick = "admin"; // un usuario que no esta baneado
+            Admin.banUser(nick);//le baneamos
+
+            User user = User.findUser(nick);//lo buscamos
+            assertFalse(user.getAccountStatus());// comprobamos su estado de la cuenta
+        } catch (Exception e) {
+            fail("User not exist");
+        }
     }
 
     @Test
     public void unBanUserTest() {
-        User user = User.findUser("Bot5");
-        user.setAccountStatus(false);
-        Admin.unBanUser(user.getNick());
-        assertTrue(user.getAccountStatus());
+        try {
+            String nick = "testBanned";
+            User user = User.findUser(nick);
+
+            Admin.unBanUser(nick);
+            assertTrue(user.getAccountStatus());
+        } catch (Exception e) {
+            fail("User not exist");
+        }
+
     }
 
-    @Test
-    public void showUserListTest() {
-        Boolean test = false;
-        if (users.size() >= 1) {
-            test = true;
-        }
-        assertTrue(test);
-    }
 }

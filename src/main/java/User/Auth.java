@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Auth {
+
     private static ArrayList<User> users = Initdata.getUsers();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int LENGTH = 1;
@@ -50,7 +51,7 @@ public class Auth {
         return null;
     }
 
-    public static void signUp(Scanner scanner) {
+    public static void signUpAuth(Scanner scanner) {
         System.out.print("Enter nick: ");
         String nick = scanner.nextLine().trim();
 
@@ -99,7 +100,12 @@ public class Auth {
         } else {
             System.out.println("Error: " + newUser.getRole());
         }
-        users.add(newUser);
+        singUp(newUser);
+    }
+
+    public static void singUp(User user) {
+        users.add(user);
         Initdata.saveUsersToFile();
     }
+
 }

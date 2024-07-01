@@ -11,9 +11,12 @@ import java.io.Serializable;
 import java.security.SecureRandom;
 
 public class Ability implements Serializable {
+
     private static final SecureRandom rand = new SecureRandom();
 
     public static class WereWolfAbility implements Don, Serializable {
+
+        @Override
         public void don(Werewolf werewolf) {
             int power = werewolf.getPower();
             int rage = werewolf.getRage();
@@ -28,22 +31,25 @@ public class Ability implements Serializable {
     }
 
     public static class VampireAbility implements Discipline, Serializable {
-        public void discipline(Vampire vampire) {
+
+        @Override
+        public void discipline(Vampire vampire) {//0-20
             int blood = rand.nextInt(vampire.getBlood() + 1) + 1;
-            int hp = vampire.getHealth();
-            int power = vampire.getPower();
+            int hp = vampire.getHealth();//hp que tiene ahora el vampiro
+            int power = vampire.getPower();// el poder antes de usar la ha
 
             if (hp > 0 && hp > blood) {
-                vampire.setHealth(hp - blood);
+                vampire.setHealth(hp - blood); 
                 vampire.setPower(power + blood);
             } else {
                 vampire.setPower(power);
             }
-
         }
     }
 
     public static class HunterAbility implements Talent, Serializable {
+
+        @Override
         public void talent(Hunter hunter) {
             int ragePower = hunter.getPower() + hunter.getWillpower();
             hunter.setPower(ragePower);

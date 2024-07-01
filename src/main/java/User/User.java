@@ -7,127 +7,126 @@ import java.util.ArrayList;
 
 public class User implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  private String nick;
-  private String password;
-  private String name;
-  private Boolean accountStatus = true;
-  private Combate combate;
+    private static final long serialVersionUID = 1L;
+    private String nick;
+    private String password;
+    private String name;
+    private Boolean accountStatus = true;
+    private Combate combate;
 
-  private String role;
-  private Boolean logged = false;
-  private Player player;
-  private Admin admin;
+    private String role;
+    private Boolean logged = false;
+    private Player player;
+    private Admin admin;
 
-  // Constructor
-  public User(String nick, String password, String name, String role) {
-    this.nick = nick;
-    this.password = password;
-    this.name = name;
-    this.role = role;
-  }
-
-  public User() {}
-
-  public static User findUser(String nick) {
-    ArrayList<User> users = Initdata.getUsers();
-    for (User user : users) {
-      if ((user.getNick().equalsIgnoreCase(nick))) {
-        return user;
-      }
+    // Constructor
+    public User(String nick, String password, String name, String role) {
+        this.nick = nick;
+        this.password = password;
+        this.name = name;
+        this.role = role;
     }
-    return null;
-  }
 
-  public static void deleteUser(String nick) {
-    ArrayList<User> users = Initdata.getUsers();
-    User userToRemove = User.findUser(nick);
-    if (userToRemove != null) {
-      userToRemove.setLogged(false);
-      users.remove(userToRemove);
-    } else {
-      System.out.println("Incorrect user Nick");
+    public User() {
     }
-    Initdata.saveUsersToFile();
-  }
 
-  // Getters and Setters
+    public static User findUser(String nick) {
+        ArrayList<User> users = Initdata.getUsers();
+        for (User user : users) {
+            if ((user.getNick().equalsIgnoreCase(nick))) {
+                return user;
+            }
+        }
+        return null;
+    }
 
-  public Boolean isLogged() {
-    return logged;
-  }
+    public static void deleteUser(String nick) {
+        ArrayList<User> users = Initdata.getUsers();
+        User userToRemove = User.findUser(nick);
+        if (userToRemove != null) {
+            userToRemove.setLogged(false);
+            users.remove(userToRemove);
+        } else {
+            System.out.println("Incorrect user Nick");
+        }
+    }
 
-  public void setLogged(Boolean logged) {
-    this.logged = logged;
-  }
+    // Getters and Setters
+    public Boolean isLogged() {
+        return logged;
+    }
 
-  // getters and setters
-  public String getNick() {
-    return nick;
-  }
+    public void setLogged(Boolean logged) {
+        this.logged = logged;
+    }
 
-  public void setNick(String nick) {
-    this.nick = nick;
-  }
+    // getters and setters
+    public String getNick() {
+        return nick;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public String getRole() {
-    return role;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setRole(String role) {
-    this.role = role;
-  }
+    public String getRole() {
+        return role;
+    }
 
-  // For future admin feature (ban user or unban user)
-  public void setAccountStatus(Boolean status) {
-    this.accountStatus = status;
-  }
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-  public Boolean getAccountStatus() {
-    return accountStatus;
-  }
+    // For future admin feature (ban user or unban user)
+    public void setAccountStatus(Boolean status) {
+        this.accountStatus = status;
+    }
 
-  public Boolean getLogged() {
-    return logged;
-  }
+    public Boolean getAccountStatus() {
+        return accountStatus;
+    }
 
-  public Player getPlayer() {
-    return player;
-  }
+    public Boolean getLogged() {
+        return logged;
+    }
 
-  public void setPlayer(Player player) {
-    this.player = player;
-  }
+    public Player getPlayer() {
+        return player;
+    }
 
-  public void setAdmin(Admin admin) {
-    this.admin = admin;
-  }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
-  public Admin getAdmin() {
-    return admin;
-  }
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
-  public Combate getCombate() {
-    return combate;
-  }
+    public Admin getAdmin() {
+        return admin;
+    }
 
-  public void setCombate(Combate combate) {
-    this.combate = combate;
-  }
+    public Combate getCombate() {
+        return combate;
+    }
+
+    public void setCombate(Combate combate) {
+        this.combate = combate;
+    }
 }

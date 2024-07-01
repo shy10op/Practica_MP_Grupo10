@@ -44,10 +44,16 @@ public class Initdata implements Serializable {
         if (users.isEmpty()) {
             generateBots();
         }
-        generateInitialInventories();
+        if (Inventory.getWeapons().isEmpty() && Inventory.getArmors().isEmpty()) {
+            generateInitialInventories();
+        }
+        
         if (combateList.isEmpty()) {
             generateRandomCombates();
         }
+
+        saveInventoriesToFile();
+        saveCombatesToFile();
     }
 
     private static void checkFile(String filePath, String fileType) {
@@ -199,9 +205,6 @@ public class Initdata implements Serializable {
     }
 
     public static void generateInitialInventories() {
-        if (!inventories.getWeapons().isEmpty() && !inventories.getArmors().isEmpty()) {
-            return;
-        }
         Weapon weapon1 = EquipmentFactory.createWeapon("Longsword", 3, 1, 2);
         Weapon weapon2 = EquipmentFactory.createWeapon("Short Sword", 2, 0, 1);
         Weapon weapon3 = EquipmentFactory.createWeapon("One-handed axe", 2, 1, 1);
@@ -222,8 +225,6 @@ public class Initdata implements Serializable {
         inventories.addArmor(armor3);
         inventories.addArmor(armor4);
         inventories.addArmor(armor5);
-
-        saveInventoriesToFile();
     }
 
     public static void generateRandomCombates() {
@@ -242,7 +243,6 @@ public class Initdata implements Serializable {
             Combate combate = new Combate(challenger, challenged, amount);
             combateList.add(combate);
         }
-        saveCombatesToFile();
     }
 
     public static Inventory getInventories() {

@@ -29,7 +29,7 @@ public class InventoryTest {
     @Test
     public void addWeaponTest() {
         String name = null;
-        Weapon weapon = EquipmentFactory.createWeapon(name, 2, 2, 1);
+        Weapon weapon = EquipmentFactory.createWeapon(name, 2, -1, 1);
         int weaponListSize = Inventory.getWeapons().size();
         inventory.addWeapon(weapon);//variable de entrada el weapon(Tipo Weapon)
         assertTrue(weaponListSize < Inventory.getWeapons().size());//comprobar el tamaño de la lista despues de añadir un objeto a dicha lista

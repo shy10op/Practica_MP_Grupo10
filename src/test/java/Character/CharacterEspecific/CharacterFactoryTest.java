@@ -4,59 +4,65 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import Character.Character;
 import Character.CharacterFactory;
-import User.Player;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 public class CharacterFactoryTest {
 
     @Test
     public void testCreateHunter() {
-        Character hunter = CharacterFactory.createCharacter(
-                "olaa",
-                "Robin",
-                100,
-                150,
-                20,
-                0,
-                0,
-                0
-        );
-        assertNotNull(hunter);
+        try {
+            Character hunter = CharacterFactory.createCharacter(
+                    "hunter",
+                    "Robin",
+                    100,//oro
+                    150,//vida
+                    20,//poder
+                    0,
+                    0,
+                    0
+            );
+            assertNotNull(hunter);
+        } catch (IllegalArgumentException e) {
+            fail("Cant create Character: " + e);
+        }
     }
 
     @Test
     public void testCreateVampire() {
-        Character vampire = CharacterFactory.createCharacter(
-                "vampire",
-                "Dracula",
-                200,
-                300,
-                40,
-                50,
-                400,
-                0
-        );
-        Player player = new Player();
-        player.setCharacter(vampire);
-
-        assertNotNull(player);
+        try {
+            Character vampire = CharacterFactory.createCharacter(
+                    "vampire",
+                    "Dracula",
+                    200,//oro
+                    300,//vida
+                    40,//poder
+                    50,
+                    400,
+                    0
+            );
+            assertNotNull(vampire);
+        } catch (IllegalArgumentException e) {
+            fail("Cant create Character: " + e);
+        }
     }
 
     @Test
     public void testCreateWerewolf() {
-        Character werewolf = CharacterFactory.createCharacter(
-                "werewolf",
-                "Lycan",
-                150,
-                250,
-                35,
-                0,
-                0,
-                60
-        );
-        Player player = new Player();
-        player.setCharacter(werewolf);
-
-        assertNotNull(player);
+        try {
+            Character werewolf = CharacterFactory.createCharacter(
+                    "werewolf",
+                    "Lycan",
+                    150,
+                    250,
+                    35,
+                    0,
+                    0,
+                    60
+            );
+            assertNotNull(werewolf);
+        } catch (IllegalArgumentException e) {
+            fail("Cant create Character: " + e);
+        }
     }
 }

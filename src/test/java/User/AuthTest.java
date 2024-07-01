@@ -1,38 +1,41 @@
 package User;
 
 import Database.Initdata;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class AuthTest {
-    public ArrayList<User> users = Initdata.getUsers();
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         Initdata.startInitData();
+        ArrayList<User> users = Initdata.getUsers();
+        User userTest = new User("testBot", "12345", "testBot", "player");
+        users.add(userTest);
+        Initdata.saveUsersToFile();
     }
 
     @Test
     public void loginTest() {
-        String nick = "Bot1";
+        String nick = "testBot";
         String password = "12345";
         User user = Auth.loginAuth(nick, password);
         assertNotNull(user);
     }
 
     @Test
-    public void signInTest() {
+    public void signUpTest() {
         String nick = "BotTest";
         String password = "12345";
         String name = "BotTest";
         String role = "player";
         User newUser = new User(nick, password, name, role);
-        users.add(newUser);
-        Initdata.saveUsersToFile();
+        Auth.singUp(newUser);
+        
         User user = User.findUser(nick);
         assertNotNull(user);
     }

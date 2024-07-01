@@ -36,11 +36,10 @@ public class Main {
             Menu.authMenu();
             String option = scanner.nextLine();
             switch (option) {
-                case "1":
+                case "1" -> {
                     user = Auth.login(scanner);
                     if (user != null) {
                         if (user.getAccountStatus()) {
-                            break;
                         } else {
                             System.out.println("Your account has been banned.");
                             user = null;
@@ -50,16 +49,17 @@ public class Main {
                         System.out.println("Invalid username or password.");
                         continue;
                     }
-                case "2":
-                    Auth.signUp(scanner);
-                    break;
-                case "3":
+                }
+                case "2" ->
+                    Auth.signUpAuth(scanner);
+                case "3" -> {
                     System.out.println("Exiting...");
                     System.exit(0);
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Invalid option. Please try again.");
                     continue;
+                }
             }
             if (user != null) {
                 while (user.isLogged()) {
@@ -219,7 +219,8 @@ public class Main {
                         int op = scanner.nextInt();
                         scanner.nextLine(); // consume the newline after the number
                         switch (op) {
-                            case 1 -> Menu.userMenu(user);
+                            case 1 ->
+                                Menu.userMenu(user);
                             case 2 -> {
                                 System.out.println(
                                         "Are you sure you want to delete your account? (yes/no)"
@@ -233,6 +234,7 @@ public class Main {
                                 } else {
                                     System.out.println("Account deletion canceled.");
                                 }
+                                Initdata.saveUsersToFile();
                             }
                             case 3 -> {
                                 Menu.inventoryMenu(inventories, scanner, user);
@@ -269,7 +271,7 @@ public class Main {
                                 if (combate != null) {
                                     System.out.println(
                                             "You have been challenged! Fight amount: "
-                                                    + combate.getAmount()
+                                            + combate.getAmount()
                                     );
                                     System.out.println("Do you want to fight? (y/n)");
                                     String combatOption = scanner.nextLine();
@@ -281,7 +283,7 @@ public class Main {
                                                 = actualCharacter.getGold() - combate.getAmount();
                                         System.out.println(
                                                 "Your current gold after declining the challenge is: "
-                                                        + result
+                                                + result
                                         );
                                         actualCharacter.setGold(result);
                                         System.out.println("You have chosen not to fight.");
@@ -291,12 +293,14 @@ public class Main {
                                     System.out.println("No challenges at the moment.");
                                 }
                             }
-                            case 6 -> Menu.rankingMenu(users);
+                            case 6 ->
+                                Menu.rankingMenu(users);
                             case 7 -> {
                                 System.out.println("Exiting...");
                                 user.setLogged(false);
                             }
-                            default -> System.out.println("Invalid option. Please try again.");
+                            default ->
+                                System.out.println("Invalid option. Please try again.");
                         }
                     } else if (userRole.equals("admin")) {
                         Menu.adminMenu();
@@ -308,7 +312,7 @@ public class Main {
                         int optionAdmin = scanner.nextInt();
                         scanner.nextLine(); // consume the newline after the number
                         switch (optionAdmin) {
-                            case 1:
+                            case 1 -> {
                                 Menu.showPlayer();
                                 System.out.println("Enter the nick of the player");
                                 String userNick = scanner.nextLine();
@@ -320,11 +324,10 @@ public class Main {
                                     System.out.println("No user found with that nickname.");
                                 }
                                 Initdata.saveUsersToFile();
-                                break;
-                            case 2:
+                            }
+                            case 2 ->
                                 Menu.inventoryMenu(inventories, scanner, user);
-                                break;
-                            case 3:
+                            case 3 -> {
                                 Menu.combatListMenu();
                                 System.out.print(
                                         "Enter the nickname of the Challenger or Challenged to view details (exit): "
@@ -358,8 +361,8 @@ public class Main {
                                     }
                                 }
                                 Initdata.saveCombatesToFile();
-                                break;
-                            case 4:
+                            }
+                            case 4 -> {
                                 System.out.print("List of players nick: \n");
                                 Menu.showPlayer();
                                 System.out.println(
@@ -370,8 +373,8 @@ public class Main {
                                     Admin.banUser(banned);
                                     Initdata.saveUsersToFile();
                                 }
-                                break;
-                            case 5:
+                            }
+                            case 5 -> {
                                 System.out.print("BanList: \n");
                                 ArrayList<User> banList = Admin.getPlayers();
                                 Iterator<User> iterator = banList.iterator();
@@ -401,14 +404,13 @@ public class Main {
                                         Initdata.saveUsersToFile();
                                     }
                                 }
-                                break;
-                            case 6:
+                            }
+                            case 6 -> {
                                 System.out.println("Exiting the program...");
                                 user.setLogged(false);
-                                break;
-                            default:
+                            }
+                            default ->
                                 System.out.println("Invalid option. Please try again.");
-                                break;
                         }
                     }
                 }

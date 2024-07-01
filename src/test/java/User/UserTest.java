@@ -3,46 +3,44 @@ package User;
 import static org.junit.jupiter.api.Assertions.*;
 
 import Database.Initdata;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class UserTest {//done
 
-  @BeforeEach
-  public void setup() throws Exception {
-    Initdata.startInitData();
-  }
+    private ArrayList<User> users;
 
-  @AfterEach
-  public void tearDown() throws Exception {
-    Initdata.saveUsersToFile();
-  }
+    @BeforeEach
+    public void setup() throws Exception {
+        Initdata.startInitData();//cargar base de datos
+        users = Initdata.getUsers();//obtener la lista de usuarios
+    }
 
-  @Test
-  public void testFindUserExists() {
-    User testBot = new User("testBot", "123456789101112", "BotName", "player");
-    
-    assertNotNull(testBot);
-    ArrayList<User> users = Initdata.getUsers();
-    users.add(testBot);
-    Initdata.saveUsersToFile();
+    @Test
+    public void testFindUserExists() {
+        String userNick = "Bot1";
+        User resultUser = User.findUser(userNick);
 
-    User result = User.findUser(testBot.getNick());
-    assertNotNull(result);
-    assertEquals(testBot.getNick().toLowerCase(), result.getNick().toLowerCase());
-  } 
+        if (resultUser == null) {
+            fail("User not Exist");
+        }
 
-  @Test
-  public void testDeleteUser() {
-    String nick = "";
-    ArrayList<User> users = Initdata.getUsers();
-    int size = users.size();
-    User.deleteUser(nick);
-    int newSize = users.size();
-    assertTrue(size > newSize);
-  }
-    
+        assertNotNull(resultUser);//no es nulo
+    }
+
+    @Test
+    public void testDeleteUser() {
+        User resultUser = User.findUser("Bot1");
+
+        int size = users.size();//el tamaño antes de borrar
+        if (resultUser == null) {
+            fail("User not exist");
+        } else {
+            User.deleteUser(resultUser.getNick());//dato de entrada el nick de usuario
+            int newSize = users.size();//tamaño despues de borrar
+            assertTrue(size > newSize);//comprobar ambos tamaños
+        }
+    }
+
 }

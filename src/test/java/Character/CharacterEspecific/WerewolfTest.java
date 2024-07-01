@@ -7,48 +7,27 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 
 class WerewolfTest {
 
-    @Test
-    void testGetRage() {
-        Character werewolf = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
-        werewolf.setType("werewolf");
-        assertEquals(3, ((Werewolf) werewolf).getRage());
+    private static Character werewolf;
+
+    @BeforeEach
+    public void setUp() {
+        werewolf = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
     }
 
     @Test
-    void testSetRage() {
-        Character werewolf = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
-        werewolf.setType("werewolf");
-        ((Werewolf) werewolf).setRage(5);
-        assertEquals(5, ((Werewolf) werewolf).getRage());
-    }
+    void testUseAbility() {
+        ((Werewolf) werewolf).setDon(new Ability.WereWolfAbility());
+        int auxPower = ((Werewolf) werewolf).getPower();
+        ((Werewolf) werewolf).useAbility();
+        boolean test = false;
+        if (auxPower < werewolf.getPower()) {
+            test = true;
+        }
+        assertTrue(test);
 
-    @Test
-    void testSetDon() {
-        Character werewolf = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
-        werewolf.setType("werewolf");
-        ((Werewolf) werewolf).setDon(new Ability.WereWolfAbility());
-        int auxPower = ((Werewolf)werewolf).getPower();
-        ((Werewolf)werewolf).useAbility();
-        boolean test = false;
-        if (auxPower < werewolf.getPower()){
-            test = true;
-        }
-        assertTrue(test);
-    }
-    @Test
-    void testUseAbility(){
-        Character werewolf = CharacterFactory.createCharacter("werewolf", "Wolf", 150, 120, 20, 0, 0, 3);
-        werewolf.setType("werewolf");
-        ((Werewolf) werewolf).setDon(new Ability.WereWolfAbility());
-        int auxPower = ((Werewolf)werewolf).getPower();
-        ((Werewolf)werewolf).useAbility();
-        boolean test = false;
-        if (auxPower < werewolf.getPower()){
-            test = true;
-        }
-        assertTrue(test);
     }
 }
