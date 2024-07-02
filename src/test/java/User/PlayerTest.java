@@ -14,7 +14,7 @@ public class PlayerTest {
 
     @BeforeEach
     public void setUp() {
-        player = new Player("playerNick", "playerName", "record123");
+        player = new Player("playerNick", "playerName", "record");
         character = new Character(); // Supuesto constructor sin parámetros
     }
 
@@ -31,13 +31,13 @@ public class PlayerTest {
     public void testParameterizedConstructor() {
         assertEquals("playerNick", player.getNick());
         assertEquals("playerName", player.getName());
-        assertEquals("record123", player.getRecord());
+        assertEquals("record", player.getRecord());
         assertNull(player.getCharacter());
     }
 
     @Test
     public void testGetRecord() {
-        assertEquals("record123", player.getRecord());
+        assertEquals("record", player.getRecord());
     }
 
     @Test

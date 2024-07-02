@@ -21,8 +21,8 @@ public class AuthTest {
 
     @Test
     public void loginTest() {
-        String nick = "Bot2";
-        String password = "wewewewe";
+        String nick = "testBot";
+        String password = "12345678";
         User user = Auth.loginAuth(nick, password);
         assertNotNull(user);
     }

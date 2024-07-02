@@ -10,7 +10,7 @@ public class Player extends User {
     }
 
     public Player(String nick, String name, String record) {
-        super(nick, name, record, "player");
+        super(nick, record, name, "player");
         this.record = record;
     }
 

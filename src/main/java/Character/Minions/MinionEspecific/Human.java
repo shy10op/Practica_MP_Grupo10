@@ -21,5 +21,4 @@ public class Human extends Minion {
     public enum Loyalty {
         LOW, NORMAL, HIGH
     }
-
 }

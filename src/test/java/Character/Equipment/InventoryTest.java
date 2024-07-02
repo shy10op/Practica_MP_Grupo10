@@ -16,18 +16,22 @@ import org.junit.jupiter.api.BeforeAll;
  */
 public class InventoryTest {
 
-    private static Inventory inventory;
+    private Inventory inventory;
 
     @BeforeAll
-    public static void setUp() {
+    public static void startUp() {
         Initdata.startInitData();//cargar los datos
+    }
+
+    @BeforeEach
+    public void setUp() {
         inventory = Initdata.getInventories();
     }
 
     @Test
     public void addWeaponTest() {
         String name = null;
-        Weapon weapon = EquipmentFactory.createWeapon(name, 2, -1, 1);
+        Weapon weapon = EquipmentFactory.createWeapon(name, 2, 1, 1);
         int weaponListSize = Inventory.getWeapons().size();
         inventory.addWeapon(weapon);//variable de entrada el weapon(Tipo Weapon)
         assertTrue(weaponListSize < Inventory.getWeapons().size());//comprobar el tamaño de la lista despues de añadir un objeto a dicha lista
@@ -44,7 +48,7 @@ public class InventoryTest {
 
     @Test
     public void findWeaponTest() {
-        String name = "Longsword";//Longsword existe en la base de datos(Inventory.dat)
+        String name = "Short Sword";//Longsword existe en la base de datos(Inventory.dat)
         Weapon weapon = Inventory.findWeapon(name);//variable de entrada un string
         assertNotNull(weapon);//Comprobar que el weapon no null
     }

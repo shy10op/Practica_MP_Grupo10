@@ -2,26 +2,66 @@ package Character.Minions.MinionEspecific;
 
 import Character.Minions.Minion;
 import Character.Minions.MinionFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class DemonTest {
 
-class DemonTest {
-    Minion minion = MinionFactory.createMinion("human", "John", 100, Human.Loyalty.HIGH, null, null, 0);
+    private Demon demon;
 
-    @Test
-    void getPactDescription() {
+    @BeforeEach
+    public void setUp() {
+        Minion minion = MinionFactory.createMinion("demon", "Lucifer", 200, null, true, "Powerful", 0);
+
+        demon = (Demon) minion;
+
     }
 
     @Test
-    void setPactDescription() {
+    public void testGetPactDescription() {
+        assertEquals("Powerful", demon.getPactDescription());
     }
 
     @Test
-    void isPact() {
+    public void testSetPactDescription() {
+        demon.setPactDescription("Very Powerful");
+        assertEquals("Very Powerful", demon.getPactDescription());
     }
 
     @Test
-    void setPact() {
+    public void testIsPact() {
+        assertTrue(demon.isPact());
     }
+
+    @Test
+    public void testSetPact() {
+        demon.setPact(false);
+        assertFalse(demon.isPact());
+    }
+
+    @Test
+    public void testGetName() {
+        assertEquals("Lucifer", demon.getName());
+    }
+
+    @Test
+    public void testSetName() {
+        demon.setName("Satan");
+        assertEquals("Satan", demon.getName());
+    }
+
+    @Test
+    public void testGetHealth() {
+        assertEquals(200, demon.getHealth());
+    }
+
+    @Test
+    public void testSetHealth() {
+        demon.setHealth(250);
+        assertEquals(250, demon.getHealth());
+    }
+
 }

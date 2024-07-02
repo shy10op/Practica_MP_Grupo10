@@ -49,6 +49,7 @@ public class InitDataTest {
     @Test
     public void testGenerateRandomCombatNullUserFile() { //cuando el userFile es vacio
         userList.clear();//Limpiar la lista de usuarios
+        combatList.clear();
         Initdata.generateRandomCombates();//generar combates con la lista de usuario vacia
         assertTrue(combatList.isEmpty());//se comrpruba que no se ha generado ningun combates
     }
