@@ -4,34 +4,25 @@
  */
 package SystemFunction;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import Character.Equipment.Armor;
 import Character.Equipment.Inventory;
 import Character.Equipment.Weapon;
 import Database.Initdata;
 import User.User;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author yshdo
  */
-public class InitdataTest {
+public class InitDataTest {
 
-    private static final String USER
-            = "src\\main\\java\\Database\\DatabaseFile\\users.dat";
-    private static final String INVENTORY
-            = "src\\main\\java\\Database\\DatabaseFile\\inventory.dat";
-    private static final String COMBATES
-            = "src\\main\\java\\Database\\DatabaseFile\\combates.dat";
     private static ArrayList<Combate> combatList;
     private static ArrayList<User> userList;
     private static ArrayList<Weapon> weapons;

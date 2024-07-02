@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import Character.Character;
 import Character.CharacterFactory;
+import Character.Minions.MinionFactory;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 

@@ -8,16 +8,20 @@ import Character.Minions.MinionEspecific.Human.Loyalty;
 import java.io.Serializable;
 
 public class MinionFactory implements Serializable {
+
     public static Minion createMinion(String type, String name, int hp, Loyalty loyalty, Boolean pact,
             String description, int dependenceOnMaster) {
         switch (type) {
-            case "human":
+            case "human" -> {
                 return new Human(name, hp, loyalty);
-            case "demon":
+            }
+            case "demon" -> {
                 return new Demon(name, hp, pact, description);
-            case "ghoul":
+            }
+            case "ghoul" -> {
                 return new Ghoul(name, hp, dependenceOnMaster);
-            default:
+            }
+            default ->
                 throw new IllegalArgumentException("Unknow Minion type : " + type);
         }
     }
