@@ -13,4 +13,12 @@ public class Ghoul extends Minion {
             this.dependenceOnMaster = 5;
         }
     }
+
+    public int getDependenceOnMaster() {
+        return dependenceOnMaster;
+    }
+
+    public void setDependenceOnMaster(int dependenceOnMaster) {
+        this.dependenceOnMaster = dependenceOnMaster;
+    }
 }

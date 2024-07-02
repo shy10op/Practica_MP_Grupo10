@@ -7,7 +7,7 @@ import Character.Minions.Minion;
 
 import java.io.Serializable;
 
-public abstract class Character implements Serializable {
+public class Character implements Serializable {
     protected String name;
     protected int gold;
     protected int health;

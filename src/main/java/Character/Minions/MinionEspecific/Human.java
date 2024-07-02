@@ -10,6 +10,14 @@ public class Human extends Minion {
         this.loyalty = loyalty;
     }
 
+    public Loyalty getLoyalty() {
+        return loyalty;
+    }
+
+    public void setLoyalty(Loyalty loyalty) {
+        this.loyalty = loyalty;
+    }
+
     public enum Loyalty {
         LOW, NORMAL, HIGH
     }
