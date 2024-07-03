@@ -64,6 +64,7 @@ public class InitDataTest {
 
     @Test
     public void testGenerateBots() {
+        userList.clear();
         Initdata.generateBots();
         assertEquals(11, userList.size());//10 jugadores y 1 admin
     }
